@@ -1,5 +1,6 @@
 <template>
-  <div class="font-sans">
-    <h1>hello there</h1>
+  <div class="container max-w-7xl mx-auto font-sans text-dark-500">
+    <Navbar />
+    <NuxtPage />
   </div>
 </template>
