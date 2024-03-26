@@ -1,11 +1,11 @@
 <template>
-  <nav class="flex justify-between py-6 border-b border-primary-8">
-    <ul class="flex flex-row flex-wrap gap-4 sm:gap-6 [&_a]:opacity-30 [&_a]:rounded-md [&_a]:cursor-pointer">
+  <nav class="flex justify-between bg-gradient-to-t from-transparent to-primary-4">
+    <ul class="container max-w-5xl mx-auto flex flex-row flex-wrap gap-4 sm:gap-6 py-6 border-b border-primary-8">
       <li v-for="link in links" :key="link.label">
         <NuxtLink
           :to="link.path"
           :class="{ active: useRoute().path === link.path }"
-          class="block px-2 py-2 sm:px-4 sm:py-3 [&.active]:bg-primary-50 [&.active]:text-primary-500 [&.active]:opacity-100"
+          class="block px-2 py-2 sm:px-4 sm:py-3 opacity-30 rounded-md cursor-pointer [&.active]:bg-primary-50 [&.active]:text-primary-500 [&.active]:opacity-100"
         >
           {{ link.label }}
         </NuxtLink>
