@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex justify-between bg-gradient-to-t from-transparent to-primary-4">
+  <nav class="flex justify-between">
     <ul class="container max-w-5xl mx-auto flex flex-row flex-wrap gap-4 sm:gap-6 py-6 border-b border-primary-8">
       <li v-for="link in links" :key="link.label">
         <NuxtLink
