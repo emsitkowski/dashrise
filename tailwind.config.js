@@ -12,7 +12,18 @@ export default {
     fontFamily: {
       sans: ["Lato", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      colors: {
+        primary: {
+          8: "rgba(0, 0, 255, 0.08)",
+          50: "#EBEBFF",
+          500: "#0101FF",
+        },
+        dark: {
+          500: "#00001A",
+        },
+      },
+    },
   },
   plugins: [],
 };
