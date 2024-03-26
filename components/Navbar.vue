@@ -5,7 +5,7 @@
         <NuxtLink
           :to="link.path"
           :class="{ active: useRoute().path === link.path }"
-          class="block px-2 py-2 sm:px-4 sm:py-3 opacity-30 rounded-md cursor-pointer [&.active]:bg-primary-50 [&.active]:text-primary-500 [&.active]:opacity-100"
+          class="block px-2 py-2 sm:px-4 sm:py-3 opacity-30 rounded-md cursor-pointer [&.active]:bg-primary-50 [&.active]:text-primary-500 [&.active]:opacity-100 duration-300"
         >
           {{ link.label }}
         </NuxtLink>
