@@ -15,8 +15,8 @@ export default {
     extend: {
       colors: {
         primary: {
-          4: "rgba(0, 0, 255, 0.04)",
-          8: "rgba(0, 0, 255, 0.08)",
+          "4%": "rgba(0, 0, 255, 0.04)",
+          "8%": "rgba(0, 0, 255, 0.08)",
           50: "#EBEBFF",
           500: "#0101FF",
         },
@@ -26,6 +26,8 @@ export default {
         light: {
           50: "#f7f7f7",
         },
+        "white-40%": "rgba(255, 255, 255, 0.4)",
+        "white-60%": "rgba(255, 255, 255, 0.6)",
       },
     },
   },
