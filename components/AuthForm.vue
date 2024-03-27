@@ -54,8 +54,10 @@ async function handleSubmit() {
   // toggle submitting state
   isSubmitting.value = true;
 
+  // clear error message
+  authError.value = "";
+
   if (props.action === "login") {
-    console.log("logging in..");
     // log in user
     const success = await signInWithPassword(formData.value);
 
