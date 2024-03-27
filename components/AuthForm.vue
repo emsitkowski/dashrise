@@ -23,7 +23,9 @@
         ></FormInput>
       </FormField>
 
-      <Button class="mt-4" ref="submitBtn" :loading="isSubmitting">Log in</Button>
+      <Button class="mt-4" ref="submitBtn" :loading="isSubmitting">{{
+        action === "login" ? "Log in" : "Create account"
+      }}</Button>
     </Form>
 
     <!-- Authentication error -->
@@ -35,7 +37,13 @@
 
 <script setup lang="ts">
 const isSubmitting = ref(false);
-const { signInWithPassword, authError } = useSupabaseLogin();
+const { signInWithPassword, createNewAccount, authError } = useSupabaseAuth();
+
+const props = defineProps({
+  action: {
+    type: String,
+  },
+});
 
 const formData = ref({
   email: "",
@@ -46,15 +54,30 @@ async function handleSubmit() {
   // toggle submitting state
   isSubmitting.value = true;
 
-  // log in user
-  const success = await signInWithPassword(formData.value);
+  if (props.action === "login") {
+    console.log("logging in..");
+    // log in user
+    const success = await signInWithPassword(formData.value);
 
-  if (success) {
     // redirect to homepage
-    navigateTo("/");
+    if (success) {
+      navigateTo("/");
+    } else {
+      // toggle submitting state
+      isSubmitting.value = false;
+    }
   } else {
-    // toggle submitting state
-    isSubmitting.value = false;
+    console.log("creating new account..");
+    // create new account
+    const success = await createNewAccount(formData.value);
+
+    // redirect to homepage
+    if (success) {
+      navigateTo("/");
+    } else {
+      // toggle submitting state
+      isSubmitting.value = false;
+    }
   }
 }
 

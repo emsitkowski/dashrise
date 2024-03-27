@@ -2,17 +2,17 @@
   <div class="flex justify-center">
     <Card class="w-full max-w-xs">
       <template #card-header>
-        <h1 class="text-xl">Login to your dashboard</h1>
+        <h1 class="text-xl">Create an account</h1>
       </template>
 
       <template #card-body>
-        <AuthForm action="login" />
+        <AuthForm action="register" />
       </template>
 
       <template #card-footer>
-        <p class="mb-2">Don't have an account?</p>
-        <NuxtLink to="/register">
-          <Button variant="soft" size="sm">Create account here</Button>
+        <p class="mb-2">Have an account?</p>
+        <NuxtLink to="/login">
+          <Button variant="soft" size="sm">Log in here</Button>
         </NuxtLink>
       </template>
     </Card>
