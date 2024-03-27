@@ -3,7 +3,7 @@
     class="relative inline-flex justify-center items-center shrink-0 gap-2 rounded-md overflow-hidden duration-300"
     :class="[
       variant === 'soft' ? 'bg-primary-8% text-primary-500' : '',
-      variant === 'ghost' ? ' text-primary-32% hover:text-primary-500' : '',
+      variant === 'ghost' ? ' text-dark-32% hover:text-primary-500 hover:bg-primary-2%' : '',
       variant === undefined ? ' bg-primary-500 text-white' : '',
       size === 'sm' ? 'px-3 py-2 text-sm' : 'px-3 py-3',
     ]"
