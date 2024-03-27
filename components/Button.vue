@@ -1,13 +1,15 @@
 <template>
   <button
-    class="relative inline-flex justify-center items-center gap-1 rounded-md overflow-hidden"
+    class="relative inline-flex justify-center items-center shrink-0 gap-2 rounded-md overflow-hidden duration-300"
     :class="[
-      variant === 'soft' ? 'bg-primary-8% text-primary-500' : 'bg-primary-500 text-white',
+      variant === 'soft' ? 'bg-primary-8% text-primary-500' : '',
+      variant === 'ghost' ? ' text-primary-32% hover:text-primary-500' : '',
+      variant === undefined ? ' bg-primary-500 text-white' : '',
       size === 'sm' ? 'px-3 py-2 text-sm' : 'px-3 py-3',
     ]"
   >
-    <div class="-ml-1" v-if="icon && iconType === 'plus'">
-      <img class="w-5 h-full" src="~assets/icons/plus.svg" alt="" />
+    <div class="-ml-1" v-if="icon">
+      <img v-if="iconType === 'plus'" class="w-5 h-full" src="~assets/icons/plus.svg" alt="" />
     </div>
     <div
       class="absolute flex justify-center items-center top-0 left-0 right-0 w-full h-full bg-primary-500"
