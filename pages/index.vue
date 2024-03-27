@@ -1,10 +1,16 @@
 <template>
   <div>
-    <h1 class="text-3xl font-bold mb-3">Hi, {{ useSupabaseUser().value?.email?.split("@")[0] }} 👋</h1>
-    <p>Here's what's happening with your money this month</p>
+    <PageHeader
+      :headerText="`Hi, ${username} 👋`"
+      subheader-text="Here's what's happening with your money this month"
+    ></PageHeader>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const username = computed(() => {
+  return useSupabaseUser().value?.email?.split("@")[0];
+});
+</script>
 
 <style scoped></style>
