@@ -1,12 +1,12 @@
 <template>
   <button
-    class="relative inline-flex gap-2 rounded-md overflow-hidden"
+    class="relative inline-flex justify-center items-center gap-1 rounded-md overflow-hidden"
     :class="[
       variant === 'soft' ? 'bg-primary-8% text-primary-500' : 'bg-primary-500 text-white',
       size === 'sm' ? 'px-3 py-2 text-sm' : 'px-3 py-3',
     ]"
   >
-    <div v-if="icon && iconType === 'plus'">
+    <div class="-ml-1" v-if="icon && iconType === 'plus'">
       <img class="w-5 h-full" src="~assets/icons/plus.svg" alt="" />
     </div>
     <div
