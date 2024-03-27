@@ -5,7 +5,7 @@
       variant === 'soft' ? 'bg-primary-8% text-primary-500' : '',
       variant === 'ghost' ? ' text-dark-32% hover:text-primary-500 hover:bg-primary-2%' : '',
       variant === undefined ? ' bg-primary-500 text-white' : '',
-      size === 'sm' ? 'px-3 py-2 text-sm' : 'px-3 py-3',
+      size === 'sm' ? 'px-3 py-2 text-sm' : 'px-4 py-3',
     ]"
     @click="$emit('button-click')"
   >
