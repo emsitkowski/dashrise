@@ -1,8 +1,12 @@
 <template>
   <div>
     <PageHeader
-      :headerText="`Hi, ${username} 👋`"
+      :header-text="`Hi, ${username} 👋`"
       subheader-text="Here's what's happening with your money this month"
+      :button="true"
+      button-text="Add transaction"
+      :button-icon="true"
+      button-icon-type="plus"
     ></PageHeader>
   </div>
 </template>
