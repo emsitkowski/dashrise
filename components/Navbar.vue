@@ -1,5 +1,5 @@
 <template>
-  <nav class="flex justify-between items-center border-b border-primary-8">
+  <nav class="flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center border-b border-primary-8">
     <ul class="container max-w-5xl mx-auto flex flex-row flex-wrap gap-2 sm:gap-6 py-6">
       <li v-for="link in links" :key="link.label">
         <NuxtLink :to="link.path">
@@ -15,7 +15,7 @@
     </ul>
 
     <!-- Log out button -->
-    <Button variant="ghost" @click="useSupabaseAuth().logOut">Log out</Button>
+    <Button class="self-end sm:self-auto" variant="ghost" @click="useSupabaseAuth().logOut">Log out</Button>
   </nav>
 </template>
 
