@@ -2,7 +2,7 @@
   <div class="flex justify-center">
     <Card class="w-full max-w-xs">
       <template #card-header>
-        <h1 class="text-xl">Create an account</h1>
+        <h1 class="text-xl mx-auto">Create an account</h1>
       </template>
 
       <template #card-body>
