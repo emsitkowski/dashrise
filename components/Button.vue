@@ -7,6 +7,7 @@
       variant === undefined ? ' bg-primary-500 text-white' : '',
       size === 'sm' ? 'px-3 py-2 text-sm' : 'px-3 py-3',
     ]"
+    @click="$emit('button-click')"
   >
     <div class="-ml-1" v-if="icon">
       <img v-if="iconType === 'plus'" class="w-5 h-full" src="~assets/icons/plus.svg" alt="" />
@@ -39,6 +40,8 @@ defineProps({
     type: String,
   },
 });
+
+defineEmits(["button-click"]);
 </script>
 
 <style scoped></style>
