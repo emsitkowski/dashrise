@@ -2,7 +2,7 @@
   <input
     v-if="props.type === 'text'"
     @input="$emit('input', $event.target)"
-    class="px-3 py-2 bg-none border border-gray-300 rounded-md placeholder:text-sm"
+    class="px-3 py-2 bg-none border border-gray-300 rounded-md"
     type="text"
     :name="props.name"
     :id="props.id"
@@ -11,7 +11,7 @@
   <input
     v-if="props.type === 'password'"
     @input="$emit('input', $event.target)"
-    class="px-3 py-2 bg-none border border-gray-300 rounded-md placeholder:text-sm"
+    class="px-3 py-2 bg-none border border-gray-300 rounded-md"
     type="password"
     :name="props.name"
     :id="props.id"
