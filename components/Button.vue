@@ -1,7 +1,10 @@
 <template>
   <button
-    class="relative inline-block px-3 py-3 bg-primary-500 text-white rounded-md overflow-hidden"
-    :class="{ 'bg-green-600': loading }"
+    class="relative inline-block rounded-md overflow-hidden"
+    :class="[
+      variant === 'soft' ? 'bg-primary-8% text-primary-500' : 'bg-primary-500 text-white',
+      size === 'sm' ? 'px-3 py-2 text-sm' : 'px-3 py-3',
+    ]"
   >
     <div
       class="absolute flex justify-center items-center top-0 left-0 right-0 w-full h-full bg-primary-500"
@@ -14,7 +17,17 @@
 </template>
 
 <script setup lang="ts">
-defineProps(["loading"]);
+defineProps({
+  loading: {
+    type: Boolean,
+  },
+  variant: {
+    type: String,
+  },
+  size: {
+    type: String,
+  },
+});
 </script>
 
 <style scoped></style>
