@@ -12,7 +12,7 @@
       <template #card-footer>
         <p class="mb-2">Have an account?</p>
         <NuxtLink to="/login">
-          <Button variant="soft" size="sm">Log in here</Button>
+          <Button variant="ghost" size="sm">Log in here</Button>
         </NuxtLink>
       </template>
     </Card>
