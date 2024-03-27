@@ -1,6 +1,6 @@
 <template>
-  <nav class="flex justify-between items-center">
-    <ul class="container max-w-5xl mx-auto flex flex-row flex-wrap gap-2 sm:gap-6 py-6 border-b border-primary-8">
+  <nav class="flex justify-between items-center border-b border-primary-8">
+    <ul class="container max-w-5xl mx-auto flex flex-row flex-wrap gap-2 sm:gap-6 py-6">
       <li v-for="link in links" :key="link.label">
         <NuxtLink :to="link.path">
           <Button
