@@ -39,5 +39,25 @@ export const useSupabaseAuth = () => {
     }
   };
 
-  return { signInWithPassword, createNewAccount, authError };
+  const logOut = async (userDetails: any) => {
+    // clear previous error message
+    authError.value = "";
+
+    const { error } = await useSupabaseClient().auth.signOut();
+
+    if (error) {
+      // save error message to a ref
+      authError.value = error.message;
+      return false;
+    } else {
+      // navigate to login page and restart the app
+      reloadNuxtApp({ path: "/login" });
+      return true;
+    }
+  };
+
+  // User sign out function
+  async function signOut() {}
+
+  return { signInWithPassword, createNewAccount, logOut, authError };
 };
