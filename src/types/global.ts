@@ -6,3 +6,8 @@ export interface FormData {
 export interface Tab {
   label: string;
 }
+
+export interface userCredentials {
+  name: string;
+  password: string;
+}

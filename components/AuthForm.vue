@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormData } from "~/src/types/global";
+import type { userCredentials } from "~/src/types/global";
 const isSubmitting = ref(false);
 const { signInWithPassword, createNewAccount, authError } = useSupabaseAuth();
 
@@ -37,7 +37,7 @@ const props = defineProps({
   },
 });
 
-async function handleSubmit(formData: FormData) {
+async function handleSubmit(formData: userCredentials) {
   // toggle submitting state
   isSubmitting.value = true;
 
