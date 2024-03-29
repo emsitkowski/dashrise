@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     },
   },
   css: ["~/assets/style/main.scss"],
-  modules: ["@nuxtjs/supabase"],
+  modules: ["@nuxtjs/supabase", "@pinia/nuxt"],
   supabase: { redirect: false }, // disable supabase default redirect rules
   postcss: {
     plugins: {
