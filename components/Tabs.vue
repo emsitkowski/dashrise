@@ -9,7 +9,7 @@
         class="flex basis-1/3 items-center justify-center flex-grow rounded text-dark-32% cursor-pointer select-none duration-300"
         :class="{ 'bg-white text-dark-500': activeTab === index }"
         :key="index"
-        @click="setActiveTab(index)"
+        @click="setActiveTab(index), $emit('tabSwitch', tab)"
       >
         {{ tab.label }}
       </div>
@@ -18,12 +18,14 @@
     <!-- Tab content -->
     <div v-show="activeTab === index" v-for="(tab, index) in items">
       <slot :name="tab.label"></slot>
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 defineProps(["items"]);
+const emit = defineEmits(["tabSwitch"]);
 const activeTab = ref(0);
 
 function setActiveTab(index: number) {
