@@ -1,29 +1,20 @@
 <template>
   <div>
     <!-- Authentication form -->
-    <Form @submit="handleSubmit" :loading="isSubmitting">
-      <FormField>
-        <FormLabel inputID="1" label="Email"></FormLabel>
-        <FormInput
-          id="1"
-          type="text"
-          name="Email"
-          placeholder="Enter your email address"
-          @input="handleInput"
-        ></FormInput>
-      </FormField>
-      <FormField>
-        <FormLabel inputID="2" label="Password"></FormLabel>
-        <FormInput
-          id="2"
-          type="password"
-          name="Password"
-          placeholder="Enter your password"
-          @input="handleInput"
-        ></FormInput>
-      </FormField>
-
-      <Button class="mt-4" ref="submitBtn" :loading="isSubmitting">{{
+    <Form
+      @submit="handleSubmit"
+      :loading="isSubmitting"
+      :fields="[
+        { label: 'Email', type: 'text', name: 'Email', placeholder: 'Enter your email address' },
+        {
+          label: 'Password',
+          type: 'password',
+          name: 'Password',
+          placeholder: 'Enter your password',
+        },
+      ]"
+    >
+      <Button type="submit" class="mt-4" ref="submitBtn" :loading="isSubmitting">{{
         action === "login" ? "Log in" : "Create account"
       }}</Button>
     </Form>
@@ -36,6 +27,7 @@
 </template>
 
 <script setup lang="ts">
+import type { FormData } from "~/src/types/global";
 const isSubmitting = ref(false);
 const { signInWithPassword, createNewAccount, authError } = useSupabaseAuth();
 
@@ -45,21 +37,16 @@ const props = defineProps({
   },
 });
 
-const formData = ref({
-  email: "",
-  password: "",
-});
-
-async function handleSubmit() {
+async function handleSubmit(formData: FormData) {
   // toggle submitting state
   isSubmitting.value = true;
 
   // clear error message
   authError.value = "";
 
+  // log in user
   if (props.action === "login") {
-    // log in user
-    const success = await signInWithPassword(formData.value);
+    const success = await signInWithPassword(formData);
 
     // redirect to homepage
     if (success) {
@@ -69,9 +56,8 @@ async function handleSubmit() {
       isSubmitting.value = false;
     }
   } else {
-    console.log("creating new account..");
     // create new account
-    const success = await createNewAccount(formData.value);
+    const success = await createNewAccount(formData);
 
     // redirect to homepage
     if (success) {
@@ -80,16 +66,6 @@ async function handleSubmit() {
       // toggle submitting state
       isSubmitting.value = false;
     }
-  }
-}
-
-function handleInput(target: any) {
-  const inputType = target.getAttribute("name");
-
-  if (inputType === "Email") {
-    formData.value.email = target.value;
-  } else if (inputType === "Password") {
-    formData.value.password = target.value;
   }
 }
 </script>
