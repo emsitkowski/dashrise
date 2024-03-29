@@ -7,7 +7,7 @@ export const useSupabaseAuth = () => {
       password: userDetails.password,
     });
 
-    return handleError(error);
+    return handleResponse(error);
   };
 
   const createNewAccount = async (userDetails: any) => {
@@ -16,7 +16,7 @@ export const useSupabaseAuth = () => {
       password: userDetails.password,
     });
 
-    return handleError(error);
+    return handleResponse(error);
   };
 
   const logOut = async (userDetails: any) => {
@@ -24,10 +24,10 @@ export const useSupabaseAuth = () => {
 
     reloadNuxtApp({ path: "/login" });
 
-    return handleError(error);
+    return handleResponse(error);
   };
 
-  function handleError(error: any) {
+  function handleResponse(error: any) {
     // save error message to a ref
     if (error) {
       authError.value = error.message;
