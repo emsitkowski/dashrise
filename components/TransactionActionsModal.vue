@@ -106,8 +106,6 @@ function handleTabSwitch(tabIndex: number) {
 onUpdated(() => {
   // Update form schema
   setCorrectFormSchema();
-
-  console.log("UPDATED HOOK", activeTab.value);
 });
 
 function setCorrectFormSchema() {
