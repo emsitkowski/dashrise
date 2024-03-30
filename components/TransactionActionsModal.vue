@@ -15,7 +15,7 @@
         </FormField>
 
         <!-- Category -->
-        <FormField v-show="activeTab.label === 'Expense'" label="Category">
+        <FormField v-if="activeTab.label === 'Expense'" label="Category">
           <SelectMenu :options="categories" v-model="formState.category" />
         </FormField>
 
@@ -82,7 +82,6 @@ async function handleSubmit() {
     // Restore form to initial state
     clearInputs();
     formState.value = {};
-    activeTab.value = tabs[0];
   } else {
     throw Error("Failed to save transaction");
   }
@@ -96,9 +95,21 @@ function toggleFormLoading() {
 }
 
 function handleTabSwitch(tab: Tab) {
+  // Find correct tab index based on label value
   activeTab.value = tab;
 
-  // Set correct form schema
+  // Update form schema
+  setCorrectFormSchema();
+}
+
+onUpdated(() => {
+  // Update form schema
+  setCorrectFormSchema();
+
+  console.log("UPDATED HOOK", activeTab.value);
+});
+
+function setCorrectFormSchema() {
   if (activeTab.value.label === "Income") {
     formSchema.value = incomeSchema;
   } else if (activeTab.value.label === "Expense") {

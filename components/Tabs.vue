@@ -24,9 +24,9 @@
 </template>
 
 <script setup lang="ts">
-defineProps(["items"]);
+const props = defineProps(["items"]);
 const emit = defineEmits(["tabSwitch"]);
-const activeTab = ref(0);
+const activeTab = ref(0); // set initial active tab to first one
 
 function setActiveTab(index: number) {
   activeTab.value = index;
