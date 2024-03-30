@@ -1,7 +1,10 @@
 <template>
-  <div class="fixed flex justify-center items-center top-0 left-0 right-0 w-full h-full px-4 bg-dark-80% z-50">
+  <div
+    v-show="open"
+    class="fixed flex justify-center items-start top-0 left-0 right-0 w-full h-full px-4 bg-dark-80% overflow-y-auto z-50"
+  >
     <!-- Modal card -->
-    <Card class="w-full max-w-md">
+    <Card class="w-full max-w-md my-16">
       <template #card-header>
         <!-- Modal header -->
         <span class="text-xl">{{ headerText }}</span>
@@ -21,8 +24,16 @@
 </template>
 
 <script setup lang="ts">
-defineProps(["headerText"]);
+const props = defineProps(["headerText", "open"]);
 defineEmits(["close"]);
+
+onUpdated(() => {
+  if (props.open === true) {
+    disableScrollbar();
+  } else {
+    enableScrollbar();
+  }
+});
 </script>
 
 <style scoped></style>

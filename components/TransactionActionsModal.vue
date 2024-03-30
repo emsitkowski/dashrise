@@ -1,5 +1,5 @@
 <template>
-  <Modal v-show="open" header-text="Add transaction" @close="$emit('close')">
+  <Modal :open="open" header-text="Add transaction" @close="$emit('close')">
     <!-- Transaction type switch -->
     <Tabs :items="tabs" @tab-switch="handleTabSwitch">
       <!-- Transaction form -->
