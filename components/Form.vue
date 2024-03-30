@@ -1,42 +1,41 @@
 <template>
-  <form
-    class="relative flex flex-col gap-4"
-    :class="{
-      'after:content-[\'\'] after:absolute after:bg-white-60% after:w-full after:h-full after:top-0 ': loading,
-    }"
-    @submit.prevent="$emit('submit', formData), unfocusInputs()"
-    novalidate
-    autocomplete="off"
-  >
-    <FormField v-for="(field, index) in fields">
-      <FormLabel :id="index" :label="field.label" />
-      <FormInput
-        :id="index.toString()"
-        :type="field.type"
-        :name="field.name"
-        :placeholder="field.placeholder"
-        @input="handleInput"
-      ></FormInput>
-    </FormField>
+  <div>
+    <form
+      class="relative flex flex-col gap-4"
+      :class="{
+        'after:content-[\'\'] after:absolute after:bg-white-60% after:w-full after:h-full after:top-0 ': loading,
+      }"
+      @submit.prevent="handleSubmit"
+      novalidate
+      autocomplete="off"
+    >
+      <slot></slot>
+    </form>
 
-    <slot></slot>
-  </form>
+    <!-- Validation error -->
+    <p class="text-sm text-red-500 text-center mt-3">
+      {{ validationError }}
+    </p>
+  </div>
 </template>
 
 <script setup lang="ts">
-defineProps(["fields", "loading"]);
-defineEmits(["submit"]);
+const props = defineProps(["state", "schema", "loading"]);
+const emit = defineEmits(["submit"]);
+const validationError = ref("");
 
-const formData = ref({});
+function handleSubmit() {
+  // Clear any previous validation errors
+  validationError.value = "";
 
-function handleInput(target: HTMLInputElement) {
-  const inputType = target.getAttribute("name");
+  // Validate form
+  const { error } = useFormValidation(props.schema, props.state);
 
-  if (inputType) {
-    (formData.value as any)[inputType.toLowerCase()] = target.value;
+  if (error) {
+    validationError.value = error;
+  } else {
+    emit("submit");
   }
-
-  console.log(formData.value);
 }
 </script>
 
