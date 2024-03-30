@@ -1,35 +1,33 @@
 <template>
   <Modal v-show="open" header-text="Add transaction" @close="$emit('close')">
-    <div class="flex flex-col gap-2">
-      <!-- Transaction type switch -->
-      <Tabs :items="tabs" @tab-switch="handleTabSwitch">
-        <!-- Transaction form -->
-        <Form class="mt-4" @submit="handleSubmit" :loading="isSubmitting" :state="formState" :schema="formSchema">
-          <!-- Date -->
-          <FormField label="Date">
-            <FormInput name="Date" type="date" placeholder="Pick transaction date" v-model="formState.date" />
-          </FormField>
+    <!-- Transaction type switch -->
+    <Tabs :items="tabs" @tab-switch="handleTabSwitch">
+      <!-- Transaction form -->
+      <Form class="mt-6" @submit="handleSubmit" :loading="isSubmitting" :state="formState" :schema="formSchema">
+        <!-- Date -->
+        <FormField label="Date">
+          <FormInput name="Date" type="date" placeholder="Pick transaction date" v-model="formState.date" />
+        </FormField>
 
-          <!-- Name -->
-          <FormField label="Name">
-            <FormInput name="Name" type="text" placeholder="Enter transaction name" v-model="formState.name" />
-          </FormField>
+        <!-- Name -->
+        <FormField label="Name">
+          <FormInput name="Name" type="text" placeholder="Enter transaction name" v-model="formState.name" />
+        </FormField>
 
-          <!-- Category -->
-          <FormField v-show="activeTab.label === 'Expense'" label="Category">
-            <FormInput name="Name" type="text" placeholder="Enter transaction category" v-model="formState.category" />
-          </FormField>
+        <!-- Category -->
+        <FormField v-show="activeTab.label === 'Expense'" label="Category">
+          <SelectMenu :options="categories" v-model="formState.category" />
+        </FormField>
 
-          <!-- Value -->
-          <FormField label="Value">
-            <FormInput name="Value" type="text" placeholder="Enter transaction value" v-model="formState.value" />
-          </FormField>
+        <!-- Value -->
+        <FormField label="Value">
+          <FormInput name="Value" type="text" placeholder="Enter transaction value" v-model="formState.value" />
+        </FormField>
 
-          <!-- Submit button -->
-          <Button class="mt-4" ref="submitBtn" :loading="isSubmitting">Add transaction</Button>
-        </Form>
-      </Tabs>
-    </div>
+        <!-- Submit button -->
+        <Button class="mt-4" ref="submitBtn" :loading="isSubmitting">Add transaction</Button>
+      </Form>
+    </Tabs>
   </Modal>
 </template>
 
@@ -48,6 +46,25 @@ const activeTab = ref(tabs[0]); // Set initial active tab
 
 const formSchema = ref(incomeSchema); // set initial form schema
 
+const categories = [
+  {
+    label: "Food",
+    value: "value",
+  },
+  {
+    label: "Cat",
+    value: "value",
+  },
+  {
+    label: "Car",
+    value: "value",
+  },
+  {
+    label: "House",
+    value: "value",
+  },
+];
+
 async function handleSubmit() {
   // Turn on loading state
   toggleFormLoading();
@@ -62,9 +79,10 @@ async function handleSubmit() {
     // Emit success event
     emit("success");
 
-    // Clear form fields and form state
+    // Restore form to initial state
     clearInputs();
     formState.value = {};
+    activeTab.value = tabs[0];
   } else {
     throw Error("Failed to save transaction");
   }
