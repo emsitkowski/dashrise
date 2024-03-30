@@ -1,7 +1,7 @@
 <template>
   <div>
     <form
-      class="relative flex flex-col gap-4"
+      class="relative flex flex-col gap-6"
       :class="{
         'after:content-[\'\'] after:absolute after:bg-white-60% after:w-full after:h-full after:top-0 ': loading,
       }"
