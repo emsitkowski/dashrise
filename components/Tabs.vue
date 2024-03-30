@@ -7,9 +7,9 @@
       <div
         v-for="(tab, index) in items"
         class="flex basis-1/3 items-center justify-center flex-grow rounded text-dark-32% cursor-pointer select-none duration-300"
-        :class="{ 'bg-white text-dark-500': activeTab === index }"
+        :class="{ 'bg-white text-dark-500': props.value === index }"
         :key="index"
-        @click="setActiveTab(index), $emit('tabSwitch', tab)"
+        @click="switchTab(index)"
       >
         {{ tab.label }}
       </div>
@@ -24,12 +24,13 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["items"]);
-const emit = defineEmits(["tabSwitch"]);
-const activeTab = ref(0); // set initial active tab to first one
+const props = defineProps(["items", "value"]);
+const emit = defineEmits(["update:value"]);
+const activeTab = ref(props.value); // set initial active tab to first one
 
-function setActiveTab(index: number) {
+function switchTab(index: number) {
   activeTab.value = index;
+  emit("update:value", index);
 }
 </script>
 

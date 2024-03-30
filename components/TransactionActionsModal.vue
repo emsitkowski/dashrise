@@ -1,7 +1,7 @@
 <template>
   <Modal :open="open" header-text="Add transaction" @close="$emit('close')">
     <!-- Transaction type switch -->
-    <Tabs :items="tabs" @tab-switch="handleTabSwitch">
+    <Tabs :items="tabs" :value="activeTab" @update:value="handleTabSwitch">
       <!-- Transaction form -->
       <Form class="mt-6" @submit="handleSubmit" :loading="isSubmitting" :state="formState" :schema="formSchema">
         <!-- Date -->
@@ -15,7 +15,7 @@
         </FormField>
 
         <!-- Category -->
-        <FormField v-if="activeTab.label === 'Expense'" label="Category">
+        <FormField v-if="tabs[activeTab].label === 'Expense'" label="Category">
           <SelectMenu :options="categories" v-model="formState.category" />
         </FormField>
 
@@ -42,7 +42,7 @@ const isSubmitting = ref(false);
 const formState = ref<any>({});
 
 const tabs = [{ label: "Income" }, { label: "Expense" }];
-const activeTab = ref(tabs[0]); // Set initial active tab
+const activeTab = ref(0); // Set initial active tab
 
 const formSchema = ref(incomeSchema); // set initial form schema
 
@@ -70,7 +70,7 @@ async function handleSubmit() {
   toggleFormLoading();
 
   // Add transaction type to form state
-  formState.value.type = activeTab.value.label;
+  formState.value.type = tabs[activeTab.value].label;
 
   // Save transaction
   const success = await useTransactionStore().saveTransaction(formState.value as Transaction);
@@ -81,6 +81,7 @@ async function handleSubmit() {
 
     // Restore form to initial state
     clearInputs();
+    activeTab.value = 0;
     formState.value = {};
   } else {
     throw Error("Failed to save transaction");
@@ -94,9 +95,9 @@ function toggleFormLoading() {
   isSubmitting.value = !isSubmitting.value;
 }
 
-function handleTabSwitch(tab: Tab) {
+function handleTabSwitch(tabIndex: number) {
   // Find correct tab index based on label value
-  activeTab.value = tab;
+  activeTab.value = tabIndex;
 
   // Update form schema
   setCorrectFormSchema();
@@ -110,9 +111,9 @@ onUpdated(() => {
 });
 
 function setCorrectFormSchema() {
-  if (activeTab.value.label === "Income") {
+  if (tabs[activeTab.value].label === "Income") {
     formSchema.value = incomeSchema;
-  } else if (activeTab.value.label === "Expense") {
+  } else if (tabs[activeTab.value].label === "Expense") {
     formSchema.value = expenseSchema;
   }
 }
