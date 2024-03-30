@@ -10,7 +10,7 @@
       @button-click="isModalOpen = true"
     ></PageHeader>
 
-    <TransactionModal :open="isModalOpen" @close="isModalOpen = false" @success="isModalOpen = false" />
+    <TransactionActionsModal :open="isModalOpen" @close="isModalOpen = false" @success="isModalOpen = false" />
   </div>
 </template>
 
