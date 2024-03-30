@@ -7,7 +7,7 @@
         <span class="text-xl">{{ headerText }}</span>
 
         <!-- Modal close button -->
-        <Button class="ml-6" variant="ghost" @click="$emit('close')">
+        <Button class="ml-6" variant="ghost" size="sm" @click="$emit('close')">
           <img src="~assets/icons/x.svg" alt="close" />
         </Button>
       </template>
