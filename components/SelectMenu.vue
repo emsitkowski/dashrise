@@ -1,6 +1,9 @@
 <template>
   <div class="relative flex flex-col cursor-pointer select-none" @click="handleClick">
-    <div class="select flex justify-between items-center px-3 py-2 bg-none border border-gray-300 rounded-md">
+    <div
+      class="select flex justify-between items-center px-3 py-2 bg-none border-gray-300"
+      :class="isOpen ? 'border-t border-l border-r rounded-t-md' : 'border rounded-md'"
+    >
       <div class="selected pointer-events-none">
         <span ref="select">{{ selected }}</span>
       </div>
@@ -9,8 +12,8 @@
       </div>
     </div>
     <ul
-      class="absolute top-0 translate-y-10 w-full px-2 py-2 bg-white border border-gray-300 rounded-md max-h-64 overflow-auto z-50"
-      :class="{ hidden: !isOpen }"
+      class="absolute top-0 translate-y-10 w-full px-2 py-2 bg-white border-gray-300 max-h-64 overflow-auto z-50"
+      :class="isOpen ? 'border-b border-l border-r rounded-b-md border-t' : 'border rounded-md hidden'"
     >
       <li v-for="option in options" class="hover:bg-dark-4% px-3 py-2 rounded">{{ option.label }}</li>
     </ul>
