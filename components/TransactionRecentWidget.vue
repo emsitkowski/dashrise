@@ -4,7 +4,7 @@
   >
     <template #card-body>
       <div v-if="props.transactions.length > 0" class="divide-y divide-primary-8%">
-        <div v-for="transaction in props.transactions" class="flex items-start py-4 gap-4 sm:gap-8">
+        <div v-for="transaction in props.transactions" class="flex items-center py-4 gap-4 sm:gap-8">
           <!-- Transaction type -->
           <div class="w-16 sm:w-20 shrink-0">
             <Badge
