@@ -6,7 +6,9 @@
     </div>
 
     <!-- Card body -->
-    <slot name="card-body"></slot>
+    <div v-if="$slots['card-body']">
+      <slot name="card-body"></slot>
+    </div>
 
     <!-- Card footer -->
     <div v-if="$slots['card-footer']" :class="{ 'mt-6 pt-6  text-center': $slots['card-footer'] }">
