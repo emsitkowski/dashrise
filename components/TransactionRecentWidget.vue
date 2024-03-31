@@ -6,7 +6,7 @@
       <div v-if="props.transactions.length > 0" class="divide-y divide-primary-8%">
         <div v-for="transaction in props.transactions" class="flex items-start py-4 gap-4 sm:gap-8">
           <!-- Transaction type -->
-          <div class="w-16 sm:w-20">
+          <div class="w-16 sm:w-20 shrink-0">
             <Badge
               class="w-full"
               :label="transaction.type"
@@ -21,7 +21,7 @@
           </div>
 
           <!-- Transaction value -->
-          <div class="ml-auto text-sm sm:text-base whitespace-nowrap">
+          <div class="ml-auto text-sm sm:text-base whitespace-nowrap shrink-0">
             <span v-if="transaction.type === 'Income'"> + {{ transaction.value }} PLN</span>
             <span v-if="transaction.type === 'Expense'" class="text-dark-32%"> - {{ transaction.value }} PLN</span>
           </div>
