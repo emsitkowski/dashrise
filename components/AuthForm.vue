@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Authentication form -->
-    <Form class="mt-4" @submit="handleSubmit" :loading="isSubmitting" :state="formState" :schema="formSchema">
+    <Form @submit="handleSubmit" :loading="isSubmitting" :state="formState" :schema="formSchema">
       <!-- Email -->
       <FormField label="Email">
         <FormInput name="Email" type="text" placeholder="Enter your email address" v-model="formState.email" />
