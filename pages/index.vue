@@ -12,11 +12,14 @@
 
     <TransactionActionsModal :open="isModalOpen" @close="isModalOpen = false" @success="isModalOpen = false" />
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[600px] mt-12">
-      <TransactionRecentWidget
-        :transactions="useTransactionStore().filterTransactionsByDate('2024', '03', 10)"
-        :loading="useTransactionStore().loading"
-      />
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+      <div class="flex flex-col">
+        <SectionHeader></SectionHeader>
+        <TransactionRecentWidget
+          :transactions="useTransactionStore().filterTransactionsByDate('2024', '03', 10)"
+          :loading="useTransactionStore().loading"
+        />
+      </div>
     </div>
   </div>
 </template>
