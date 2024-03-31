@@ -1,20 +1,20 @@
 <template>
-  <div class="flex flex-col justify-center p-6 sm:p-8 rounded-2xl bg-white divide-y divide-primary-8% overflow-x-auto">
+  <div class="flex flex-col justify-center gap-6 p-6 sm:p-8 rounded-2xl bg-white overflow-x-auto">
     <!-- Card header -->
     <div
       v-if="$slots['card-header']"
-      :class="{ 'flex justify-between items-center mb-6 sm:mb-8': $slots['card-header'] }"
+      :class="{ 'flex justify-between items-center border-b border-primary-8% pb-6': $slots['card-header'] }"
     >
       <slot name="card-header"></slot>
     </div>
 
     <!-- Card body -->
-    <div class="pt-6" v-if="$slots['card-body']">
+    <div v-if="$slots['card-body']">
       <slot name="card-body"></slot>
     </div>
 
     <!-- Card footer -->
-    <div v-if="$slots['card-footer']" :class="{ 'mt-6 pt-6  text-center': $slots['card-footer'] }">
+    <div v-if="$slots['card-footer']" class="pt-6 border-t border-primary-8% text-center">
       <slot name="card-footer"></slot>
     </div>
   </div>
