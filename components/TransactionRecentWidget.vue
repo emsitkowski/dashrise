@@ -17,7 +17,7 @@
           <!-- Transaction details -->
           <div class="flex flex-col gap-1 leading-tight text-base">
             <span>{{ transaction.name }}</span>
-            <span class="text-xs text-dark-32%">{{ transaction.date }}</span>
+            <span class="text-xs sm:text-sm text-dark-32%">{{ transaction.date }}</span>
           </div>
 
           <!-- Transaction value -->
