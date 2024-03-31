@@ -35,7 +35,7 @@
       </div>
 
       <!-- Loading spinner -->
-      <SpinnerLoader v-if="loading" bg-color-class="bg-white" color="#000" :loading="true" />
+      <SpinnerLoader v-if="loading" bg-color-class="bg-white" stroke-color-class="stroke-dark-500" :loading="true" />
     </template>
   </Card>
 </template>
