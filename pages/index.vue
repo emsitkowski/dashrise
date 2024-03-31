@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Page header -->
     <PageHeader
       :header-text="`Hi, ${username} 👋`"
       subheader-text="Here's what's happening with your money this month"
@@ -8,10 +9,12 @@
       :button-icon="true"
       button-icon-type="plus"
       @button-click="isModalOpen = true"
-    ></PageHeader>
+    />
 
+    <!-- Transactions modal -->
     <TransactionActionsModal :open="isModalOpen" @close="isModalOpen = false" @success="isModalOpen = false" />
 
+    <!-- Recent activity widget -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
       <div class="flex flex-col">
         <SectionHeader></SectionHeader>
