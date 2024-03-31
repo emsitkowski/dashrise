@@ -35,7 +35,7 @@ function handleSubmit() {
   const { error } = useFormValidation(props.schema, props.state);
 
   if (error) {
-    validationError.value = error;
+    validationError.value = error.message;
   } else {
     emit("submit");
   }
