@@ -23,7 +23,10 @@ export const useSupabaseDatabase = () => {
   };
 
   const getTransactions = async () => {
-    const { data, error } = await useSupabaseClient().from("Transactions").select("*");
+    const { data, error } = await useSupabaseClient()
+      .from("Transactions")
+      .select("*")
+      .order("date", { ascending: false });
 
     if (error) {
       handleError(error);

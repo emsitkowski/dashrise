@@ -14,7 +14,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 h-[600px] mt-12">
       <TransactionRecentWidget
-        :transactions="useTransactionStore().transactions"
+        :transactions="useTransactionStore().filterTransactionsByDate('2024', '03')"
         :loading="useTransactionStore().loading"
       />
     </div>

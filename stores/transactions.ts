@@ -31,7 +31,9 @@ export const useTransactionStore = defineStore("transactions", () => {
     if (transactions.value) {
       transactions.value.push(newTransaction);
     }
-    console.log(newTransaction);
+
+    // Sort transactions by date
+    transactions.value.sort((a, b) => a.date.localeCompare(b.date)).reverse();
   }
 
   // Save new transaction
@@ -43,11 +45,19 @@ export const useTransactionStore = defineStore("transactions", () => {
     loading.value = false;
   }
 
+  // Filter transactions
+  const filterTransactionsByDate = computed(() => {
+    return (month: string | number, year: string | number) => {
+      return transactions.value.filter((transaction: Transaction) => transaction.date.includes(`${month}-${year}`));
+    };
+  });
+
   return {
     clear,
     transactions,
     saveTransaction,
     fetchTransactionsFromDatabase,
+    filterTransactionsByDate,
     loading,
     error,
   };
