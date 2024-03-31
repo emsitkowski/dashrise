@@ -1,6 +1,6 @@
 <template>
   <Card
-    class="relative overflow-hidden h-[400px] py-2 sm:py-4 after:content-[''] after:w-full after:h-full after:absolute after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-white after:to-50% z-10 after:select-none after:pointer-events-none"
+    class="relative overflow-hidden h-[420px] py-2 sm:py-4 after:content-[''] after:w-full after:h-full after:absolute after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-white after:to-50% z-10 after:select-none after:pointer-events-none"
   >
     <template #card-body>
       <div v-if="props.transactions.length > 0" class="divide-y divide-primary-8%">
@@ -15,13 +15,13 @@
           </div>
 
           <!-- Transaction details -->
-          <div class="flex flex-col gap-1 leading-tight text-base">
-            <span>{{ transaction.name }}</span>
+          <div class="flex flex-col gap-1 leading-tight">
+            <span class="text-base">{{ transaction.name }}</span>
             <span class="text-xs sm:text-sm text-dark-32%">{{ transaction.date }}</span>
           </div>
 
           <!-- Transaction value -->
-          <div class="ml-auto text-sm sm:text-base whitespace-nowrap shrink-0">
+          <div class="ml-auto text-base whitespace-nowrap shrink-0">
             <span v-if="transaction.type === 'Income'"> + {{ transaction.value }} PLN</span>
             <span v-if="transaction.type === 'Expense'" class="text-dark-32%"> - {{ transaction.value }} PLN</span>
           </div>
@@ -29,8 +29,8 @@
       </div>
 
       <!-- Empty state -->
-      <div v-else class="flex flex-col justify-center w-full h-full items-center gap-2 text-dark-32%">
-        <img class="w-7" src="~assets/icons/info.svg" alt="" />
+      <div v-else class="flex flex-col justify-center items-center w-full h-full gap-1 sm:gap-2 text-dark-32%">
+        <img class="w-5 sm:w-6" src="~assets/icons/info.svg" alt="" />
         <span>No recent transactions found</span>
       </div>
 
