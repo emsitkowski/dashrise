@@ -15,7 +15,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
       <div class="flex flex-col">
         <SectionHeader></SectionHeader>
-        <RecentActivity
+        <WidgetRecentActivity
           :transactions="useTransactionStore().filterTransactionsByDate('2024', '03', 10)"
           :loading="useTransactionStore().loading"
         />
