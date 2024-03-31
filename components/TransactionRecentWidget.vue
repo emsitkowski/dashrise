@@ -1,6 +1,6 @@
 <template>
   <Card
-    class="relative overflow-hidden sm:py-4 after:content-[''] after:w-full after:h-1/3 after:absolute after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-30% after:from-white z-10"
+    class="relative overflow-hidden sm:py-4 after:content-[''] after:w-full after:h-full after:absolute after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-white z-10 after:select-none after:pointer-events-none"
   >
     <template #card-body>
       <div v-if="props.transactions.length > 0" class="divide-y divide-primary-8%">
