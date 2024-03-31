@@ -8,6 +8,6 @@
 <script setup>
 onMounted(() => {
   // Load all transactions
-  useTransactionStore().getTransactions();
+  useTransactionStore().fetchTransactionsFromDatabase();
 });
 </script>

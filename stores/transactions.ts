@@ -35,7 +35,7 @@ export const useTransactionStore = defineStore("transactions", () => {
   }
 
   // Save new transaction
-  async function getTransactions() {
+  async function fetchTransactionsFromDatabase() {
     loading.value = true;
     // retrieve data from database
     transactions.value = (await useSupabaseDatabase().getTransactions()) as any;
@@ -47,7 +47,7 @@ export const useTransactionStore = defineStore("transactions", () => {
     clear,
     transactions,
     saveTransaction,
-    getTransactions,
+    fetchTransactionsFromDatabase,
     loading,
     error,
   };
