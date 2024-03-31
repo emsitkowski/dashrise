@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-center gap-6 p-6 sm:p-8 rounded-2xl bg-white overflow-x-auto">
+  <div class="flex flex-col gap-6 p-6 sm:p-8 rounded-2xl bg-white overflow-x-auto">
     <!-- Card header -->
     <div
       v-if="$slots['card-header']"
@@ -9,7 +9,7 @@
     </div>
 
     <!-- Card body -->
-    <div v-if="$slots['card-body']">
+    <div v-if="$slots['card-body']" class="grow">
       <slot name="card-body"></slot>
     </div>
 
