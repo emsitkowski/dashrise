@@ -4,7 +4,7 @@ export interface Transaction {
   date: string;
   type: string;
   name: string;
-  value: number | undefined;
+  value: number | string;
 }
 
 export interface Tab {
