@@ -47,8 +47,13 @@ export const useTransactionStore = defineStore("transactions", () => {
 
   // Filter transactions
   const filterTransactionsByDate = computed(() => {
-    return (month: string | number, year: string | number) => {
-      return transactions.value.filter((transaction: Transaction) => transaction.date.includes(`${month}-${year}`));
+    return (month: string | number, year: string | number, limit: number) => {
+      const filterTransactions = transactions.value.filter((transaction: Transaction) =>
+        transaction.date.includes(`${month}-${year}`)
+      );
+
+      // Return limited number of transactions
+      return filterTransactions.slice(0, limit);
     };
   });
 
