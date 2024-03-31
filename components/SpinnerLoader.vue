@@ -1,12 +1,12 @@
 <template>
   <Transition>
     <div
-      class="absolute flex flex-col gap-2 justify-center items-center top-0 left-0 right-0 w-full h-full duration-300"
+      class="absolute flex flex-col gap-1 sm:gap-2 justify-center items-center top-0 left-0 right-0 w-full h-full duration-300"
       :class="bgColorClass"
       v-if="loading"
     >
       <svg
-        class="animate-spin duration-100"
+        class="w-5 sm:w-6 animate-spin duration-100"
         :class="strokeColorClass"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -28,7 +28,7 @@
       </svg>
 
       <!-- Loading label -->
-      <span v-if="label" class="text-base text-dark-32%">
+      <span v-if="label" class="text-sm sm:text-base text-dark-32%">
         {{ label }}
       </span>
     </div>
