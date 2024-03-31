@@ -1,10 +1,8 @@
 import type { Transaction } from "~/src/types/global";
 
 export const useSupabaseDatabase = () => {
-  const databaseError = ref("");
-
   const saveTransaction = async (transaction: Transaction) => {
-    const { error } = await useSupabaseClient()
+    const { data, error } = await useSupabaseClient()
       .from("Transactions")
       .insert([
         {
@@ -17,19 +15,29 @@ export const useSupabaseDatabase = () => {
         },
       ] as never);
 
-    return handleResponse(error);
+    if (error) {
+      handleError(error);
+    } else {
+      return data;
+    }
   };
 
-  function handleResponse(error: any) {
+  const getTransactions = async () => {
+    const { data, error } = await useSupabaseClient().from("Transactions").select("*");
+
+    if (error) {
+      handleError(error);
+    } else {
+      return data;
+    }
+  };
+
+  function handleError(error: any) {
     // save error message to a ref
     if (error) {
-      databaseError.value = error.message;
-      return error;
-    } else {
-      // auth action successful
-      return true;
+      throw Error(error);
     }
   }
 
-  return { saveTransaction, databaseError };
+  return { saveTransaction, getTransactions };
 };

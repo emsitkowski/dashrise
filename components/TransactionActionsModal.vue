@@ -73,19 +73,15 @@ async function handleSubmit() {
   formState.value.type = tabs[activeTab.value].label;
 
   // Save transaction
-  const success = await useTransactionStore().saveTransaction(formState.value as Transaction);
+  await useTransactionStore().saveTransaction(formState.value as Transaction);
 
-  if (success) {
-    // Emit success event
-    emit("success");
+  // Emit success event
+  emit("success");
 
-    // Restore form to initial state
-    clearInputs();
-    activeTab.value = 0;
-    formState.value = {};
-  } else {
-    throw Error("Failed to save transaction");
-  }
+  // Restore form to initial state
+  clearInputs();
+  activeTab.value = 0;
+  formState.value = {};
 
   // Turn off loading state
   toggleFormLoading();

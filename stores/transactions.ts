@@ -6,6 +6,7 @@ import type { Transaction } from "~/src/types/global";
 export const useTransactionStore = defineStore("transactions", () => {
   const error = ref("");
   const transactions = ref<Transaction[]>([]);
+  const loading = ref(false);
 
   // Clear store
   function clear() {
@@ -24,24 +25,30 @@ export const useTransactionStore = defineStore("transactions", () => {
     };
 
     // Save new transactions in database
-    const { error } = await useSupabaseDatabase().saveTransaction(newTransaction);
+    await useSupabaseDatabase().saveTransaction(newTransaction);
 
-    // save error message to a ref
-    if (error) {
-      error.value = error.message;
-      return false;
-    } else {
-      // Save new transactions in store
+    // Save new transactions in store
+    if (transactions.value) {
       transactions.value.push(newTransaction);
-      console.log(newTransaction);
-      return true;
     }
+    console.log(newTransaction);
+  }
+
+  // Save new transaction
+  async function getTransactions() {
+    loading.value = true;
+    // retrieve data from database
+    transactions.value = (await useSupabaseDatabase().getTransactions()) as any;
+
+    loading.value = false;
   }
 
   return {
     clear,
     transactions,
     saveTransaction,
+    getTransactions,
+    loading,
     error,
   };
 });
