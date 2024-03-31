@@ -5,8 +5,8 @@ const defaultSchema = {
   date: Joi.string().required(),
   name: Joi.string().required(),
   value: Joi.string()
-    .regex(/^[0-9,]+$/)
-    .rule({ message: "Value should only contain numbers and commas for decimals" })
+    .regex(/^\d+(,\d{2})?$/)
+    .rule({ message: "Enter correct value, use numbers and commas for decimals" })
     .required(),
 };
 
