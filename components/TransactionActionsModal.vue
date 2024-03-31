@@ -1,9 +1,10 @@
 <template>
   <Modal :open="open" header-text="Add transaction" @close="$emit('close')">
     <!-- Transaction type switch -->
-    <Tabs :items="tabs" :value="activeTab" @update:value="handleTabSwitch">
+    <span class="block mb-2">Choose transaction type</span>
+    <Tabs class="gap-6" :items="tabs" :value="activeTab" @update:value="handleTabSwitch">
       <!-- Transaction form -->
-      <Form class="mt-6" @submit="handleSubmit" :loading="isSubmitting" :state="formState" :schema="formSchema">
+      <Form @submit="handleSubmit" :loading="isSubmitting" :state="formState" :schema="formSchema">
         <!-- Date -->
         <FormField label="Date">
           <FormInput name="Date" type="date" placeholder="Pick transaction date" v-model="formState.date" />
