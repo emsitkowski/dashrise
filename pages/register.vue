@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-center">
-    <Card class="w-full max-w-xs">
+    <Card class="w-full max-w-sm">
       <template #card-header>
         <h1 class="text-xl mx-auto">Create an account</h1>
       </template>
