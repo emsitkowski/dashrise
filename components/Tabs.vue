@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col">
     <div
-      class="relative flex w-full h-10 mb-4 p-1 bg-dark-4% rounded-md overflow-hidden text-sm font-medium [&>.active]:bg-white [&>.active]:text-dark-500"
+      class="relative flex w-full h-10 p-1 bg-dark-4% rounded-md overflow-hidden text-sm font-medium [&>.active]:bg-white [&>.active]:text-dark-500"
     >
       <!-- Tab links -->
       <div
