@@ -4,7 +4,10 @@ import Joi from "joi";
 const defaultSchema = {
   date: Joi.string().required(),
   name: Joi.string().required(),
-  value: Joi.string().required(),
+  value: Joi.string()
+    .regex(/^[0-9,]+$/)
+    .rule({ message: "Value should only contain numbers and commas for decimals" })
+    .required(),
 };
 
 const incomeSchema = Joi.object({
