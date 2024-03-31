@@ -5,7 +5,7 @@
   >
     <div class="container max-w-5xl min-h-screen mx-auto px-4">
       <NuxtLayout>
-        <NuxtPage class="pt-20" />
+        <NuxtPage class="pt-12 sm:pt-20" />
       </NuxtLayout>
     </div>
   </div>
