@@ -11,6 +11,13 @@
     ></PageHeader>
 
     <TransactionActionsModal :open="isModalOpen" @close="isModalOpen = false" @success="isModalOpen = false" />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 h-[600px] mt-12">
+      <TransactionRecentWidget
+        :transactions="useTransactionStore().transactions"
+        :loading="useTransactionStore().loading"
+      />
+    </div>
   </div>
 </template>
 
