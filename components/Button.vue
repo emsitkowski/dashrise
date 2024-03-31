@@ -12,7 +12,7 @@
     <div class="-ml-1" v-if="icon">
       <img v-if="iconType === 'plus'" class="w-5 h-full" src="~assets/icons/plus.svg" alt="" />
     </div>
-    <SpinnerLoader :loading="loading" bg-color-class="bg-primary-500" color="#fff" />
+    <SpinnerLoader :loading="loading" bg-color-class="bg-primary-500" stroke-color-class="stroke-white" />
     <slot></slot>
   </button>
 </template>
