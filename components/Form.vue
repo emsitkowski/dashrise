@@ -28,6 +28,9 @@ function handleSubmit() {
   // Clear any previous validation errors
   validationError.value = "";
 
+  // Unfocus inputs
+  unfocusInputs();
+
   // Validate form
   const { error } = useFormValidation(props.schema, props.state);
 
