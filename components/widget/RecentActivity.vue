@@ -1,6 +1,6 @@
 <template>
   <Card
-    class="relative overflow-hidden h-[420px] py-2 sm:py-4 after:content-[''] after:w-full after:h-full after:absolute after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-white after:to-50% z-10 after:select-none after:pointer-events-none"
+    class="relative overflow-hidden h-[420px] sm:py-4 after:content-[''] after:w-full after:h-full after:absolute after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-white after:to-50% z-10 after:select-none after:pointer-events-none"
   >
     <template #card-body>
       <div v-if="props.transactions.length > 0" class="divide-y divide-primary-8%">
@@ -36,7 +36,7 @@
 
       <!-- Loading spinner -->
       <SpinnerLoader
-        label="Loading transactions..."
+        label="Loading recent transactions..."
         bg-color-class="bg-white"
         stroke-color-class="stroke-dark-500"
         :loading="loading"
