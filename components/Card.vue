@@ -1,9 +1,9 @@
 <template>
-  <div class="flex flex-col gap-6 p-6 sm:p-8 rounded-2xl bg-white overflow-x-auto">
+  <div class="flex flex-col gap-6 p-4 sm:p-8 rounded-2xl bg-white overflow-x-auto">
     <!-- Card header -->
     <div
       v-if="$slots['card-header']"
-      :class="{ 'flex justify-between items-center border-b border-primary-8% pb-6': $slots['card-header'] }"
+      :class="{ 'flex justify-between items-center border-b border-primary-8% pb-4 sm:pb-6': $slots['card-header'] }"
     >
       <slot name="card-header"></slot>
     </div>
