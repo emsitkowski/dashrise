@@ -27,7 +27,8 @@ export const useSupabaseDatabase = () => {
     const { data, error } = await useSupabaseClient()
       .from("Transactions")
       .select("*")
-      .order("date", { ascending: false });
+      .order("date", { ascending: false })
+      .order("created_at", { ascending: false });
 
     if (error) {
       handleError(error);
