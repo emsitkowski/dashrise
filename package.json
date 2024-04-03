@@ -12,6 +12,7 @@
   "dependencies": {
     "@nuxtjs/supabase": "^1.1.7",
     "@pinia/nuxt": "^0.5.1",
+    "animejs": "^3.2.2",
     "currency.js": "^2.0.4",
     "joi": "^17.12.2",
     "nanoid": "^5.0.6",
@@ -21,6 +22,7 @@
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
+    "@types/animejs": "^3.1.12",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "sass": "^1.72.0",
