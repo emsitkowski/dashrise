@@ -20,7 +20,8 @@ export const useTransactionStore = defineStore("transactions", () => {
       date: transaction.date,
       type: transaction.type,
       category: transaction.category,
-      value: transaction.value,
+      value:
+        typeof transaction.value === "string" ? parseFloat(transaction.value.replace(",", ".")) : transaction.value,
       name: transaction.name,
     };
 
