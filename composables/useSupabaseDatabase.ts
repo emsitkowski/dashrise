@@ -11,7 +11,8 @@ export const useSupabaseDatabase = () => {
           type: transaction.type,
           category: transaction.category,
           name: transaction.name,
-          value: transaction.value,
+          value:
+            typeof transaction.value === "string" ? parseFloat(transaction.value.replace(",", ".")) : transaction.value,
         },
       ] as never);
 

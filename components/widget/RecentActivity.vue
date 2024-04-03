@@ -22,8 +22,10 @@
 
           <!-- Transaction value -->
           <div class="ml-auto text-base whitespace-nowrap shrink-0">
-            <span v-if="transaction.type === 'Income'"> + {{ transaction.value }} PLN</span>
-            <span v-if="transaction.type === 'Expense'" class="text-dark-32%"> - {{ transaction.value }} PLN</span>
+            <span v-if="transaction.type === 'Income'"> + {{ convertToCurrency(transaction.value) }} PLN</span>
+            <span v-if="transaction.type === 'Expense'" class="text-dark-32%">
+              - {{ convertToCurrency(transaction.value) }} PLN</span
+            >
           </div>
         </div>
       </div>
