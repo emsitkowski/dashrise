@@ -15,7 +15,6 @@
         <div class="text-xl sm:text-3xl whitespace-nowrap shrink-0 overflow-hidden">
           <span v-if="value">
             <span class="opacity-0" ref="integer">0</span>
-            <span id="decimal" class="text-dark-32% text-xs sm:text-base"> PLN</span>
           </span>
           <div v-else>–</div>
         </div>
