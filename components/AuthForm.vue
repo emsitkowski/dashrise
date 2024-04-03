@@ -13,9 +13,13 @@
       </FormField>
 
       <!-- Submit button -->
-      <Button type="submit" class="mt-4" ref="submitBtn" :loading="isSubmitting">{{
-        action === "login" ? "Log in" : "Create account"
-      }}</Button>
+      <Button
+        :label="action === 'login' ? 'Log in' : 'Create account'"
+        type="submit"
+        class="mt-4"
+        ref="submitBtn"
+        :loading="isSubmitting"
+      />
     </Form>
 
     <!-- Authentication error -->

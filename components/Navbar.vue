@@ -4,6 +4,7 @@
       <li v-for="link in links" :key="link.label">
         <NuxtLink :to="link.path">
           <Button
+            :label="link.label"
             variant="ghost"
             :class="{ active: useRoute().path === link.path }"
             class="[&.active]:bg-primary-50 [&.active]:text-primary-500"
@@ -15,7 +16,7 @@
     </ul>
 
     <!-- Log out button -->
-    <Button class="self-end sm:self-auto" variant="ghost" @click="useSupabaseAuth().logOut">Log out</Button>
+    <Button label="Log out" class="self-end sm:self-auto" variant="ghost" @click="useSupabaseAuth().logOut"></Button>
   </nav>
 </template>
 

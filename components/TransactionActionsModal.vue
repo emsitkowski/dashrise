@@ -26,7 +26,7 @@
         </FormField>
 
         <!-- Submit button -->
-        <Button class="mt-4" ref="submitBtn" :loading="isSubmitting">Add transaction</Button>
+        <Button label="Add transaction" class="mt-4" ref="submitBtn" :loading="isSubmitting" />
       </Form>
     </Tabs>
   </Modal>

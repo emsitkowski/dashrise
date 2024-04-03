@@ -4,9 +4,13 @@
       <h1 class="text-3xl font-semibold mb-3">{{ headerText }}</h1>
       <p v-if="subheaderText">{{ subheaderText }}</p>
     </div>
-    <Button @button-click="$emit('button-click')" v-if="button" :icon="buttonIcon" :icon-type="buttonIconType">{{
-      buttonText
-    }}</Button>
+    <Button
+      v-if="button"
+      :label="buttonText"
+      :icon="buttonIcon"
+      :icon-type="buttonIconType"
+      @button-click="$emit('button-click')"
+    />
   </header>
 </template>
 
