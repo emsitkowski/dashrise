@@ -12,7 +12,9 @@
     />
 
     <!-- Summary -->
-    <div class="grid grid-cols-2 xl:grid-cols-4 justify-between w-full [&>*]:w-full gap-4 sm:gap-8 mb-16">
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 justify-between w-full [&>*]:w-full gap-4 sm:gap-8 mb-16"
+    >
       <WidgetTotal
         header="Balance"
         icon="credit-card"
