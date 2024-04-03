@@ -8,11 +8,11 @@
           <img v-if="icon === 'arrow-in'" class="w-4 sm:w-5" src="~assets/icons/arrow-in.svg" alt="" />
           <img v-if="icon === 'arrow-out'" class="w-4 sm:w-5" src="~assets/icons/arrow-out.svg" alt="" />
           <img v-if="icon === 'box'" class="w-4 sm:w-5" src="~assets/icons/box.svg" alt="" />
-          <span class="text-xs sm:text-sm uppercase">{{ header }}</span>
+          <span class="uppercase text-sm sm:text-base">{{ header }}</span>
         </div>
 
         <!-- Value -->
-        <div class="text-xl sm:text-3xl whitespace-nowrap shrink-0 overflow-hidden">
+        <div class="text-2xl sm:text-3xl font-medium leading-none whitespace-nowrap shrink-0 overflow-hidden">
           <span v-if="value">
             <span class="opacity-0" ref="integer">0</span>
           </span>
