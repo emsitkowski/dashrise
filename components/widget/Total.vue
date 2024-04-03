@@ -69,7 +69,12 @@ function animateValues() {
       duration: 1200,
       easing: "linear",
       update: function (animation: any) {
-        element.textContent = convertToCurrency(animation.animatables[0].target.value);
+        element.innerHTML = `${
+          convertToCurrency(animation.animatables[0].target.value).split(".")[0]
+        }<span class="text-dark-32% text-xs sm:text-base">.${
+          convertToCurrency(animation.animatables[0].target.value).split(".")[1]
+        }</span>
+        `;
       },
     });
   }
