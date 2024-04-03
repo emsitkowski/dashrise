@@ -58,12 +58,32 @@ export const useTransactionStore = defineStore("transactions", () => {
     };
   });
 
+  // Calculate total transaction values
+  const getTotalTransactionValues = computed(() => {
+    let totalIncome = 0;
+    let totalExpenses = 0;
+    let totalSavings = 0;
+
+    transactions.value.forEach((transaction) => {
+      if (transaction.type === "Income") {
+        totalIncome += transaction.value as number;
+      } else if (transaction.type === "Expense") {
+        totalExpenses += transaction.value as number;
+      } else if (transaction.type === "Savings") {
+        totalSavings += transaction.value as number;
+      }
+    });
+
+    return { totalIncome, totalExpenses, totalSavings };
+  });
+
   return {
     clear,
     transactions,
     saveTransaction,
     fetchTransactionsFromDatabase,
     filterTransactionsByDate,
+    getTotalTransactionValues,
     loading,
     error,
   };
