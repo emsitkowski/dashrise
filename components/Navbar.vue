@@ -9,7 +9,6 @@
             :class="{ active: useRoute().path === link.path }"
             class="[&.active]:bg-primary-50 [&.active]:text-primary-500"
           >
-            {{ link.label }}
           </Button>
         </NuxtLink>
       </li>
