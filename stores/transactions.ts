@@ -29,15 +29,13 @@ export const useTransactionStore = defineStore("transactions", () => {
     await useSupabaseDatabase().saveTransaction(newTransaction);
 
     // Save new transactions in store
-    if (transactions.value) {
-      transactions.value.push(newTransaction);
-    }
+    transactions.value.push(newTransaction);
 
     // Sort transactions by date
     transactions.value.sort((a, b) => a.date.localeCompare(b.date)).reverse();
   }
 
-  // Save new transaction
+  // Get transactions from database
   async function fetchTransactionsFromDatabase() {
     loading.value = true;
     // retrieve data from database
