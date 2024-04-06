@@ -44,7 +44,7 @@
     <!-- Recent activity widget -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       <div class="flex flex-col">
-        <SectionHeader></SectionHeader>
+        <SectionHeader headerText="Recent activity" />
         <RecentActivity
           :transactions="useTransactionStore().filterTransactionsByDate('2024', '04', 6)"
           :loading="useTransactionStore().loading"
