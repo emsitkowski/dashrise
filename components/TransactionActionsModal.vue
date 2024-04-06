@@ -47,25 +47,6 @@ const activeTab = ref(0); // Set initial active tab
 
 const formSchema = ref(incomeSchema); // set initial form schema
 
-const categories = [
-  {
-    label: "Food",
-    value: "value",
-  },
-  {
-    label: "Cat",
-    value: "value",
-  },
-  {
-    label: "Car",
-    value: "value",
-  },
-  {
-    label: "House",
-    value: "value",
-  },
-];
-
 async function handleSubmit() {
   // Turn on loading state
   toggleFormLoading();
