@@ -38,7 +38,7 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
         categories.value.push(newCategory);
       }
     } catch (error: any) {
-      console.log("Failed to save new category: ", error);
+      console.error("Failed to save new category: ", error);
       error.value = error;
     }
 
