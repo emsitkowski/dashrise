@@ -19,9 +19,17 @@ const expenseSchema = Joi.object({
   category: Joi.string().required(),
 });
 
+const categorySchema = Joi.object({
+  name: Joi.string().required(),
+  limitValue: Joi.string()
+    .regex(/^\d+(,\d{2})?$/)
+    .rule({ message: "Enter correct value, use numbers and commas for decimals" })
+    .required(),
+});
+
 const authSchema = Joi.object({
   email: Joi.string().email({ tlds: false }).required(),
   password: Joi.string().required(),
 });
 
-export { incomeSchema, expenseSchema, authSchema };
+export { incomeSchema, expenseSchema, categorySchema, authSchema };
