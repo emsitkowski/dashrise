@@ -40,11 +40,6 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
     return userCategories;
   }
 
-  /*   // Get all categories objects
-    const getAllCategories = computed(() => {
-    return categories.value;
-  }); */
-
   // Get all categories names sorted alfabetically
   const getUserCategoriesNames = computed(() => {
     return () => {
