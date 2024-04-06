@@ -13,38 +13,63 @@ export const useTransactionStore = defineStore("transactions", () => {
     transactions.value = [];
   }
 
-  // Save new transaction
-  async function saveTransaction(transaction: Transaction) {
-    const newTransaction: Transaction = {
-      id: nanoid(),
-      date: transaction.date,
-      type: transaction.type,
-      category: transaction.category,
-      value:
-        typeof transaction.value === "string" ? parseFloat(transaction.value.replace(",", ".")) : transaction.value,
-      name: transaction.name,
-    };
+  // Toggle loading
+  function toggleLoading(state: boolean) {
+    loading.value = state;
+  }
 
-    // Save new transactions in database
-    await useSupabaseDatabase().saveTransaction(newTransaction);
-
-    // Save new transactions in store
-    transactions.value.push(newTransaction);
-
-    // Sort transactions by date
+  // Sort transactions by date
+  function sortByDate() {
     transactions.value.sort((a, b) => a.date.localeCompare(b.date)).reverse();
   }
 
-  // Get transactions from database
-  async function fetchTransactionsFromDatabase() {
-    loading.value = true;
-    // retrieve data from database
-    transactions.value = (await useSupabaseDatabase().getTransactions()) as any;
+  // Save new transaction
+  async function saveTransaction(transaction: Transaction) {
+    toggleLoading(true);
 
-    loading.value = false;
+    try {
+      const newTransaction: Transaction = {
+        id: nanoid(),
+        date: transaction.date,
+        type: transaction.type,
+        category: transaction.category,
+        value:
+          typeof transaction.value === "string" ? parseFloat(transaction.value.replace(",", ".")) : transaction.value,
+        name: transaction.name,
+      };
+
+      // Save in database
+      await useSupabaseDatabase().saveTransaction(newTransaction);
+
+      // Save in store
+      transactions.value.push(newTransaction);
+
+      // Sort by date
+      sortByDate();
+    } catch (error: any) {
+      console.error("Failed to save new transaction: ", error);
+      error.value = error;
+    }
+
+    toggleLoading(false);
   }
 
-  // Filter transactions
+  // Fetch transactions from database
+  async function fetchTransactionsFromDatabase() {
+    toggleLoading(true);
+
+    // Retrieve data from database and save it in store
+    try {
+      transactions.value = (await useSupabaseDatabase().getTransactions()) as any;
+    } catch (error: any) {
+      console.error("Failed to fetch transactions from database: ", error);
+      error.value = error;
+    }
+
+    toggleLoading(false);
+  }
+
+  // Filter transactions by a given date, with optional limit
   const filterTransactionsByDate = computed(() => {
     return (month: string | number, year: string | number, limit: number) => {
       const filterTransactions = transactions.value.filter((transaction: Transaction) =>
