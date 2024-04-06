@@ -7,6 +7,12 @@ export interface Transaction {
   value: string | number;
 }
 
+export interface Category {
+  id?: string;
+  name: string;
+  limitValue: string | number;
+}
+
 export interface Tab {
   label: string;
 }
