@@ -9,5 +9,8 @@
 onMounted(() => {
   // Load all transactions
   useTransactionStore().fetchTransactionsFromDatabase();
+
+  // Load all categories
+  useCategoryStore().fetchUserCategoriesFromDatabase();
 });
 </script>
