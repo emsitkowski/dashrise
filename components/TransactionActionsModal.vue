@@ -17,7 +17,7 @@
 
         <!-- Category -->
         <FormField v-if="tabs[activeTab].label === 'Expense'" label="Category">
-          <SelectMenu :options="categories" v-model="formState.category" />
+          <SelectMenu :options="useCategoryStore().getUserCategoriesNames()" v-model="formState.category" />
         </FormField>
 
         <!-- Value -->

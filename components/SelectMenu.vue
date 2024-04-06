@@ -15,7 +15,7 @@
       class="absolute top-0 translate-y-10 w-full px-2 py-2 bg-white border-gray-300 max-h-52 overflow-auto z-50"
       :class="isOpen ? 'border-b border-l border-r rounded-b-md border-t' : 'border rounded-md hidden'"
     >
-      <li v-for="option in options" class="hover:bg-dark-4% px-3 py-2 rounded">{{ option.label }}</li>
+      <li v-for="option in options" class="hover:bg-dark-4% px-3 py-2 rounded">{{ option }}</li>
     </ul>
   </div>
 </template>
