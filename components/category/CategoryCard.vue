@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="mb-6">
-        <span class="text-2xl sm:text-3xl font-medium leading-none">
+        <span class="text-2xl sm:text-3xl font-medium leading-none" :class="{ 'text-secondary-500': leftValue < 0 }">
           {{ totalValue > 0 ? convertToCurrency(totalValue) : "–" }}
           <span class="text-sm sm:text-base text-dark-32% whitespace-nowrap font-normal"
             >/ {{ convertToCurrency(category.limitValue) }}</span
@@ -32,8 +32,9 @@
         </span>
       </div>
       <ProgressBar
-        :label="leftValue ? convertToCurrency(leftValue) + ' left' : '–' + ' left'"
+        :label="progressLabel"
         :progress="(totalValue / category.limitValue) * 100"
+        :color="leftValue >= 0 ? 'primary' : 'secondary'"
       />
     </template>
   </Card>
@@ -52,6 +53,14 @@ const totalValue = computed(() => {
 
 const leftValue = computed(() => {
   return props.category.limitValue - totalValue.value;
+});
+
+const progressLabel = computed(() => {
+  if (leftValue.value > 0) {
+    return `${convertToCurrency(leftValue.value)} left`;
+  } else {
+    return `${convertToCurrency(-leftValue.value)} overspent`;
+  }
 });
 </script>
 
