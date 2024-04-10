@@ -47,7 +47,7 @@ const props = defineProps(["category"]);
 
 const totalValue = computed(() => {
   const expenses = useTransactionStore()
-    .getExpensesByCategories()
+    .expensesByCategories({ year: getCurrentYear(), month: getCurrentMonth() })
     .filter((el) => el.category === props.category.name);
 
   return expenses.length > 0 ? expenses[0].totalValue : 0;
@@ -61,7 +61,7 @@ const progressLabel = computed(() => {
   if (leftValue.value > 0) {
     return `${convertToCurrency(leftValue.value)} left`;
   } else {
-    return `${convertToCurrency(-leftValue.value)} overspent`;
+    return `${convertToCurrency(leftValue.value)} overspent`;
   }
 });
 </script>

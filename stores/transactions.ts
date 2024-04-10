@@ -4,8 +4,8 @@ import { nanoid } from "nanoid";
 import type { CategoryExpense, Transaction } from "~/src/types/global";
 
 export const useTransactionStore = defineStore("transactions", () => {
-  const storeError = ref();
   const transactions = ref<Transaction[]>([]);
+  const storeError = ref();
   const loading = ref(false);
 
   // Toggle loading
@@ -18,8 +18,8 @@ export const useTransactionStore = defineStore("transactions", () => {
     transactions.value.sort((a, b) => a.date.localeCompare(b.date)).reverse();
   }
 
-  // Fetch transactions from database and save them in store
-  async function fetchTransactions() {
+  // Fetch all transactions from database and save them in store
+  async function fetchAllTransactions() {
     toggleLoading(true);
 
     try {
@@ -44,77 +44,75 @@ export const useTransactionStore = defineStore("transactions", () => {
       await useSupabaseDatabase().saveTransaction(transaction);
 
       // Save transaction in the store
-      transactions.value.push(transaction);
+      transactions.value.unshift(transaction);
     } catch (error: any) {
       console.error("Failed to save new transaction: ", error);
       error.value = error;
     }
-
-    // Sort transactions by date
-    sortByDate();
 
     toggleLoading(false);
   }
 
   // Filter transactions by a given date, with optional limit
   const filterTransactionsByDate = computed(() => {
-    return (month: string | number, year: string | number, limit: number) => {
-      return transactions.value
-        .filter((transaction: Transaction) => transaction.date.includes(`${month}-${year}`))
-        .slice(0, limit);
+    return (date: { year: string; month: string }, limit?: number | undefined) => {
+      const results = transactions.value.filter((transaction: Transaction) =>
+        transaction.date.includes(`${date.year}-${date.month}`)
+      );
+
+      return limit ? results.slice(0, limit) : results;
     };
   });
 
-  // Calculate total transaction values
-  const getTotalTransactionValues = computed(() => {
-    let totalIncome = 0;
-    let totalExpenses = 0;
-    let totalSavings = 0;
+  // Calculate total values
+  const totalValues = computed(() => {
+    return (type: "Income" | "Expense", date?: { year: string; month: string }) => {
+      const transactionsToCalculate: Transaction[] = date
+        ? useTransactionStore().filterTransactionsByDate(date)
+        : transactions.value;
 
-    transactions.value.forEach((transaction) => {
-      if (transaction.type === "Income") {
-        totalIncome += transaction.value as number;
-      } else if (transaction.type === "Expense") {
-        totalExpenses += transaction.value as number;
-      } else if (transaction.type === "Savings") {
-        totalSavings += transaction.value as number;
-      }
-    });
-
-    return { totalIncome, totalExpenses, totalSavings };
+      return transactionsToCalculate.reduce((total, transaction) => {
+        if (transaction.type === type) {
+          total += transaction.value as number;
+        }
+        return total;
+      }, 0);
+    };
   });
 
-  // Calculate total transaction values by categories
-  const getExpensesByCategories = computed(() => {
-    return () => {
+  // Calculate total transaction values by categories, filtered by date
+  const expensesByCategories = computed(() => {
+    return (date: { year: string; month: string }) => {
       const expenses: CategoryExpense[] = [];
 
-      transactions.value.forEach((transaction: Transaction) => {
-        // Check if it's an expense
-        if (transaction.type === "Expense") {
-          // If category doesn't exist, initialize it with the transaction value
-          if (!expenses.find((el) => el.category === transaction.category)) {
-            const filteredCategory = useCategoryStore().categories.filter(
-              (category) => category.name === transaction.category
-            );
-            const categoryLimit = filteredCategory.length > 0 ? filteredCategory[0].limitValue : 0;
+      useTransactionStore()
+        .filterTransactionsByDate(date)
+        .forEach((transaction: Transaction) => {
+          // Check if it's an expense
+          if (transaction.type === "Expense") {
+            // If category doesn't exist, initialize it with the transaction value
+            if (!expenses.find((el) => el.category === transaction.category)) {
+              const filteredCategory = useCategoryStore().categories.filter(
+                (category) => category.name === transaction.category
+              );
+              const categoryLimit = filteredCategory.length > 0 ? filteredCategory[0].limitValue : 0;
 
-            // Save expense in a variable
-            expenses.push({
-              category: transaction.category as string,
-              totalValue: transaction.value as number,
-              limitValue: categoryLimit as number,
-            });
-          } else {
-            // If category exists, add transaction value to the existing total value
-            const category = expenses.find((el) => el.category === transaction.category);
+              // Save expense in a variable
+              expenses.push({
+                category: transaction.category as string,
+                totalValue: transaction.value as number,
+                limitValue: categoryLimit as number,
+              });
+            } else {
+              // If category exists, add transaction value to the existing total value
+              const category = expenses.find((el) => el.category === transaction.category);
 
-            if (category) {
-              category.totalValue += transaction.value as number;
+              if (category) {
+                category.totalValue += transaction.value as number;
+              }
             }
           }
-        }
-      });
+        });
 
       return expenses;
     };
@@ -123,10 +121,10 @@ export const useTransactionStore = defineStore("transactions", () => {
   return {
     transactions,
     saveTransaction,
-    fetchTransactions,
+    fetchAllTransactions,
     filterTransactionsByDate,
-    getTotalTransactionValues,
-    getExpensesByCategories,
+    totalValues,
+    expensesByCategories,
     loading,
     storeError,
   };

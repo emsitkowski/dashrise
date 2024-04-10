@@ -12,7 +12,7 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
   }
 
   // Fetch categories from database and save them in store
-  async function fetchCategories() {
+  async function fetchAllCategories() {
     toggleLoading(true);
 
     try {
@@ -59,5 +59,5 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
     };
   });
 
-  return { storeError, categories, saveCategory, fetchCategories, getCategoriesNames };
+  return { storeError, categories, saveCategory, fetchAllCategories, getCategoriesNames };
 });
