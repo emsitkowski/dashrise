@@ -6,12 +6,12 @@
       <div v-if="expenses.length > 0" class="divide-y divide-primary-8%">
         <div v-for="expense in expenses" class="flex items-center py-4 gap-4 sm:gap-8">
           <!-- Category name -->
-          <div class="min-w-14 shrink-0">
+          <div class="shrink-0 basis-1/4">
             <span class="text-base">{{ expense.category }}</span>
           </div>
 
           <!-- Category total value -->
-          <div class="flex flex-col gap-1 leading-tight">
+          <div class="flex flex-col basis-1/3 gap-1 leading-tight">
             <span class="text-base">{{ convertToCurrency(expense.totalValue) }}</span>
           </div>
 
