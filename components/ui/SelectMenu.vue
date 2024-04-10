@@ -1,7 +1,7 @@
 <template>
-  <div class="relative flex flex-col cursor-pointer select-none" @click="handleClick">
+  <div class="relative flex flex-col select-none" @click="handleClick">
     <div
-      class="select flex justify-between items-center px-3 py-2 bg-none border-gray-300"
+      class="select flex justify-between items-center px-3 py-2 bg-none border-gray-300 cursor-pointer"
       :class="isOpen ? 'border-t border-l border-r border-b border-b-transparent rounded-t-md' : 'border rounded-md'"
     >
       <div class="selected pointer-events-none h-full">
@@ -15,10 +15,12 @@
       class="absolute top-0 translate-y-10 w-full px-2 py-2 bg-white border-gray-300 max-h-52 overflow-auto z-50"
       :class="isOpen ? 'border-b border-l border-r rounded-b-md border-t' : 'border rounded-md hidden'"
     >
-      <li v-if="options.length > 0" v-for="option in options" class="hover:bg-dark-4% px-3 py-2 rounded">
+      <li v-for="option in options" class="hover:bg-dark-4% px-3 py-2 rounded cursor-pointer">
         {{ option }}
       </li>
-      <li v-else class="pointer-events-none text-dark-32%">Create new categories on the Budget page</li>
+      <li class="pointer-events-none px-3 py-2 mt-2 border-t border-primary-8% text-dark-32% cursor-default">
+        Go to budget page to create new categories
+      </li>
     </ul>
   </div>
 </template>
