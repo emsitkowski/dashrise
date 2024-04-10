@@ -15,11 +15,12 @@
       class="absolute top-0 translate-y-10 w-full px-2 py-2 bg-white border-gray-300 max-h-52 overflow-auto z-50"
       :class="isOpen ? 'border-b border-l border-r rounded-b-md border-t' : 'border rounded-md hidden'"
     >
-      <li v-for="option in options" class="hover:bg-dark-4% px-3 py-2 rounded cursor-pointer">
+      <li v-if="options.length > 0" v-for="option in options" class="hover:bg-dark-4% px-3 py-2 rounded cursor-pointer">
         {{ option }}
       </li>
+      <li v-else class="px-3 py-2 rounded cursor-default pointer-events-none">No categories found...</li>
       <li class="pointer-events-none px-3 py-2 mt-2 border-t border-primary-8% text-dark-32% cursor-default">
-        Go to budget page to create new categories
+        Create new categories on the budget page
       </li>
     </ul>
   </div>

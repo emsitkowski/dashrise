@@ -13,14 +13,16 @@
 
     <!-- Summary -->
     <div
-      class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 justify-between w-full [&>*]:w-full gap-4 sm:gap-8 mb-16"
+      class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 justify-between w-full [&>*]:w-full gap-4 sm:gap-8 mb-16"
     >
-      <!--       <Total
+      <Total
         header="Balance"
         icon="credit-card"
-        :value="getTotalTransactionValues.totalIncome - getTotalTransactionValues.totalExpenses"
+        :value="
+          useTransactionStore().totalValues('Income', today) - useTransactionStore().totalValues('Expense', today)
+        "
         :loading="useTransactionStore().loading"
-      /> -->
+      />
       <Total
         header="Income"
         icon="arrow-in"
@@ -33,13 +35,6 @@
         :value="useTransactionStore().totalValues('Expense', today)"
         :loading="useTransactionStore().loading"
       />
-      <!-- 
-      <Total
-        header="Savings"
-        icon="box"
-        :value="getTotalTransactionValues.totalSavings"
-        :loading="useTransactionStore().loading"
-      /> -->
     </div>
 
     <!-- Recent activity widget -->
