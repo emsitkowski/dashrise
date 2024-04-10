@@ -8,9 +8,9 @@
 <script setup>
 onMounted(() => {
   // Load all transactions
-  useTransactionStore().fetchTransactionsFromDatabase();
+  useTransactionStore().fetchTransactions();
 
   // Load all categories
-  useCategoryStore().fetchUserCategoriesFromDatabase();
+  useCategoryStore().fetchCategories();
 });
 </script>

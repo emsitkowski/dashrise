@@ -17,12 +17,17 @@
 
         <!-- Category -->
         <FormField v-if="tabs[activeTab].label === 'Expense'" label="Category">
-          <SelectMenu :options="useCategoryStore().getUserCategoriesNames()" v-model="formState.category" />
+          <SelectMenu :options="useCategoryStore().getCategoriesNames()" v-model="formState.category" />
         </FormField>
 
         <!-- Value -->
         <FormField label="Value">
-          <FormInput name="Value" type="text" placeholder="Enter transaction value" v-model="formState.value" />
+          <FormInput
+            name="Value"
+            type="number"
+            placeholder="Enter transaction value"
+            v-model.number="formState.value"
+          />
         </FormField>
 
         <!-- Submit button -->
@@ -53,6 +58,8 @@ async function handleSubmit() {
 
   // Add transaction type to form state
   formState.value.type = tabs[activeTab.value].label;
+
+  console.log(formState.value);
 
   // Save transaction
   await useTransactionStore().saveTransaction(formState.value as Transaction);

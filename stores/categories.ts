@@ -2,18 +2,27 @@ import type { Category } from "~/src/types/global";
 import { nanoid } from "nanoid";
 
 export const useCategoryStore = defineStore("transaction-categories", () => {
-  const error = ref("");
+  const storeError = ref("");
   const categories = ref<Category[]>([]);
   const loading = ref(false);
-
-  // Clear store
-  function clear() {
-    categories.value = [];
-  }
 
   // Toggle loading
   function toggleLoading(state: boolean) {
     loading.value = state;
+  }
+
+  // Fetch categories from database and save them in store
+  async function fetchCategories() {
+    toggleLoading(true);
+
+    try {
+      categories.value = (await useSupabaseDatabase().fetchUserCategories()) as [];
+    } catch (error: any) {
+      console.error("Failed to fetch user categories from database: ", error);
+      storeError.value = error;
+    }
+
+    toggleLoading(false);
   }
 
   // Save new category
@@ -21,53 +30,24 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
     toggleLoading(true);
 
     try {
-      const newCategory: Category = {
-        id: nanoid(),
-        name: category.name,
-        limitValue:
-          typeof category.limitValue === "string"
-            ? parseFloat(category.limitValue.replace(",", "."))
-            : category.limitValue,
-      };
+      // Add unique id to the category
+      category.id = nanoid();
 
-      // Save new category in database
-      await useSupabaseDatabase().saveCategory(newCategory);
-
-      // Save new category in store if doesn't exist yet
+      // Save new category if doesn't exist yet
       if (categories.value.filter((el) => el.name === category.name).length === 0) {
-        categories.value.push(newCategory);
+        await useSupabaseDatabase().saveCategory(category);
+        categories.value.push(category);
       }
     } catch (error: any) {
       console.error("Failed to save new category: ", error);
-      error.value = error;
+      storeError.value = error;
     }
 
     toggleLoading(false);
   }
-
-  // Fetch all user categories from the database and save them to store
-  async function fetchUserCategoriesFromDatabase() {
-    toggleLoading(true);
-
-    // Retrieve data from database and save it in store
-    try {
-      const userCategories = (await useSupabaseDatabase().getUserCategories()) as [];
-      categories.value = userCategories;
-    } catch (error: any) {
-      console.error("Failed to fetch user categories from database: ", error);
-      error.value = error;
-    }
-
-    toggleLoading(false);
-  }
-
-  // Get all categories
-  const getAllCategories = computed(() => {
-    return categories.value;
-  });
 
   // Get all categories names sorted alfabetically
-  const getUserCategoriesNames = computed(() => {
+  const getCategoriesNames = computed(() => {
     return () => {
       const names = [] as any;
 
@@ -79,5 +59,5 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
     };
   });
 
-  return { categories, saveCategory, getAllCategories, fetchUserCategoriesFromDatabase, getUserCategoriesNames };
+  return { storeError, categories, saveCategory, fetchCategories, getCategoriesNames };
 });

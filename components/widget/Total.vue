@@ -52,7 +52,6 @@ function animateValues() {
     const startValue = revertCurrencyToNumber(integer.value.textContent);
     const endValue = value.value;
     const element = integer.value;
-    const isNegativeValue = endValue.toString().includes("-");
 
     // Fade in values
     anime({

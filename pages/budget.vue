@@ -11,7 +11,7 @@
       @button-click="isModalOpen = true"
     />
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-8">
-      <CategoryCard :category="category" v-for="category in useCategoryStore().getAllCategories" />
+      <CategoryCard :category="category" v-for="category in useCategoryStore().categories" />
     </div>
 
     <!-- Category modal -->

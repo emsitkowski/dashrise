@@ -4,10 +4,7 @@ import Joi from "joi";
 const defaultSchema = {
   date: Joi.string().required(),
   name: Joi.string().required(),
-  value: Joi.string()
-    .regex(/^\d+(,\d{2})?$/)
-    .rule({ message: "Enter correct value, use numbers and commas for decimals" })
-    .required(),
+  value: Joi.number().precision(2).required(),
 };
 
 const incomeSchema = Joi.object({
@@ -21,10 +18,7 @@ const expenseSchema = Joi.object({
 
 const categorySchema = Joi.object({
   name: Joi.string().required(),
-  limitValue: Joi.string()
-    .regex(/^\d+(,\d{2})?$/)
-    .rule({ message: "Enter correct value, use numbers and commas for decimals" })
-    .required(),
+  limitValue: Joi.number().precision(2).required(),
 });
 
 const authSchema = Joi.object({

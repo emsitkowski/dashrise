@@ -25,19 +25,34 @@
       </div>
       <div class="mb-6">
         <span class="text-2xl sm:text-3xl font-medium leading-none">
-          {{ convertToCurrency("0") }}
+          {{ totalValue > 0 ? convertToCurrency(totalValue) : "–" }}
           <span class="text-sm sm:text-base text-dark-32% whitespace-nowrap font-normal"
             >/ {{ convertToCurrency(category.limitValue) }}</span
           >
         </span>
       </div>
-      <ProgressBar :label="convertToCurrency(category.limitValue) + ' left'" progress="24" />
+      <ProgressBar
+        :label="leftValue ? convertToCurrency(leftValue) + ' left' : '–' + ' left'"
+        :progress="(totalValue / category.limitValue) * 100"
+      />
     </template>
   </Card>
 </template>
 
 <script setup lang="ts">
-defineProps(["category"]);
+const props = defineProps(["category"]);
+
+const totalValue = computed(() => {
+  const expenses = useTransactionStore()
+    .getExpensesByCategories()
+    .filter((el) => el.category === props.category.name);
+
+  return expenses.length > 0 ? expenses[0].totalValue : 0;
+});
+
+const leftValue = computed(() => {
+  return props.category.limitValue - totalValue.value;
+});
 </script>
 
 <style scoped></style>

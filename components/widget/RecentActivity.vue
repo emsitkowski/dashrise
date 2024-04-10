@@ -38,7 +38,7 @@
 
       <!-- Loading spinner -->
       <SpinnerLoader
-        label="Loading recent transactions..."
+        label="Loading transactions..."
         bg-color-class="bg-white"
         stroke-color-class="stroke-dark-500"
         :loading="loading"

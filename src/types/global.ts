@@ -4,13 +4,19 @@ export interface Transaction {
   date: string;
   type: string;
   name: string;
-  value: string | number;
+  value: number;
 }
 
 export interface Category {
   id?: string;
   name: string;
-  limitValue: string | number;
+  limitValue: number;
+}
+
+export interface CategoryExpense {
+  category: string;
+  totalValue: number;
+  limitValue: number;
 }
 
 export interface Tab {

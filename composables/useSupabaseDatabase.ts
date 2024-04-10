@@ -4,17 +4,7 @@ export const useSupabaseDatabase = () => {
   const saveTransaction = async (transaction: Transaction) => {
     const { data, error } = await useSupabaseClient()
       .from("Transactions")
-      .insert([
-        {
-          id: transaction.id,
-          date: transaction.date,
-          type: transaction.type,
-          category: transaction.category,
-          name: transaction.name,
-          value:
-            typeof transaction.value === "string" ? parseFloat(transaction.value.replace(",", ".")) : transaction.value,
-        },
-      ] as never);
+      .insert([transaction] as never);
 
     if (error) {
       handleError(error);
@@ -38,23 +28,21 @@ export const useSupabaseDatabase = () => {
   };
 
   const saveCategory = async (category: Category) => {
-    const allCategoriesStoredInDatabase = await useSupabaseDatabase().getAllCategories();
-    const userCategoriesStoredInDatabase = await useSupabaseDatabase().getUserCategories();
+    const allCategoriesStoredInDatabase = await useSupabaseDatabase().fetchCategories();
+    const userCategoriesStoredInDatabase = await useSupabaseDatabase().fetchUserCategories();
 
     // Save new category in Categories table in the database if it doesn't exist yet
-    if (allCategoriesStoredInDatabase!.filter((el: Category) => el.name === category.name).length === 0) {
-      const { error } = await useSupabaseClient()
-        .from("Categories")
-        .insert([
-          {
-            id: category.id,
-            name: category.name,
-          },
-        ] as never);
+    const { error } = await useSupabaseClient()
+      .from("Categories")
+      .insert([
+        {
+          id: category.id,
+          name: category.name,
+        },
+      ] as never);
 
-      if (error) {
-        console.log(error);
-      }
+    if (error) {
+      console.log(error);
     }
 
     // Save new category in UserCategories table if it doesn't exist yet
@@ -74,7 +62,7 @@ export const useSupabaseDatabase = () => {
     }
   };
 
-  const getAllCategories = async () => {
+  const fetchCategories = async () => {
     const { data, error } = await useSupabaseClient().from("Categories").select("*");
 
     if (error) {
@@ -84,7 +72,7 @@ export const useSupabaseDatabase = () => {
     }
   };
 
-  const getUserCategories = async () => {
+  const fetchUserCategories = async () => {
     const { data, error } = await useSupabaseClient().from("UserCategories").select("*");
 
     if (error) {
@@ -101,5 +89,5 @@ export const useSupabaseDatabase = () => {
     }
   }
 
-  return { saveTransaction, getTransactions, saveCategory, getAllCategories, getUserCategories };
+  return { saveTransaction, getTransactions, saveCategory, fetchCategories, fetchUserCategories };
 };

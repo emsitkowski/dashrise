@@ -1,17 +1,12 @@
 import { defineStore } from "pinia";
 import { useSupabaseDatabase } from "~/composables/useSupabaseDatabase";
 import { nanoid } from "nanoid";
-import type { Transaction } from "~/src/types/global";
+import type { CategoryExpense, Transaction } from "~/src/types/global";
 
 export const useTransactionStore = defineStore("transactions", () => {
-  const error = ref("");
+  const storeError = ref();
   const transactions = ref<Transaction[]>([]);
   const loading = ref(false);
-
-  // Clear store
-  function clear() {
-    transactions.value = [];
-  }
 
   // Toggle loading
   function toggleLoading(state: boolean) {
@@ -23,48 +18,40 @@ export const useTransactionStore = defineStore("transactions", () => {
     transactions.value.sort((a, b) => a.date.localeCompare(b.date)).reverse();
   }
 
-  // Save new transaction
-  async function saveTransaction(transaction: Transaction) {
+  // Fetch transactions from database and save them in store
+  async function fetchTransactions() {
     toggleLoading(true);
 
     try {
-      const newTransaction: Transaction = {
-        id: nanoid(),
-        date: transaction.date,
-        type: transaction.type,
-        category: transaction.category,
-        value:
-          typeof transaction.value === "string" ? parseFloat(transaction.value.replace(",", ".")) : transaction.value,
-        name: transaction.name,
-      };
-
-      // Save in database
-      await useSupabaseDatabase().saveTransaction(newTransaction);
-
-      // Save in store
-      transactions.value.push(newTransaction);
-
-      // Sort by date
-      sortByDate();
-    } catch (error: any) {
-      console.error("Failed to save new transaction: ", error);
-      error.value = error;
+      transactions.value = (await useSupabaseDatabase().getTransactions()) as Transaction[];
+    } catch (error) {
+      console.error("Failed to fetch transactions from database: ", error);
+      storeError.value = error;
     }
 
     toggleLoading(false);
   }
 
-  // Fetch transactions from database
-  async function fetchTransactionsFromDatabase() {
+  // Save new transaction
+  async function saveTransaction(transaction: Transaction) {
     toggleLoading(true);
 
-    // Retrieve data from database and save it in store
     try {
-      transactions.value = (await useSupabaseDatabase().getTransactions()) as any;
+      // Add unique id to the transaction
+      transaction.id = nanoid();
+
+      // Save transaction in database
+      await useSupabaseDatabase().saveTransaction(transaction);
+
+      // Save transaction in the store
+      transactions.value.push(transaction);
     } catch (error: any) {
-      console.error("Failed to fetch transactions from database: ", error);
+      console.error("Failed to save new transaction: ", error);
       error.value = error;
     }
+
+    // Sort transactions by date
+    sortByDate();
 
     toggleLoading(false);
   }
@@ -72,12 +59,9 @@ export const useTransactionStore = defineStore("transactions", () => {
   // Filter transactions by a given date, with optional limit
   const filterTransactionsByDate = computed(() => {
     return (month: string | number, year: string | number, limit: number) => {
-      const filterTransactions = transactions.value.filter((transaction: Transaction) =>
-        transaction.date.includes(`${month}-${year}`)
-      );
-
-      // Return limited number of transactions
-      return filterTransactions.slice(0, limit);
+      return transactions.value
+        .filter((transaction: Transaction) => transaction.date.includes(`${month}-${year}`))
+        .slice(0, limit);
     };
   });
 
@@ -100,14 +84,50 @@ export const useTransactionStore = defineStore("transactions", () => {
     return { totalIncome, totalExpenses, totalSavings };
   });
 
+  // Calculate total transaction values by categories
+  const getExpensesByCategories = computed(() => {
+    return () => {
+      const expenses: CategoryExpense[] = [];
+
+      transactions.value.forEach((transaction: Transaction) => {
+        // Check if it's an expense
+        if (transaction.type === "Expense") {
+          // If category doesn't exist, initialize it with the transaction value
+          if (!expenses.find((el) => el.category === transaction.category)) {
+            const filteredCategory = useCategoryStore().categories.filter(
+              (category) => category.name === transaction.category
+            );
+            const categoryLimit = filteredCategory.length > 0 ? filteredCategory[0].limitValue : 0;
+
+            // Save expense in a variable
+            expenses.push({
+              category: transaction.category as string,
+              totalValue: transaction.value as number,
+              limitValue: categoryLimit as number,
+            });
+          } else {
+            // If category exists, add transaction value to the existing total value
+            const category = expenses.find((el) => el.category === transaction.category);
+
+            if (category) {
+              category.totalValue += transaction.value as number;
+            }
+          }
+        }
+      });
+
+      return expenses;
+    };
+  });
+
   return {
-    clear,
     transactions,
     saveTransaction,
-    fetchTransactionsFromDatabase,
+    fetchTransactions,
     filterTransactionsByDate,
     getTotalTransactionValues,
+    getExpensesByCategories,
     loading,
-    error,
+    storeError,
   };
 });
