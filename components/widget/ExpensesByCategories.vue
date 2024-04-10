@@ -12,7 +12,7 @@
 
           <!-- Category total value -->
           <div class="flex flex-col basis-1/3 gap-1 leading-tight">
-            <span class="text-base">{{ convertToCurrency(expense.totalValue) }}</span>
+            <span class="text-base font-semibold">{{ convertToCurrency(expense.totalValue) }}</span>
           </div>
 
           <!-- Category progress bar -->
@@ -54,26 +54,6 @@ const props = defineProps({
     type: Boolean,
   },
 });
-
-/* const totalValue = computed(() => {
-  const expenses = useTransactionStore()
-    .getExpensesByCategories()
-    .filter((el) => el.category === props.category.name);
-
-  return expenses.length > 0 ? expenses[0].totalValue : 0;
-});
-
-const leftValue = computed(() => {
-  return props.category.limitValue - totalValue.value;
-});
-
-const progressLabel = computed(() => {
-  if (leftValue.value > 0) {
-    return `${convertToCurrency(leftValue.value)} left`;
-  } else {
-    return `${convertToCurrency(-leftValue.value)} overspent`;
-  }
-}); */
 </script>
 
 <style scoped></style>
