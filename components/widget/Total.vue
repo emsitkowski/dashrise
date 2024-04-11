@@ -65,7 +65,7 @@ function animateValues() {
     anime({
       targets: { value: startValue },
       value: endValue,
-      duration: 1200,
+      duration: 600,
       easing: "linear",
       update: function (animation: any) {
         element.innerHTML = `${
