@@ -57,7 +57,7 @@ function animateValues() {
     anime({
       targets: element,
       opacity: 1,
-      duration: 800,
+      duration: 600,
       easing: "linear",
     });
 
