@@ -1,6 +1,6 @@
 <template>
   <button
-    class="relative inline-flex justify-center items-center shrink-0 gap-1 rounded-md leading-none overflow-hidden duration-300"
+    class="relative group inline-flex justify-center items-center shrink-0 gap-1 rounded-md leading-none overflow-hidden duration-300"
     :class="[
       variant === 'soft' ? 'bg-primary-8% text-primary-500' : '',
       variant === 'ghost' ? ' text-dark-32% hover:text-primary-500 hover:bg-primary-2%' : '',
@@ -13,7 +13,7 @@
       <img v-if="iconType === 'plus'" class="w-5 h-full" src="~assets/icons/plus.svg" alt="" />
     </div>
     <SpinnerLoader :loading="loading" bg-color-class="bg-primary-500" stroke-color-class="stroke-white" />
-    <div class="text-dark-32% stroke-dark-32% hover:text-primary-500 hover:stroke-primary-500 duration-300">
+    <div class="text-dark-32% stroke-dark-32% hover:text-primary-500 group-hover:stroke-primary-500 duration-300">
       <slot></slot>
     </div>
 
