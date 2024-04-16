@@ -15,7 +15,7 @@ const randomFormFieldID = ref(nanoid());
 onMounted(() => {
   const elements = formField.value.children;
 
-  // set id for every input to match label's "for" attribute
+  // Set id for every input to match label's "for" attribute
   for (let index = 0; index < elements.length; index++) {
     if (elements[index].tagName === "INPUT") elements[index].setAttribute("id", randomFormFieldID.value);
   }
