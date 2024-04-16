@@ -45,6 +45,7 @@
 <script setup lang="ts">
 const props = defineProps(["category"]);
 
+// Calculate total transactions value for the category
 const totalValue = computed(() => {
   const expenses = useTransactionStore()
     .expensesByCategories({ year: getCurrentYear(), month: getCurrentMonth() })
@@ -53,10 +54,12 @@ const totalValue = computed(() => {
   return expenses.length > 0 ? expenses[0].totalValue : 0;
 });
 
+// Calculate left amount limit for the category
 const leftValue = computed(() => {
   return props.category.limitValue - totalValue.value;
 });
 
+// Generate correct progress bar label
 const progressLabel = computed(() => {
   if (leftValue.value >= 0) {
     return `${convertToCurrency(leftValue.value)} left`;
