@@ -9,13 +9,22 @@
       :label="buttonText"
       :icon="buttonIcon"
       :icon-type="buttonIconType"
+      :icon-leading="buttonIconLeading"
       @button-click="$emit('button-click')"
     />
   </header>
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["headerText", "subheaderText", "button", "buttonText", "buttonIcon", "buttonIconType"]);
+const props = defineProps([
+  "headerText",
+  "subheaderText",
+  "button",
+  "buttonText",
+  "buttonIcon",
+  "buttonIconType",
+  "buttonIconLeading",
+]);
 
 defineEmits(["button-click"]);
 </script>

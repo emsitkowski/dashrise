@@ -8,6 +8,7 @@
       button-text="Add category"
       :button-icon="true"
       button-icon-type="plus"
+      :button-icon-leading="true"
       @button-click="isModalOpen = true"
     />
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-8">

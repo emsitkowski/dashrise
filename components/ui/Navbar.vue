@@ -7,7 +7,7 @@
             :label="link.label"
             variant="ghost"
             :class="{ active: useRoute().path === link.path }"
-            class="[&.active]:bg-primary-50 [&.active]:text-primary-500"
+            class="[&.active]:bg-primary-50 [&.active]:text-primary-500 [&.active]:opacity-100"
           >
           </Button>
         </NuxtLink>

@@ -12,7 +12,7 @@
       <template #card-footer>
         <p class="mb-2">Don't have an account?</p>
         <NuxtLink to="/register">
-          <Button variant="ghost" size="sm">Create account here</Button>
+          <Button label="Create account here" variant="ghost" size="sm" />
         </NuxtLink>
       </template>
     </Card>

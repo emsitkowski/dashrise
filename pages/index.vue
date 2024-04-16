@@ -8,6 +8,7 @@
       button-text="Add transaction"
       :button-icon="true"
       button-icon-type="plus"
+      :button-icon-leading="true"
       @button-click="isModalOpen = true"
     />
 
