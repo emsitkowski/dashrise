@@ -58,7 +58,7 @@ const leftValue = computed(() => {
 });
 
 const progressLabel = computed(() => {
-  if (leftValue.value > 0) {
+  if (leftValue.value >= 0) {
     return `${convertToCurrency(leftValue.value)} left`;
   } else {
     return `${convertToCurrency(leftValue.value)} overspent`;

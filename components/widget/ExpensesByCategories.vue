@@ -19,7 +19,7 @@
           <div class="w-full">
             <ProgressBar
               :progress="(expense.totalValue / expense.limitValue) * 100"
-              :color="expense.limitValue - expense.totalValue > 0 ? 'primary' : 'secondary'"
+              :color="expense.limitValue - expense.totalValue >= 0 ? 'primary' : 'secondary'"
             />
           </div>
         </div>
