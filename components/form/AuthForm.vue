@@ -30,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import type { userCredentials } from "~/src/types/global";
 import { authSchema } from "~/src/schemas/form";
 const isSubmitting = ref(false);
 const { signInWithPassword, createNewAccount, authError } = useSupabaseAuth();

@@ -22,3 +22,8 @@ export interface CategoryExpense {
 export interface Tab {
   label: string;
 }
+
+export interface userCredentials {
+  email: string;
+  password: string;
+}
