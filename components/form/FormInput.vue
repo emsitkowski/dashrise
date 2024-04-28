@@ -3,10 +3,12 @@
     :value="modelValue"
     @input="handleInput"
     class="px-3 py-2 bg-none border border-gray-300 rounded-md"
+    :class="$props.disabled ? 'bg-dark-2% text-dark-60% cursor-not-allowed' : ''"
     :type="props.type"
     :name="props.name"
     :placeholder="props.placeholder"
     autocapitalize="none"
+    :disabled="props.disabled"
   />
 </template>
 
@@ -23,6 +25,9 @@ const props = defineProps({
   },
   name: {
     type: String,
+  },
+  disabled: {
+    type: Boolean,
   },
   modelValue: {},
 });

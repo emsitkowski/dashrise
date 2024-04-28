@@ -61,6 +61,19 @@ export const useSupabaseDatabase = () => {
     }
   };
 
+  const editCategory = async (category: Category) => {
+    // Edit category in UserCategories table
+    const { data, error } = await useSupabaseClient()
+      .from("UserCategories")
+      .update({ limitValue: category.limitValue } as never)
+      .eq("name", category.name)
+      .select("*");
+
+    if (error) {
+      console.log(error);
+    }
+  };
+
   const fetchCategories = async () => {
     const { data, error } = await useSupabaseClient().from("Categories").select("*");
 
@@ -88,5 +101,5 @@ export const useSupabaseDatabase = () => {
     }
   }
 
-  return { saveTransaction, getTransactions, saveCategory, fetchCategories, fetchUserCategories };
+  return { saveTransaction, getTransactions, saveCategory, editCategory, fetchCategories, fetchUserCategories };
 };

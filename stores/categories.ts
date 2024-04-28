@@ -46,6 +46,27 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
     toggleLoading(false);
   }
 
+  // Edit category
+  async function editCategory(category: Category) {
+    toggleLoading(true);
+
+    try {
+      // Find and edit correct category
+      const categoryToEdit = categories.value.filter((el) => el.name === category.name);
+      console.log("editing: ", categoryToEdit);
+
+      await useSupabaseDatabase().editCategory(category);
+
+      // Save updated values in the store
+      categories.value[categories.value.findIndex((el) => el.name === category.name)].limitValue = category.limitValue;
+    } catch (error: any) {
+      console.error("Failed to edit category: ", error);
+      storeError.value = error;
+    }
+
+    toggleLoading(false);
+  }
+
   // Get all categories names sorted alfabetically
   const getCategoriesNames = computed(() => {
     return () => {
@@ -59,5 +80,5 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
     };
   });
 
-  return { storeError, categories, saveCategory, fetchAllCategories, getCategoriesNames };
+  return { storeError, categories, saveCategory, editCategory, fetchAllCategories, getCategoriesNames };
 });

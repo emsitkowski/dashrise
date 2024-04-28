@@ -4,7 +4,13 @@
     <Form @submit="handleSubmit" :loading="isSubmitting" :state="formState" :schema="formSchema">
       <!-- Name -->
       <FormField label="Name">
-        <FormInput name="Name" type="text" placeholder="Enter transaction name" v-model="formState.name" />
+        <FormInput
+          name="Name"
+          type="text"
+          placeholder="Enter transaction name"
+          v-model="formState.name"
+          :disabled="props.mode === 'edit'"
+        />
       </FormField>
 
       <!-- Limit -->
@@ -54,7 +60,7 @@ async function handleSubmit() {
 
   // Save or edit transaction
   if (props.mode === "edit") {
-    console.log("EDIT !");
+    await useCategoryStore().editCategory(formState.value as Category);
   } else {
     await useCategoryStore().saveCategory(formState.value as Category);
   }
