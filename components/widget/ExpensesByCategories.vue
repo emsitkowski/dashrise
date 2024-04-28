@@ -18,9 +18,11 @@
           <!-- Category progress bar -->
           <div class="w-full">
             <ProgressBar
+              v-if="expense.limitValue"
               :progress="(expense.totalValue / expense.limitValue) * 100"
               :color="expense.limitValue - expense.totalValue >= 0 ? 'primary' : 'secondary'"
             />
+            <span v-else class="text-sm text-dark-32%">This category has no limit set</span>
           </div>
         </div>
       </div>
