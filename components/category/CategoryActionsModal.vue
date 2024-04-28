@@ -22,13 +22,13 @@
           :icon="true"
           icon-type="trash"
           variant="secondary-ghost"
-        />
+        ></Button>
         <Button
           class="mt-4 grow"
           :label="mode === 'edit' ? 'Save changes' : 'Add category'"
           ref="submitBtn"
           :loading="isSubmitting"
-        />
+        ></Button>
       </div>
     </Form>
   </Modal>
