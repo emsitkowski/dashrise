@@ -11,7 +11,7 @@
       :icon-type="buttonIconType"
       :icon-leading="buttonIconLeading"
       @button-click="$emit('button-click')"
-    />
+    ></Button>
   </header>
 </template>
 

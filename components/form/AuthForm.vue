@@ -19,7 +19,7 @@
         class="mt-4"
         ref="submitBtn"
         :loading="isSubmitting"
-      />
+      ></Button>
     </Form>
 
     <!-- Authentication error -->
