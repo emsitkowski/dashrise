@@ -1,28 +1,28 @@
 <template>
-  <Card
-    class="relative overflow-hidden h-[420px] py-2 sm:py-4 after:content-[''] after:w-full after:h-full after:absolute after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-white after:to-50% z-10 after:select-none after:pointer-events-none"
-  >
+  <Card class="relative overflow-x-hidden overflow-y-visible h-[420px] py-2 sm:py-4">
     <template #card-body>
       <div v-if="expenses.length > 0" class="divide-y divide-primary-8%">
-        <div v-for="expense in expenses" class="flex items-center py-4 gap-4 sm:gap-8">
+        <div v-for="expense in expenses" class="flex flex-col sm:flex-row sm:items-center py-4 gap-4">
           <!-- Category name -->
-          <div class="shrink-0 basis-1/4">
+          <div class="sm:basis-2/5">
             <span class="text-base">{{ expense.category }}</span>
           </div>
 
-          <!-- Category total value -->
-          <div class="flex flex-col basis-1/3 gap-1 leading-tight">
-            <span class="text-base font-semibold">{{ convertToCurrency(expense.totalValue) }}</span>
-          </div>
+          <div class="w-full flex flex-col sm:flex-row sm:basis-3/5 gap-2 sm:gap-4">
+            <!-- Category total value -->
+            <div class="flex flex-col basis-1/4 gap-1 leading-tight">
+              <span class="text-base font-semibold">{{ convertToCurrency(expense.totalValue) }}</span>
+            </div>
 
-          <!-- Category progress bar -->
-          <div class="w-full">
-            <ProgressBar
-              v-if="expense.limitValue"
-              :progress="(expense.totalValue / expense.limitValue) * 100"
-              :color="expense.limitValue - expense.totalValue >= 0 ? 'primary' : 'secondary'"
-            />
-            <span v-else class="text-sm text-dark-32%">This category has no limit set</span>
+            <!-- Category progress bar -->
+            <div class="w-full flex flex-col basis-3/4 justify-center">
+              <ProgressBar
+                v-if="expense.limitValue"
+                :progress="(expense.totalValue / expense.limitValue) * 100"
+                :color="expense.limitValue - expense.totalValue >= 0 ? 'primary' : 'secondary'"
+              />
+              <span v-else class="inline-block text-sm leading-1 text-dark-32%">This category has no limit set</span>
+            </div>
           </div>
         </div>
       </div>
