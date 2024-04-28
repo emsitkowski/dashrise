@@ -19,21 +19,21 @@
       </FormField>
 
       <!-- Submit button -->
-      <div class="flex w-full gap-4">
-        <Button
-          v-if="mode === 'edit'"
-          class="mt-4"
-          ref="submitBtn"
-          :loading="isSubmitting"
-          :icon="true"
-          icon-type="trash"
-          variant="secondary-ghost"
-        ></Button>
+      <div class="flex flex-row-reverse w-full gap-4">
         <Button
           class="mt-4 grow"
           :label="mode === 'edit' ? 'Save changes' : 'Add category'"
           ref="submitBtn"
           :loading="isSubmitting"
+        ></Button>
+        <Button
+          v-if="mode === 'edit'"
+          class="mt-4"
+          ref="submitBtn"
+          :icon="true"
+          icon-type="trash"
+          variant="secondary-ghost"
+          @click.prevent="handleDelete"
         ></Button>
       </div>
     </Form>
@@ -55,6 +55,7 @@ const formState = ref<any>(
 const formSchema = ref(categorySchema); // set initial form schema
 
 async function handleSubmit() {
+  console.log(formState.value);
   // Turn on loading state
   toggleFormLoading();
 
@@ -68,11 +69,21 @@ async function handleSubmit() {
   // Emit success event
   emit("success");
 
-  // Restore form to initial state if adding new category
-  if (props.mode !== "edit") {
-    clearInputs();
-    formState.value = {};
-  }
+  // Turn off loading state
+  toggleFormLoading();
+}
+
+// Handle category delete
+async function handleDelete() {
+  // Turn on loading state
+  toggleFormLoading();
+
+  // Delete transaction
+  console.log("delete formstate: ", formState.value);
+  await useCategoryStore().deleteCategory(formState.value as Category);
+
+  // Emit success event
+  emit("success");
 
   // Turn off loading state
   toggleFormLoading();

@@ -16,7 +16,12 @@
     </div>
 
     <!-- Category modal -->
-    <CategoryActionsModal :open="isModalOpen" @close="isModalOpen = false" @success="isModalOpen = false" />
+    <CategoryActionsModal
+      v-if="isModalOpen"
+      :open="isModalOpen"
+      @close="isModalOpen = false"
+      @success="isModalOpen = false"
+    />
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="props.category">
     <Card>
       <template #card-body>
         <div class="flex flex-col h-full">
@@ -31,8 +31,9 @@
 
     <!-- Category modal -->
     <CategoryActionsModal
+      v-if="isModalOpen"
       mode="edit"
-      :category="category"
+      :category="props.category"
       :open="isModalOpen"
       @close="isModalOpen = false"
       @success="isModalOpen = false"
