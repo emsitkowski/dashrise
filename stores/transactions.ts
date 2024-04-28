@@ -1,11 +1,9 @@
 import { defineStore } from "pinia";
-import { useSupabaseDatabase } from "~/composables/useSupabaseDatabase";
 import { nanoid } from "nanoid";
 import type { CategoryExpense, Transaction } from "~/src/types/global";
 
 export const useTransactionStore = defineStore("transactions", () => {
   const transactions = ref<Transaction[]>([]);
-  const storeError = ref();
   const loading = ref(false);
 
   // Toggle loading
@@ -18,15 +16,14 @@ export const useTransactionStore = defineStore("transactions", () => {
     transactions.value.sort((a, b) => a.date.localeCompare(b.date)).reverse();
   }
 
-  // Fetch all transactions from database and save them in store
+  // Fetch all transactions from database and save them in the store
   async function fetchAllTransactions() {
     toggleLoading(true);
 
     try {
-      transactions.value = (await useSupabaseDatabase().getTransactions()) as Transaction[];
+      transactions.value = (await useSupabaseTransactions().getTransactions()) as Transaction[];
     } catch (error) {
       console.error("Failed to fetch transactions from database: ", error);
-      storeError.value = error;
     }
 
     toggleLoading(false);
@@ -37,13 +34,11 @@ export const useTransactionStore = defineStore("transactions", () => {
     toggleLoading(true);
 
     try {
-      // Add unique id to the transaction
+      // Add unique id for the transaction
       transaction.id = nanoid();
 
-      // Save transaction in database
-      await useSupabaseDatabase().saveTransaction(transaction);
-
-      // Save transaction in the store
+      // Save transaction to database and store
+      await useSupabaseTransactions().saveTransaction(transaction);
       transactions.value.unshift(transaction);
     } catch (error: any) {
       console.error("Failed to save new transaction: ", error);
@@ -106,7 +101,6 @@ export const useTransactionStore = defineStore("transactions", () => {
             } else {
               // If category exists, add transaction value to the existing total value
               const category = expenses.find((el) => el.category === transaction.category);
-
               if (category) {
                 category.totalValue += transaction.value as number;
               }
@@ -126,6 +120,5 @@ export const useTransactionStore = defineStore("transactions", () => {
     totalValues,
     expensesByCategories,
     loading,
-    storeError,
   };
 });

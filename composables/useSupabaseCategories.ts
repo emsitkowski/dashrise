@@ -1,34 +1,8 @@
-import type { Transaction, Category } from "~/src/types/global";
+import type { Category } from "~/src/types/global";
 
-export const useSupabaseDatabase = () => {
-  const saveTransaction = async (transaction: Transaction) => {
-    const { data, error } = await useSupabaseClient()
-      .from("Transactions")
-      .insert([transaction] as never);
-
-    if (error) {
-      handleError(error);
-    } else {
-      return data;
-    }
-  };
-
-  const getTransactions = async () => {
-    const { data, error } = await useSupabaseClient()
-      .from("Transactions")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (error) {
-      handleError(error);
-    } else {
-      return data;
-    }
-  };
-
+export const useSupabaseCategories = () => {
   const saveCategory = async (category: Category) => {
-    const allCategoriesStoredInDatabase = await useSupabaseDatabase().fetchCategories();
-    const userCategoriesStoredInDatabase = await useSupabaseDatabase().fetchUserCategories();
+    const userCategoriesStoredInDatabase = await useSupabaseCategories().fetchUserCategories();
 
     // Save new category in Categories table in the database if it doesn't exist yet
     const { error } = await useSupabaseClient()
@@ -41,7 +15,7 @@ export const useSupabaseDatabase = () => {
       ] as never);
 
     if (error) {
-      console.log(error);
+      throw new Error(error.message);
     }
 
     // Save new category in UserCategories table if it doesn't exist yet
@@ -70,16 +44,16 @@ export const useSupabaseDatabase = () => {
       .select("*");
 
     if (error) {
-      console.log(error);
+      throw new Error(error.message);
     }
   };
 
   const deleteCategory = async (category: Category) => {
-    // Edit category in UserCategories table
+    // Delete category from UserCategories table
     const { data, error } = await useSupabaseClient().from("UserCategories").delete().eq("name", category.name);
 
     if (error) {
-      console.log(error);
+      throw new Error(error.message);
     }
   };
 
@@ -87,7 +61,7 @@ export const useSupabaseDatabase = () => {
     const { data, error } = await useSupabaseClient().from("Categories").select("*");
 
     if (error) {
-      handleError(error);
+      throw new Error(error.message);
     } else {
       return data;
     }
@@ -97,26 +71,11 @@ export const useSupabaseDatabase = () => {
     const { data, error } = await useSupabaseClient().from("UserCategories").select("*");
 
     if (error) {
-      handleError(error);
+      throw new Error(error.message);
     } else {
       return data;
     }
   };
 
-  function handleError(error: any) {
-    // save error message to a ref
-    if (error) {
-      throw Error(error);
-    }
-  }
-
-  return {
-    saveTransaction,
-    getTransactions,
-    saveCategory,
-    editCategory,
-    deleteCategory,
-    fetchCategories,
-    fetchUserCategories,
-  };
+  return { saveCategory, editCategory, deleteCategory, fetchCategories, fetchUserCategories };
 };
