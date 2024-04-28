@@ -23,9 +23,6 @@
 const links = [
   { path: "/", label: "Dashboard" },
   { path: "/budget", label: "Budget" },
-  { path: "/vaults", label: "Vaults" },
-  { path: "/activity", label: "Activity" },
-  { path: "/analytics", label: "Analytics" },
 ];
 </script>
 
