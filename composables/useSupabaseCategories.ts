@@ -35,8 +35,8 @@ export const useSupabaseCategories = () => {
     }
   };
 
+  // Edit category in UserCategories table
   const editCategory = async (category: Category) => {
-    // Edit category in UserCategories table
     const { data, error } = await useSupabaseClient()
       .from("UserCategories")
       .update({ limitValue: category.limitValue } as never)
@@ -48,8 +48,8 @@ export const useSupabaseCategories = () => {
     }
   };
 
+  // Delete category from UserCategories table
   const deleteCategory = async (category: Category) => {
-    // Delete category from UserCategories table
     const { data, error } = await useSupabaseClient().from("UserCategories").delete().eq("name", category.name);
 
     if (error) {
@@ -57,6 +57,7 @@ export const useSupabaseCategories = () => {
     }
   };
 
+  // Fetch all categories from Categories table
   const fetchCategories = async () => {
     const { data, error } = await useSupabaseClient().from("Categories").select("*");
 
@@ -67,6 +68,7 @@ export const useSupabaseCategories = () => {
     }
   };
 
+  // Fetch all user categories from UserCategories table
   const fetchUserCategories = async () => {
     const { data, error } = await useSupabaseClient().from("UserCategories").select("*");
 
