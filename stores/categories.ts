@@ -10,12 +10,18 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
     loading.value = state;
   }
 
+  // Sort categories by name
+  function sortCategoriesByName() {
+    categories.value.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
   // Fetch categories from database and save them in store
   async function fetchAllCategories() {
     toggleLoading(true);
 
     try {
       categories.value = (await useSupabaseCategories().fetchUserCategories()) as [];
+      sortCategoriesByName();
     } catch (error: any) {
       console.error("Failed to fetch user categories from database: ", error);
     } finally {
@@ -35,6 +41,7 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
       if (categories.value.filter((el) => el.name === category.name).length === 0) {
         await useSupabaseCategories().saveCategory(category);
         categories.value.push(category);
+        sortCategoriesByName();
         console.log("New category added: ", category);
       } else {
         console.warn("Category already exists");

@@ -108,7 +108,8 @@ export const useTransactionStore = defineStore("transactions", () => {
           }
         });
 
-      return expenses;
+      // Return expenses sorted descendingly by value
+      return expenses.toSorted((a, b) => b.totalValue - a.totalValue);
     };
   });
 
