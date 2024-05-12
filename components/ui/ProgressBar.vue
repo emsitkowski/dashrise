@@ -3,7 +3,7 @@
     <div class="relative w-full h-1 bg-primary-4% rounded-full overflow-hidden">
       <div
         class="absolute top-0 left-0 h-full"
-        :class="color === 'primary' ? 'bg-primary-500' : 'bg-secondary-500'"
+        :class="[{ 'bg-primary-500': color === 'primary' }, { 'bg-secondary-500': color === 'secondary' }]"
         :style="`width: ${progress}%`"
       ></div>
     </div>
