@@ -20,20 +20,21 @@
         header="Balance"
         icon="credit-card"
         :value="
-          useTransactionStore().totalValues('Income', today) - useTransactionStore().totalValues('Expense', today)
+          useTransactionStore().totalValues('Income', selectedDate) -
+          useTransactionStore().totalValues('Expense', selectedDate)
         "
         :loading="useTransactionStore().loading"
       />
       <Total
         header="Income"
         icon="arrow-in"
-        :value="useTransactionStore().totalValues('Income', today)"
+        :value="useTransactionStore().totalValues('Income', selectedDate)"
         :loading="useTransactionStore().loading"
       />
       <Total
         header="Expenses"
         icon="arrow-out"
-        :value="useTransactionStore().totalValues('Expense', today)"
+        :value="useTransactionStore().totalValues('Expense', selectedDate)"
         :loading="useTransactionStore().loading"
       />
     </div>
@@ -43,7 +44,7 @@
       <div class="flex flex-col">
         <SectionHeader headerText="Recent activity" />
         <RecentActivity
-          :transactions="useTransactionStore().filterTransactionsByDate(today, 6)"
+          :transactions="useTransactionStore().filterTransactionsByDate(selectedDate, 6)"
           :loading="useTransactionStore().loading"
         />
       </div>
@@ -51,7 +52,7 @@
         <SectionHeader headerText="Expenses summary" />
 
         <ExpensesByCategories
-          :expenses="useTransactionStore().expensesByCategories(today)"
+          :expenses="useTransactionStore().expensesByCategories(selectedDate)"
           :loading="useTransactionStore().loading"
         />
       </div>
@@ -66,7 +67,7 @@
 const isModalOpen = ref(false);
 const username = useSupabaseUser().value?.email?.split("@")[0];
 
-const today = { year: getCurrentYear(), month: getCurrentMonth() };
+const selectedDate = useSelectedDate().selectedDate;
 </script>
 
 <style scoped></style>
