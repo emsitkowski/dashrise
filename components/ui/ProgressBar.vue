@@ -7,9 +7,12 @@
         :style="`width: ${progress}%`"
       ></div>
     </div>
-    <span v-if="label" class="mt-2 text-sm font-semibold" :class="color === 'primary' ? '' : 'text-secondary-500'">{{
-      label
-    }}</span>
+    <span
+      v-if="label"
+      v-html="label"
+      class="mt-2 text-sm font-semibold"
+      :class="color === 'primary' ? '' : 'text-secondary-500'"
+    ></span>
   </div>
 </template>
 
