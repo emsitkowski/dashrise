@@ -5,17 +5,25 @@ export const useSupabaseCategories = () => {
     const userCategoriesStoredInDatabase = await useSupabaseCategories().fetchUserCategories();
 
     // Save new category in Categories table in the database if it doesn't exist yet
-    const { error } = await useSupabaseClient()
-      .from("Categories")
-      .insert([
-        {
-          id: category.id,
-          name: category.name,
-        },
-      ] as never);
+    const existingCategory = await useSupabaseClient().from("Categories").select("*").eq("name", category.name);
 
-    if (error) {
-      throw new Error(error.message);
+    if (!existingCategory) {
+      try {
+        const { error } = await useSupabaseClient()
+          .from("Categories")
+          .insert([
+            {
+              id: category.id,
+              name: category.name,
+            },
+          ] as never);
+
+        if (error) {
+          console.log(error);
+        }
+      } catch (error) {
+        throw new Error("Failed to save category in database");
+      }
     }
 
     // Save new category in UserCategories table if it doesn't exist yet
