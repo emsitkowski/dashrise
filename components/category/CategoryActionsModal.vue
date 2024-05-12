@@ -55,7 +55,6 @@ const formState = ref<any>(
 const formSchema = ref(categorySchema); // set initial form schema
 
 async function handleSubmit() {
-  console.log(formState.value);
   // Turn on loading state
   toggleFormLoading();
 
