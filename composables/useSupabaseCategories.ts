@@ -5,9 +5,9 @@ export const useSupabaseCategories = () => {
     const userCategoriesStoredInDatabase = await useSupabaseCategories().fetchUserCategories();
 
     // Save new category in Categories table in the database if it doesn't exist yet
-    const existingCategory = await useSupabaseClient().from("Categories").select("*").eq("name", category.name);
+    const { data } = await useSupabaseClient().from("Categories").select("*").eq("name", category.name);
 
-    if (!existingCategory) {
+    if ((data as Array<Category>).length === 0) {
       try {
         const { error } = await useSupabaseClient()
           .from("Categories")
