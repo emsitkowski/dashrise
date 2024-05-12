@@ -61,10 +61,12 @@ const leftValue = computed(() => {
 
 // Generate correct progress bar label
 const progressLabel = computed(() => {
-  if (leftValue.value >= 0) {
+  if (leftValue.value < 0) {
+    return `${convertToCurrency(-leftValue.value)} overspent`;
+  } else if (leftValue.value > 0) {
     return `${convertToCurrency(leftValue.value)} left`;
   } else {
-    return `${convertToCurrency(leftValue.value)} overspent`;
+    return `&nbsp;`;
   }
 });
 </script>
