@@ -2,7 +2,7 @@
   <Card class="relative overflow-x-hidden overflow-y-visible h-[420px] py-2 sm:py-4">
     <template #card-body>
       <div v-if="expenses.length > 0" class="divide-y divide-primary-8%">
-        <div v-for="expense in expenses" class="flex flex-col sm:flex-row sm:items-center py-4 gap-4">
+        <div v-for="expense in expenses" class="flex flex-col sm:flex-row sm:items-center py-4 gap-1 sm:gap-4">
           <!-- Category name -->
           <div class="sm:basis-2/5">
             <span class="text-base">{{ expense.category }}</span>
