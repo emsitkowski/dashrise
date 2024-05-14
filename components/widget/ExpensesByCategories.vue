@@ -11,7 +11,11 @@
           <div class="w-full flex flex-col sm:flex-row sm:basis-3/5 gap-2 sm:gap-4">
             <!-- Category total value -->
             <div class="flex flex-col basis-1/4 gap-1 leading-tight">
-              <span class="text-base font-semibold">{{ convertToCurrency(expense.totalValue) }}</span>
+              <span
+                class="text-base font-semibold"
+                :class="{ 'text-secondary-500': expense.totalValue > expense.limitValue && expense.limitValue > 0 }"
+                >{{ convertToCurrency(expense.totalValue) }}</span
+              >
             </div>
 
             <!-- Category progress bar -->
