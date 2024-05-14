@@ -4,28 +4,32 @@
   >
     <template #card-body>
       <div v-if="props.transactions.length > 0" class="divide-y divide-primary-8%">
-        <div v-for="transaction in props.transactions" class="flex items-center py-4 gap-4 sm:gap-8">
-          <!-- Transaction type -->
-          <div class="w-16 sm:w-20 shrink-0">
-            <Badge
-              class="w-full"
-              :label="transaction.type"
-              :variant="transaction.type === 'Income' ? 'primary' : 'secondary'"
-            />
-          </div>
+        <div v-for="transaction in props.transactions" class="flex flex-col py-4 gap-4">
+          <div class="flex items-center gap-4">
+            <!-- Transaction details -->
+            <Badge :label="transaction.type" :variant="transaction.type === 'Income' ? 'primary' : 'secondary'" />
+            <div class="flex flex-col gap-3">
+              <div class="flex flex-col gap-1">
+                <span class="text-sm sm:text-base font-semibold">{{ transaction.name }}</span>
+                <span v-if="transaction.category" class="text-xs sm:text-sm">{{ transaction.category }}</span>
+              </div>
 
-          <!-- Transaction details -->
-          <div class="flex flex-col gap-1 leading-tight">
-            <span class="text-base">{{ transaction.name }}</span>
-            <span class="text-xs sm:text-sm text-dark-32%">{{ transaction.date }}</span>
-          </div>
+              <!-- Transaction date -->
+              <div class="flex items-center gap-1 opacity-40">
+                <img class="w-3 sm:w-4 h-3 sm:h-4" src="~assets/icons/calendar.svg" alt="" />
+                <span class="text-xs sm:text-sm">{{ transaction.date }}</span>
+              </div>
+            </div>
 
-          <!-- Transaction value -->
-          <div class="ml-auto text-base whitespace-nowrap shrink-0">
-            <span v-if="transaction.type === 'Income'"> + {{ convertToCurrency(transaction.value) }}</span>
-            <span v-if="transaction.type === 'Expense'" class="text-dark-32%">
-              - {{ convertToCurrency(transaction.value) }}</span
-            >
+            <!-- Transaction value -->
+            <div class="ml-auto text-sm sm:text-base font-semibold whitespace-nowrap shrink-0">
+              <span v-if="transaction.type === 'Income'" class="text-primary-500 font-semibold">
+                + {{ convertToCurrency(transaction.value) }}</span
+              >
+              <span v-if="transaction.type === 'Expense'" class="text-dark-60%">
+                - {{ convertToCurrency(transaction.value) }}</span
+              >
+            </div>
           </div>
         </div>
       </div>
