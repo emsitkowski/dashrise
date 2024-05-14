@@ -5,7 +5,7 @@
         <div v-for="expense in expenses" class="flex flex-col sm:flex-row sm:items-center py-4 gap-1 sm:gap-4">
           <!-- Category name -->
           <div class="sm:basis-2/5">
-            <span class="text-base">{{ expense.category }}</span>
+            <span class="text-sm sm:text-base uppercase">{{ expense.category }}</span>
           </div>
 
           <div class="w-full flex flex-col sm:flex-row sm:basis-3/5 gap-2 sm:gap-4">
