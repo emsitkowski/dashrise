@@ -4,7 +4,7 @@
       <template #card-body>
         <div class="flex flex-col h-full">
           <div class="flex justify-between items-center mb-3">
-            <span class="uppercase text-sm sm:text-base pr-14">{{ category.name }}</span>
+            <span class="text-base sm:text-lg font-semibold pr-14">{{ category.name }}</span>
             <div class="absolute top-5 right-5">
               <Button variant="ghost" size="sm" @click="isModalOpen = true" :icon="true" icon-type="edit" />
             </div>
@@ -12,10 +12,10 @@
           <div class="mb-6 mt-auto">
             <span
               class="text-2xl sm:text-3xl font-medium leading-none"
-              :class="{ 'text-secondary-500': leftValue < 0 }"
+              :class="leftValue < 0 ? 'text-secondary-500' : 'text-dark-500'"
             >
               {{ totalValue > 0 ? convertToCurrency(totalValue) : "–" }}
-              <span class="text-sm sm:text-base text-dark-32% whitespace-nowrap font-normal"
+              <span class="text-sm sm:text-base text-dark-32% font-semibold whitespace-nowrap"
                 >/ {{ convertToCurrency(category.limitValue) }}</span
               >
             </span>

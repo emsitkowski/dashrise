@@ -2,17 +2,17 @@
   <Card class="relative overflow-x-hidden overflow-y-visible h-[420px] py-2 sm:py-4">
     <template #card-body>
       <div v-if="expenses.length > 0" class="divide-y divide-primary-8%">
-        <div v-for="expense in expenses" class="flex flex-col sm:flex-row sm:items-center py-4 gap-1 sm:gap-4">
+        <div v-for="expense in expenses" class="flex flex-col sm:flex-row sm:items-center py-4 gap-4">
           <!-- Category name -->
           <div class="sm:basis-2/5">
-            <span class="text-sm sm:text-base uppercase">{{ expense.category }}</span>
+            <span class="text-sm sm:text-base font-semibold">{{ expense.category }}</span>
           </div>
 
-          <div class="w-full flex flex-col sm:flex-row sm:basis-3/5 gap-2 sm:gap-4">
+          <div class="w-full flex flex-col sm:basis-3/5 gap-3">
             <!-- Category total value -->
-            <div class="flex flex-col basis-1/4 gap-1 leading-tight">
+            <div class="flex flex-col basis-1/4">
               <span
-                class="text-base font-semibold"
+                class="text-sm leading-none"
                 :class="{ 'text-secondary-500': expense.totalValue > expense.limitValue && expense.limitValue > 0 }"
                 >{{ convertToCurrency(expense.totalValue) }}</span
               >

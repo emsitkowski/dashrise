@@ -8,7 +8,7 @@
           <img v-if="icon === 'arrow-in'" class="w-4 sm:w-5" src="~assets/icons/arrow-in.svg" alt="" />
           <img v-if="icon === 'arrow-out'" class="w-4 sm:w-5" src="~assets/icons/arrow-out.svg" alt="" />
           <img v-if="icon === 'box'" class="w-4 sm:w-5" src="~assets/icons/box.svg" alt="" />
-          <span class="uppercase text-sm sm:text-base">{{ header }}</span>
+          <span class="uppercase text-base font-semibold">{{ header }}</span>
         </div>
 
         <!-- Value -->
