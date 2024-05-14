@@ -23,6 +23,7 @@
 const links = [
   { path: "/", label: "Dashboard" },
   { path: "/budget", label: "Budget" },
+  { path: "/history", label: "History" },
 ];
 </script>
 
