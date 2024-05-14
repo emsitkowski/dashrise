@@ -14,6 +14,9 @@
 
     <!-- Transactions modal -->
     <TransactionActionsModal :open="isModalOpen" @close="isModalOpen = false" @success="isModalOpen = false" />
+
+    <!-- Date select -->
+    <DateSelect />
   </div>
 </template>
 
