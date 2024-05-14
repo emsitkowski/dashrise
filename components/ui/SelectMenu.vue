@@ -1,7 +1,7 @@
 <template>
   <div class="relative flex flex-col select-none" @click="handleClick">
     <div
-      class="select flex justify-between items-center px-3 py-2 bg-none border-gray-300 cursor-pointer"
+      class="select flex justify-between items-center px-3 py-2 bg-white-60% border-gray-300 cursor-pointer"
       :class="isOpen ? 'border-t border-l border-r border-b border-b-transparent rounded-t-md' : 'border rounded-md'"
     >
       <div class="selected pointer-events-none h-full">
@@ -19,23 +19,41 @@
         {{ option }}
       </li>
       <li v-else class="px-3 py-2 rounded cursor-default pointer-events-none">No categories found...</li>
-      <li class="pointer-events-none px-3 py-2 mt-2 border-t border-primary-8% text-dark-32% cursor-default">
-        Create new categories on the budget page
+      <li
+        v-if="footerInfo"
+        class="pointer-events-none px-3 py-2 mt-2 border-t border-primary-8% text-dark-32% cursor-default"
+      >
+        {{ footerInfoLabel }}
       </li>
     </ul>
   </div>
 </template>
 
 <script setup lang="ts">
-const emit = defineEmits(["update:modelValue"]);
-const props = defineProps(["options"]);
+const emit = defineEmits(["update:modelValue", "select"]);
+const props = defineProps({
+  options: {
+    type: Array<string>,
+    required: true,
+  },
+  footerInfo: {
+    type: Boolean,
+    default: false,
+  },
+  footerInfoLabel: {
+    type: String,
+  },
+  defaultSelection: {
+    type: String,
+  },
+});
 
 const select = ref();
-const selected = ref(props.options.length > 0 ? props.options[0].label : "");
+const selected = ref(props.options.length > 0 ? props.options[0] : "");
 const isOpen = ref(false);
 
 // Emit initial value
-emit("update:modelValue", props.options.length > 0 ? props.options[0].label : "");
+emit("update:modelValue", props.defaultSelection ? props.defaultSelection : props.options[0]);
 
 function handleClick(e: Event) {
   const target = e.target as HTMLElement;
@@ -49,11 +67,19 @@ function handleClick(e: Event) {
 
     // Emit event with selected value
     emit("update:modelValue", target.textContent);
+
+    // Emit value change event
+    emit("select", target.textContent);
   } else {
     // Toggle dropdown
     isOpen.value = !isOpen.value;
   }
 }
+
+onMounted(() => {
+  // Set initial value
+  selected.value = props.defaultSelection ? (props.defaultSelection as string) : props.options[0];
+});
 </script>
 
 <style scoped></style>

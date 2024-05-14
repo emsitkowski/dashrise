@@ -17,7 +17,12 @@
 
         <!-- Category -->
         <FormField v-if="tabs[activeTab].label === 'Expense'" label="Category">
-          <SelectMenu :options="useCategoryStore().getCategoriesNames()" v-model="formState.category" />
+          <SelectMenu
+            :options="useCategoryStore().getCategoriesNames()"
+            :footer-info="true"
+            footer-info-label="Create new categories on the budget page"
+            v-model="formState.category"
+          />
         </FormField>
 
         <!-- Value -->
