@@ -48,7 +48,7 @@ const isModalOpen = ref(false);
 // Calculate total transactions value for the category
 const totalValue = computed(() => {
   const expenses = useTransactionStore()
-    .expensesByCategories(useSelectedDate().selectedDate)
+    .expensesByCategories(getCurrentDate())
     .filter((el) => el.category === props.category.name);
 
   return expenses.length > 0 ? expenses[0].totalValue : 0;
