@@ -1,12 +1,46 @@
 <template>
   <span
-    class="flex justify-center items-center px-3 py-2 text-xs sm:text-sm rounded-md"
+    class="flex justify-center items-center p-3 text-xs sm:text-sm rounded-md aspect-square"
     :class="{
       'text-primary-500 bg-primary-4%': variant === 'primary',
       'text-secondary-500 bg-secondary-4%': variant === 'secondary',
     }"
   >
-    {{ label }}
+    <!-- Arrow-in icon -->
+    <svg
+      v-if="variant === 'primary'"
+      class="stroke-primary-500"
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      <polyline points="7 10 12 15 17 10"></polyline>
+      <line x1="12" y1="15" x2="12" y2="3"></line>
+    </svg>
+
+    <!-- Arrow-out icon -->
+    <svg
+      v-if="variant === 'secondary'"
+      class="stroke-secondary-500"
+      xmlns="http://www.w3.org/2000/svg"
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+      <polyline points="17 8 12 3 7 8"></polyline>
+      <line x1="12" y1="3" x2="12" y2="15"></line>
+    </svg>
   </span>
 </template>
 
