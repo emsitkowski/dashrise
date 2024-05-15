@@ -64,8 +64,6 @@ async function handleSubmit() {
   // Add transaction type to form state
   formState.value.type = tabs[activeTab.value].label;
 
-  console.log(formState.value);
-
   // Save transaction
   await useTransactionStore().saveTransaction(formState.value as Transaction);
 
