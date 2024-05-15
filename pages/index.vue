@@ -47,10 +47,7 @@
       <div class="flex flex-col">
         <SectionHeader headerText="Expenses summary" />
 
-        <ExpensesByCategories
-          :expenses="useTransactionStore().expensesByCategories(today)"
-          :loading="useTransactionStore().loading"
-        />
+        <ExpensesByCategories :expenses="useTransactionStore().expensesByCategories(today)" />
       </div>
     </div>
 
