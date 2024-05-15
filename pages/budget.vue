@@ -12,7 +12,15 @@
       @button-click="isModalOpen = true"
     />
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-8">
-      <CategoryCard class="[&>*]:h-full" :category="category" v-for="category in useCategoryStore().categories" />
+      <div v-if="useCategoryStore().categories.length < 1">
+        <div class="flex items-center gap-2 opacity-40">
+          <img src="~assets/icons/info.svg" alt="" />
+          <span class="text-lg">No categories found</span>
+        </div>
+      </div>
+      <div v-else>
+        <CategoryCard v-for="category in useCategoryStore().categories" :category="category" class="[&>*]:h-full" />
+      </div>
     </div>
 
     <!-- Category modal -->
