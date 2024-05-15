@@ -78,7 +78,6 @@ async function handleDelete() {
   toggleFormLoading();
 
   // Delete transaction
-  console.log("delete formstate: ", formState.value);
   await useCategoryStore().deleteCategory(formState.value as Category);
 
   // Emit success event
