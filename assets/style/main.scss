@@ -31,6 +31,11 @@
   font-display: swap;
 }
 
+::selection {
+  @apply bg-primary-500;
+  @apply text-white;
+}
+
 body {
   @apply font-sans;
   @apply bg-light-50;
