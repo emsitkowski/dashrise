@@ -42,10 +42,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8">
       <div class="flex flex-col">
         <SectionHeader headerText="Recent activity" />
-        <RecentActivity
-          :transactions="useTransactionStore().filterTransactionsByDate(today, 6)"
-          :loading="useTransactionStore().loading"
-        />
+        <RecentActivity />
       </div>
       <div class="flex flex-col">
         <SectionHeader headerText="Expenses summary" />
