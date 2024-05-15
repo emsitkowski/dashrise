@@ -28,6 +28,15 @@
                 - {{ convertToCurrency(transaction.value) }}</span
               >
             </div>
+
+            <!-- Transaction actions -->
+            <Button
+              variant="ghost"
+              :icon="true"
+              icon-type="actions"
+              size="sm"
+              @click="handleAction(transaction)"
+            ></Button>
           </div>
         </div>
       </div>
@@ -53,7 +62,13 @@
 </template>
 
 <script setup lang="ts">
+import type { Transaction } from "~/src/types/global";
 const props = defineProps(["transactions"]);
+const emit = defineEmits(["actionTrigger"]);
+
+function handleAction(transaction: Transaction) {
+  emit("actionTrigger", transaction);
+}
 </script>
 
 <style scoped></style>
