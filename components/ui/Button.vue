@@ -1,7 +1,7 @@
 <template>
   <button
     class="relative inline-flex justify-center items-center shrink-0 gap-1 rounded-md leading-none overflow-hidden duration-300"
-    :class="buttonVariantClass[variant as ButtonVariant], size === 'sm' ? 'px-3 py-3 text-sm' : 'px-4 py-4'"
+    :class="buttonVariantClass[variant as ButtonVariant], size === 'sm' ? 'px-2 py-2 sm:px-3 sm:py-3 text-sm' : 'px-4 py-4'"
     @click="$emit('button-click')"
   >
     <div v-if="icon" :class="iconLeading === true ? '-ml-1' : ''">
@@ -35,6 +35,23 @@
         class="feather feather-edit-2"
       >
         <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+      </svg>
+      <svg
+        v-if="iconType === 'actions'"
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-more-vertical"
+      >
+        <circle cx="12" cy="12" r="1"></circle>
+        <circle cx="12" cy="5" r="1"></circle>
+        <circle cx="12" cy="19" r="1"></circle>
       </svg>
       <svg
         v-if="iconType === 'x'"
