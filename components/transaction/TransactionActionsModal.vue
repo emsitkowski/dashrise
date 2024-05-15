@@ -71,9 +71,7 @@ async function handleSubmit() {
   emit("success");
 
   // Restore form to initial state
-  clearInputs();
-  activeTab.value = 0;
-  formState.value = {};
+  resetForm();
 
   // Turn off loading state
   toggleFormLoading();
@@ -86,6 +84,9 @@ function toggleFormLoading() {
 function handleTabSwitch(tabIndex: number) {
   // Find correct tab index based on label value
   activeTab.value = tabIndex;
+
+  // Restore form to initial state
+  resetForm();
 
   // Update form schema
   setCorrectFormSchema();
@@ -102,6 +103,11 @@ function setCorrectFormSchema() {
   } else if (tabs[activeTab.value].label === "Expense") {
     formSchema.value = expenseSchema;
   }
+}
+
+function resetForm() {
+  clearInputs();
+  formState.value = {};
 }
 </script>
 
