@@ -16,7 +16,7 @@
 
               <!-- Transaction date -->
               <div class="flex items-center gap-1 opacity-40">
-                <img class="w-3 sm:w-4 h-3 sm:h-4" src="~assets/icons/calendar.svg" alt="" />
+                <img class="w-3 h-3" src="~assets/icons/calendar.svg" alt="" />
                 <span class="text-xs sm:text-sm">{{ transaction.date }}</span>
               </div>
             </div>
