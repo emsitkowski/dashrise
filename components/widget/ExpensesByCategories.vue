@@ -42,7 +42,7 @@
         label="Loading expenses..."
         bg-color-class="bg-white"
         stroke-color-class="stroke-dark-500"
-        :loading="loading"
+        :loading="useTransactionStore().loading"
       />
     </template>
   </Card>
@@ -55,9 +55,6 @@ const props = defineProps({
   expenses: {
     type: Array as () => CategoryExpense[],
     required: true,
-  },
-  loading: {
-    type: Boolean,
   },
 });
 </script>
