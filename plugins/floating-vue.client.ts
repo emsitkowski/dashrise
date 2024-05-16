@@ -11,6 +11,10 @@ export default defineNuxtPlugin((nuxtApp) => {
         placement: "bottom",
         distance: 0,
         skipTransition: true,
+        delay: {
+          show: 0,
+          hide: 0,
+        },
       },
     },
   });
