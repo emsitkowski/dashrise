@@ -20,8 +20,8 @@
           <Select
             :options="useCategoryStore().getCategoriesNames()"
             empty-label="No categories found"
-            v-model="formState.category"
             footer-label="Create new categories on the Budget page"
+            v-model="formState.category"
           ></Select>
         </FormField>
 
