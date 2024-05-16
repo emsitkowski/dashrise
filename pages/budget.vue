@@ -13,8 +13,8 @@
     />
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-8">
       <div v-if="useCategoryStore().categories.length < 1">
-        <div class="flex items-center gap-2 opacity-40">
-          <img src="~assets/icons/info.svg" alt="" />
+        <div class="flex items-center gap-2 opacity-50">
+          <img class="w-5 h-5" src="~assets/icons/info.svg" alt="" />
           <span class="text-lg">No categories found</span>
         </div>
       </div>
