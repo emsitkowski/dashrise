@@ -18,9 +18,12 @@
           <span class="text-lg">No categories found</span>
         </div>
       </div>
-      <div v-else>
-        <CategoryCard v-for="category in useCategoryStore().categories" :category="category" class="[&>*]:h-full" />
-      </div>
+      <CategoryCard
+        v-else
+        v-for="category in useCategoryStore().categories"
+        :category="category"
+        class="[&>*]:h-full"
+      />
     </div>
 
     <!-- Category modal -->
