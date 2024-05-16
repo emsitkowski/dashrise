@@ -48,6 +48,22 @@ export const useTransactionStore = defineStore("transactions", () => {
     toggleLoading(false);
   }
 
+  // Delete transaction
+  async function deleteTransaction(transaction: Transaction) {
+    toggleLoading(true);
+
+    try {
+      // Delete transaction from database and store
+      await useSupabaseTransactions().deleteTransaction(transaction);
+      transactions.value = transactions.value.filter((el) => el.id !== transaction.id);
+    } catch (error: any) {
+      console.error("Failed to delete transaction: ", error);
+      error.value = error;
+    }
+
+    toggleLoading(false);
+  }
+
   // Filter transactions by a given date, with optional limit
   const filterTransactionsByDate = computed(() => {
     return (date: { year: string; month: string }, limit?: number | undefined) => {
@@ -116,6 +132,7 @@ export const useTransactionStore = defineStore("transactions", () => {
   return {
     transactions,
     saveTransaction,
+    deleteTransaction,
     fetchAllTransactions,
     filterTransactionsByDate,
     totalValues,

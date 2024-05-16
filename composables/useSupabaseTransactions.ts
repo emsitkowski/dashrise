@@ -11,6 +11,14 @@ export const useSupabaseTransactions = () => {
     }
   };
 
+  const deleteTransaction = async (transaction: Transaction) => {
+    const { error } = await useSupabaseClient().from("Transactions").delete().eq("id", transaction.id!);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+  };
+
   const getTransactions = async () => {
     const { data, error } = await useSupabaseClient()
       .from("Transactions")
@@ -24,5 +32,5 @@ export const useSupabaseTransactions = () => {
     }
   };
 
-  return { saveTransaction, getTransactions };
+  return { saveTransaction, deleteTransaction, getTransactions };
 };
