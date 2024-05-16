@@ -14,7 +14,6 @@
     "@pinia/nuxt": "^0.5.1",
     "animejs": "^3.2.2",
     "currency.js": "^2.0.4",
-    "floating-vue": "^5.2.2",
     "joi": "^17.12.2",
     "nanoid": "^5.0.6",
     "nuxt": "^3.11.1",
