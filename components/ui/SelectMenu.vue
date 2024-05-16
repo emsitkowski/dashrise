@@ -1,32 +1,42 @@
 <template>
-  <div class="relative flex flex-col select-none" @click="handleClick">
+  <VDropdown theme="select" v-model:shown="isOpen">
+    <!-- This will be the popover reference (for the events and position) -->
     <div
-      class="select flex justify-between items-center px-3 py-2 bg-white-60% border-gray-300 cursor-pointer"
-      :class="isOpen ? 'border-t border-l border-r border-b border-b-transparent rounded-t-md' : 'border rounded-md'"
+      class="select flex justify-between items-center px-3 py-2 bg-white-60% border-gray-300 cursor-pointer border rounded-md"
+      ref="wrapper"
     >
-      <div class="selected pointer-events-none h-full">
+      <div class="selected pointer-events-none h-full w-full">
         <span ref="select">{{ selected ? selected : "&nbsp;" }}</span>
       </div>
       <div class="icon pointer-events-none">
         <img :class="{ 'rotate-180': isOpen }" src="~assets/icons/chevron-down.svg" alt="" />
       </div>
     </div>
-    <ul
-      class="absolute top-0 translate-y-10 w-full px-2 py-2 bg-white border-gray-300 max-h-52 overflow-auto z-50"
-      :class="isOpen ? 'border-b border-l border-r rounded-b-md border-t' : 'border rounded-md hidden'"
-    >
-      <li v-if="options.length > 0" v-for="option in options" class="hover:bg-dark-4% px-3 py-2 rounded cursor-pointer">
-        {{ option }}
-      </li>
-      <li v-else class="px-3 py-2 rounded cursor-default pointer-events-none">No categories found...</li>
-      <li
-        v-if="footerInfo"
-        class="pointer-events-none px-3 py-2 mt-2 border-t border-primary-8% text-dark-32% cursor-default"
+
+    <!-- This will be the content of the popover -->
+    <template #popper>
+      <ul
+        class="px-2 py-2 bg-white border-gray-300 max-h-52 overflow-auto z-50 border rounded-md"
+        @click="handleClick"
+        ref="content"
       >
-        {{ footerInfoLabel }}
-      </li>
-    </ul>
-  </div>
+        <li
+          v-if="options.length > 0"
+          v-for="option in options"
+          class="hover:bg-dark-4% px-3 py-2 rounded cursor-pointer"
+        >
+          {{ option }}
+        </li>
+        <li v-else class="px-3 py-2 rounded cursor-default pointer-events-none">No categories found...</li>
+        <li
+          v-if="footerInfo"
+          class="pointer-events-none px-3 py-2 mt-2 border-t border-primary-8% text-dark-32% cursor-default"
+        >
+          {{ footerInfoLabel }}
+        </li>
+      </ul>
+    </template>
+  </VDropdown>
 </template>
 
 <script setup lang="ts">
@@ -48,9 +58,11 @@ const props = defineProps({
   },
 });
 
-const select = ref();
+const wrapper = ref<HTMLElement>();
+const content = ref<HTMLElement>();
+const select = ref<HTMLElement>();
 const selected = ref(props.options.length > 0 ? props.options[0] : "");
-const isOpen = ref(false);
+const isOpen = ref<Boolean>(false);
 
 // Emit initial value
 emit("update:modelValue", props.defaultSelection ? props.defaultSelection : props.options[0]);
@@ -70,16 +82,39 @@ function handleClick(e: Event) {
 
     // Emit value change event
     emit("select", target.textContent);
-  } else {
-    // Toggle dropdown
-    isOpen.value = !isOpen.value;
   }
 }
+
+function updatePopoverSize() {
+  content.value!.style.width = `${wrapper.value?.getBoundingClientRect().width}px`;
+}
+
+// Set correct popover content size every time dropdown opens
+watch(isOpen, (newVal) => {
+  if (newVal) {
+    nextTick(() => {
+      setTimeout(() => {
+        updatePopoverSize();
+      }, 0);
+    });
+  }
+});
 
 onMounted(() => {
   // Set initial value
   selected.value = props.defaultSelection ? (props.defaultSelection as string) : props.options[0];
+
+  // Set correct popover content size every time browser resizes
+  window.addEventListener("resize", updatePopoverSize);
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.v-popper--theme-select .v-popper__arrow-outer {
+  visibility: hidden !important;
+}
+
+.v-popper--theme-select .v-popper__arrow-inner {
+  visibility: hidden !important;
+}
+</style>
