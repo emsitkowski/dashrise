@@ -15,26 +15,7 @@
 
     <!-- This will be the content of the popover -->
     <template #popper>
-      <ul
-        class="px-2 py-2 bg-white border-gray-300 max-h-52 overflow-auto z-50 border rounded-md"
-        @click="handleClick"
-        ref="content"
-      >
-        <li
-          v-if="options.length > 0"
-          v-for="option in options"
-          class="hover:bg-dark-4% px-3 py-2 rounded cursor-pointer"
-        >
-          {{ option }}
-        </li>
-        <li v-else class="px-3 py-2 rounded cursor-default pointer-events-none">No categories found...</li>
-        <li
-          v-if="footerInfo"
-          class="pointer-events-none px-3 py-2 mt-2 border-t border-primary-8% text-dark-32% cursor-default"
-        >
-          {{ footerInfoLabel }}
-        </li>
-      </ul>
+      <DropdownList v-bind="$props" @select="handleSelection" ref="content" />
     </template>
   </VDropdown>
 </template>
@@ -42,8 +23,11 @@
 <script setup lang="ts">
 const emit = defineEmits(["update:modelValue", "select"]);
 const props = defineProps({
+  defaultSelection: {
+    type: String,
+  },
   options: {
-    type: Array<string>,
+    type: Array,
     required: true,
   },
   footerInfo: {
@@ -53,13 +37,16 @@ const props = defineProps({
   footerInfoLabel: {
     type: String,
   },
-  defaultSelection: {
+  emptyState: {
+    type: Boolean,
+  },
+  emptyStateLabel: {
     type: String,
   },
 });
 
 const wrapper = ref<HTMLElement>();
-const content = ref<HTMLElement>();
+const content = ref<any>();
 const select = ref<HTMLElement>();
 const selected = ref(props.options.length > 0 ? props.options[0] : "");
 const isOpen = ref<Boolean>(false);
@@ -67,26 +54,22 @@ const isOpen = ref<Boolean>(false);
 // Emit initial value
 emit("update:modelValue", props.defaultSelection ? props.defaultSelection : props.options[0]);
 
-function handleClick(e: Event) {
-  const target = e.target as HTMLElement;
+function handleSelection(value: string) {
+  // Update selected value
+  selected.value = value;
 
-  // Change selected value
-  if (target.tagName === "LI" && target.textContent) {
-    selected.value = target.textContent;
+  // Close dropdown
+  isOpen.value = false;
 
-    // Close dropdown
-    isOpen.value = false;
+  // Emit event with selected value
+  emit("update:modelValue", value);
 
-    // Emit event with selected value
-    emit("update:modelValue", target.textContent);
-
-    // Emit value change event
-    emit("select", target.textContent);
-  }
+  // Emit value change event
+  emit("select", value);
 }
 
 function updatePopoverSize() {
-  content.value!.style.width = `${wrapper.value?.getBoundingClientRect().width}px`;
+  content.value.list.style.width = `${wrapper.value?.getBoundingClientRect().width}px`;
 }
 
 // Set correct popover content size every time dropdown opens

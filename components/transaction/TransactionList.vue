@@ -30,13 +30,18 @@
             </div>
 
             <!-- Transaction actions -->
-            <Button
-              variant="ghost"
-              :icon="true"
-              icon-type="actions"
-              size="sm"
-              @click="handleAction(transaction)"
-            ></Button>
+            <Popover
+              @select="handleAction"
+              @click="selectedTransaction = transaction"
+              :options="[
+                {
+                  action: 'Delete',
+                  icon: 'trash',
+                },
+              ]"
+            >
+              <Button variant="ghost" :icon="true" icon-type="actions" size="sm"></Button>
+            </Popover>
           </div>
         </div>
       </div>
@@ -63,11 +68,17 @@
 
 <script setup lang="ts">
 import type { Transaction } from "~/src/types/global";
+
 const props = defineProps(["transactions"]);
 const emit = defineEmits(["actionTrigger"]);
 
-function handleAction(transaction: Transaction) {
-  emit("actionTrigger", transaction);
+const selectedTransaction = ref<Transaction>();
+
+function handleAction(action: string) {
+  if (action === "Delete") {
+    console.log("Deleting: ", selectedTransaction.value);
+    useTransactionStore().deleteTransaction(selectedTransaction.value!);
+  }
 }
 </script>
 

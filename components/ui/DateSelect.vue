@@ -1,17 +1,17 @@
 <template>
   <div class="flex gap-4 sm:gap-6 [&>*]:w-full max-w-md">
-    <SelectMenu
+    <Dropdown
       :options="years"
       :default-selection="yearSelected"
       v-model="yearSelected"
       @select="handleSelection"
-    ></SelectMenu>
-    <SelectMenu
+    ></Dropdown>
+    <Dropdown
       :options="months"
       :default-selection="monthSelected"
       v-model="monthSelected"
       @select="handleSelection"
-    ></SelectMenu>
+    ></Dropdown>
   </div>
 </template>
 

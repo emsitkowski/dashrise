@@ -16,7 +16,7 @@
     <div
       class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 justify-between w-full [&>*]:w-full gap-4 sm:gap-8 mb-16"
     >
-      <Total
+      <WidgetTotal
         header="Balance"
         icon="credit-card"
         :value="
@@ -24,13 +24,13 @@
         "
         :loading="useTransactionStore().loading"
       />
-      <Total
+      <WidgetTotal
         header="Income"
         icon="arrow-in"
         :value="useTransactionStore().totalValues('Income', today)"
         :loading="useTransactionStore().loading"
       />
-      <Total
+      <WidgetTotal
         header="Expenses"
         icon="arrow-out"
         :value="useTransactionStore().totalValues('Expense', today)"
@@ -42,12 +42,12 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8">
       <div class="flex flex-col">
         <SectionHeader headerText="Recent activity" />
-        <RecentActivity />
+        <WidgetRecentActivity />
       </div>
       <div class="flex flex-col">
         <SectionHeader headerText="Expenses summary" />
 
-        <ExpensesByCategories :expenses="useTransactionStore().expensesByCategories(today)" />
+        <WidgetExpenses :expenses="useTransactionStore().expensesByCategories(today)" />
       </div>
     </div>
 
