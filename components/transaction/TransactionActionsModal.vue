@@ -17,14 +17,12 @@
 
         <!-- Category -->
         <FormField v-if="tabs[activeTab].label === 'Expense'" label="Category">
-          <Dropdown
+          <Select
             :options="useCategoryStore().getCategoriesNames()"
-            :footer-info="true"
-            footer-info-label="Create new categories on the budget page"
-            :empty-state="true"
-            empty-state-label="No categories found..."
+            empty-label="No categories found"
             v-model="formState.category"
-          />
+            footer-label="Create new categories on the Budget page"
+          ></Select>
         </FormField>
 
         <!-- Value -->
@@ -38,7 +36,7 @@
         </FormField>
 
         <!-- Submit button -->
-        <Button label="Add transaction" class="mt-4" ref="submitBtn" :loading="isSubmitting" />
+        <Button label="Add transaction" class="mt-4" :loading="isSubmitting" type="submit" ref="submitBtn"></Button>
       </Form>
     </Tabs>
   </Modal>

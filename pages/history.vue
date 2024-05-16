@@ -14,7 +14,7 @@
     </PageHeader>
 
     <!-- Date select -->
-    <DateSelect class="mb-16" />
+    <DatePicker class="mb-16" />
 
     <!-- Transactions table -->
     <SectionHeader header-text="Transactions" />

@@ -1,23 +1,13 @@
 <template>
-  <div class="flex gap-4 sm:gap-6 [&>*]:w-full max-w-md">
-    <Dropdown
-      :options="years"
-      :default-selection="yearSelected"
-      v-model="yearSelected"
-      @select="handleSelection"
-    ></Dropdown>
-    <Dropdown
-      :options="months"
-      :default-selection="monthSelected"
-      v-model="monthSelected"
-      @select="handleSelection"
-    ></Dropdown>
-  </div>
+  <DatePickerContainer>
+    <Select :options="years" v-model="selectedYear" :default-value="selectedYear" @select="handleSelection"></Select>
+    <Select :options="months" v-model="selectedMonth" :default-value="selectedMonth" @select="handleSelection"></Select>
+  </DatePickerContainer>
 </template>
 
 <script setup lang="ts">
 // Define months
-const monthsObjects = [
+const monthsList = [
   { name: "January", value: "01" },
   { name: "February", value: "02" },
   { name: "March", value: "03" },
@@ -32,9 +22,9 @@ const monthsObjects = [
   { name: "December", value: "12" },
 ];
 
-const yearSelected = ref<string>(useSelectedDate().selectedDate.year);
-const monthSelected = ref<string>(
-  monthsObjects.find((el) => el.value === useSelectedDate().selectedDate.month)?.name as string
+const selectedYear = ref<string>(useSelectedDate().selectedDate.year);
+const selectedMonth = ref<string>(
+  monthsList.find((el) => el.value === useSelectedDate().selectedDate.month)?.name as string
 );
 
 // Compute years array, starting from start year to current year
@@ -52,16 +42,14 @@ const years = computed(() => {
 });
 
 // Compute months names
-const months = computed(() => monthsObjects.map((month) => month.name));
+const months = computed(() => monthsList.map((month) => month.name));
 
 // Handle date selection
 function handleSelection() {
   // Save selected date in store
   useSelectedDate().setDate(
-    yearSelected.value,
-    monthsObjects.find((el) => el.name === monthSelected.value)?.value as string
+    selectedYear.value,
+    monthsList.find((el) => el.name === selectedMonth.value)?.value as string
   );
 }
 </script>
-
-<style scoped></style>
