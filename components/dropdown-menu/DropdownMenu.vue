@@ -1,5 +1,5 @@
 <template>
-  <DropdownMenuContainer>
+  <DropdownMenuContainer ref="dropdownContainer">
     <DropdownMenuTrigger @click="toggleSelect" ref="dropdownTrigger">
       <slot></slot>
     </DropdownMenuTrigger>
@@ -21,6 +21,7 @@
 <script setup lang="ts">
 import type { ComponentInstance } from "vue";
 import type { DropdownMenuOption } from "~/src/types/global";
+import type DropdownMenuContainer from "./DropdownMenuContainer.vue";
 import type DropdownMenuContent from "./DropdownMenuContent.vue";
 import type DropdownMenuTrigger from "./DropdownMenuTrigger.vue";
 
@@ -34,6 +35,7 @@ defineProps({
 const emit = defineEmits(["select"]);
 const isDropdownOpen = ref<boolean>(false);
 const selected = ref<DropdownMenuOption>();
+const dropdownContainer = ref<ComponentInstance<typeof DropdownMenuContainer>>();
 const dropdownTrigger = ref<ComponentInstance<typeof DropdownMenuTrigger>>();
 const dropdownContent = ref<ComponentInstance<typeof DropdownMenuContent>>();
 
@@ -61,6 +63,22 @@ function updateDropdownPosition() {
         triggerRect.x
       }px; transform: translate(${-100 + triggerRect.width}%, ${triggerRect.height}px)`);
 }
+
+const handleClickOutside = (e: MouseEvent) => {
+  if (dropdownTrigger.value) {
+    if (!(dropdownTrigger.value.$el as HTMLElement).children[0].contains(e.target as HTMLElement)) {
+      isDropdownOpen.value = false;
+    }
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("click", handleClickOutside);
+});
 </script>
 
 <style scoped></style>
