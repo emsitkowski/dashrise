@@ -14,7 +14,7 @@
     </PageHeader>
 
     <!-- Date select -->
-    <DatePicker class="mb-16" />
+    <DatePicker :start-year="2024" class="mb-16" />
 
     <!-- Transactions table -->
     <SectionHeader header-text="Transactions" />

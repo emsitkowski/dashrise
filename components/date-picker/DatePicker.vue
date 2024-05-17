@@ -6,6 +6,12 @@
 </template>
 
 <script setup lang="ts">
+const props = defineProps({
+  startYear: {
+    type: Number,
+    required: true,
+  },
+});
 // Define months
 const monthsList = [
   { name: "January", value: "01" },
@@ -29,7 +35,7 @@ const selectedMonth = ref<string>(
 
 // Compute years array, starting from start year to current year
 const years = computed(() => {
-  const startYear = 2024;
+  const startYear = props.startYear;
   const endYear = Number(getCurrentYear());
   const years = [];
 
