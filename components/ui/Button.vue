@@ -1,6 +1,6 @@
 <template>
   <button
-    class="relative inline-flex justify-center items-center shrink-0 gap-1 rounded-md leading-none overflow-hidden duration-300"
+    class="relative inline-flex justify-center items-center shrink-0 gap-1 rounded-md leading-none overflow-hidden duration-300 [&>*]:pointer-events-none"
     :class="buttonVariantClass[variant as ButtonVariant], size === 'sm' ? 'px-2 py-2 sm:px-3 sm:py-3 text-sm' : 'px-4 py-4'"
     @click="$emit('button-click')"
   >
