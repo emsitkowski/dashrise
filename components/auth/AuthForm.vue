@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import type { userCredentials } from "~/src/types/global";
+import type { UserCredentials } from "~/src/types/global";
 import { authSchema } from "~/src/schemas/form";
 const isSubmitting = ref(false);
 const { signInWithPassword, createNewAccount, authError } = useSupabaseAuth();
@@ -53,7 +53,7 @@ async function handleSubmit() {
 
   // Log in user
   if (props.action === "login") {
-    const success = await signInWithPassword(formState.value as userCredentials);
+    const success = await signInWithPassword(formState.value as UserCredentials);
 
     // Redirect to homepage
     if (success) {
@@ -64,7 +64,7 @@ async function handleSubmit() {
     }
   } else {
     // Create new account
-    const success = await createNewAccount(formState.value as userCredentials);
+    const success = await createNewAccount(formState.value as UserCredentials);
 
     // Redirect to homepage
     if (success) {

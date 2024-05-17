@@ -23,7 +23,7 @@ export interface Tab {
   label: string;
 }
 
-export interface userCredentials {
+export interface UserCredentials {
   email: string;
   password: string;
 }
