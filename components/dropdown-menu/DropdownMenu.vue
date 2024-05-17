@@ -66,7 +66,9 @@ function updateDropdownPosition() {
 }
 
 const handleOutsideClick = (e: MouseEvent) => {
-  detectOutsideClick(e, dropdownContainer.value!.$el, () => (isDropdownOpen.value = false));
+  if (dropdownContainer.value) {
+    detectOutsideClick(e, dropdownContainer.value.$el, () => (isDropdownOpen.value = false));
+  }
 };
 
 const handleResize = () => {

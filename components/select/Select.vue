@@ -69,7 +69,9 @@ function toggleSelect() {
 }
 
 const handleOutsideClick = (e: MouseEvent) => {
-  detectOutsideClick(e, selectContainer.value!.$el, () => (isSelectOpen.value = false));
+  if (selectContainer.value) {
+    detectOutsideClick(e, selectContainer.value.$el, () => (isSelectOpen.value = false));
+  }
 };
 
 const handleResize = () => {
