@@ -29,8 +29,10 @@
               >
             </div>
 
-            <!-- Transaction actions -->
-            <Button variant="ghost" :icon="true" icon-type="actions" size="sm"></Button>
+            <!-- Transaction actions dropdown -->
+            <DropdownMenu :options="[{ label: 'Delete' }]" @select="handleActionSelect($event, transaction)">
+              <Button variant="ghost" :icon="true" icon-type="actions" size="sm"></Button>
+            </DropdownMenu>
           </div>
         </div>
       </div>
@@ -56,8 +58,17 @@
 </template>
 
 <script setup lang="ts">
+import type { Transaction, DropdownMenuOption } from "~/src/types/global";
+
 const props = defineProps(["transactions"]);
-const emit = defineEmits(["actionTrigger"]);
+
+// Handle action selection
+function handleActionSelect(option: DropdownMenuOption, transaction: Transaction) {
+  // Delete transaction
+  if (option.label === "Delete") {
+    useTransactionStore().deleteTransaction(transaction);
+  }
+}
 </script>
 
 <style scoped></style>
