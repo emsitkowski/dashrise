@@ -28,7 +28,6 @@ export interface userCredentials {
   password: string;
 }
 
-export interface DropdownListAction {
-  action: string;
-  icon: string;
+export interface DropdownMenuOption {
+  label: string;
 }
