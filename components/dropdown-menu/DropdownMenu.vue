@@ -24,6 +24,7 @@ import type { DropdownMenuOption } from "~/src/types/global";
 import type DropdownMenuContainer from "./DropdownMenuContainer.vue";
 import type DropdownMenuContent from "./DropdownMenuContent.vue";
 import type DropdownMenuTrigger from "./DropdownMenuTrigger.vue";
+import { detectOutsideClick } from "~/utils/detectOutsideClick";
 
 defineProps({
   options: {
@@ -64,12 +65,8 @@ function updateDropdownPosition() {
       }px; transform: translate(${-100 + triggerRect.width}%, ${triggerRect.height}px)`);
 }
 
-const handleClickOutside = (e: MouseEvent) => {
-  if (dropdownTrigger.value) {
-    if (!(dropdownTrigger.value.$el as HTMLElement).children[0].contains(e.target as HTMLElement)) {
-      isDropdownOpen.value = false;
-    }
-  }
+const handleOutsideClick = (e: MouseEvent) => {
+  detectOutsideClick(e, dropdownContainer.value!.$el, () => (isDropdownOpen.value = false));
 };
 
 const handleResize = () => {
@@ -77,12 +74,12 @@ const handleResize = () => {
 };
 
 onMounted(() => {
-  document.addEventListener("click", handleClickOutside);
+  document.addEventListener("click", handleOutsideClick);
   window.addEventListener("resize", handleResize);
 });
 
 onUnmounted(() => {
-  document.removeEventListener("click", handleClickOutside);
+  document.removeEventListener("click", handleOutsideClick);
   window.removeEventListener("click", handleResize);
 });
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <SelectContainer>
-    <SelectTrigger @click="toggleSelect"> {{ selected }} </SelectTrigger>
+  <SelectContainer ref="selectContainer">
+    <SelectTrigger @click="toggleSelect" ref="selectTrigger"> {{ selected }} </SelectTrigger>
     <SelectContent :is-visible="isSelectOpen">
       <SelectItem
         v-if="options.length > 0"
@@ -25,6 +25,11 @@
 </template>
 
 <script setup lang="ts">
+import type { ComponentInstance } from "vue";
+import type SelectTrigger from "./SelectTrigger.vue";
+import type SelectContainer from "./SelectContainer.vue";
+import { detectOutsideClick } from "~/utils/detectOutsideClick";
+
 const emit = defineEmits(["update:modelValue", "select"]);
 
 const props = defineProps({
@@ -46,6 +51,8 @@ const props = defineProps({
 
 const isSelectOpen = ref<boolean>(false);
 const selected = ref(props.defaultValue ? props.defaultValue : props.options[0]);
+const selectTrigger = ref<ComponentInstance<typeof SelectTrigger>>();
+const selectContainer = ref<ComponentInstance<typeof SelectContainer>>();
 
 function handleSelection(option: string) {
   // Emit events with selected value
@@ -61,10 +68,26 @@ function toggleSelect() {
   isSelectOpen.value = !isSelectOpen.value;
 }
 
+const handleOutsideClick = (e: MouseEvent) => {
+  detectOutsideClick(e, selectContainer.value!.$el, () => (isSelectOpen.value = false));
+};
+
+const handleResize = () => {
+  isSelectOpen.value = false;
+};
+
 onMounted(() => {
   // Set and emit initial value
   selected.value = props.defaultValue ? (props.defaultValue as string) : props.options[0];
   emit("update:modelValue", selected.value);
+
+  document.addEventListener("click", handleOutsideClick);
+  window.addEventListener("resize", handleResize);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("click", handleOutsideClick);
+  window.removeEventListener("click", handleResize);
 });
 </script>
 
