@@ -72,12 +72,18 @@ const handleClickOutside = (e: MouseEvent) => {
   }
 };
 
+const handleResize = () => {
+  isDropdownOpen.value = false;
+};
+
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
+  window.addEventListener("resize", handleResize);
 });
 
 onUnmounted(() => {
   document.removeEventListener("click", handleClickOutside);
+  window.removeEventListener("click", handleResize);
 });
 </script>
 
