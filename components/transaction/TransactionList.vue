@@ -30,7 +30,10 @@
             </div>
 
             <!-- Transaction actions dropdown -->
-            <DropdownMenu :options="[{ label: 'Delete' }]" @select="handleActionSelect($event, transaction)">
+            <DropdownMenu
+              :options="[{ label: 'Delete' }, { label: 'Edit' }]"
+              @select="handleActionSelect($event, transaction)"
+            >
               <Button variant="ghost" :icon="true" icon-type="actions" size="sm"></Button>
             </DropdownMenu>
           </div>
@@ -67,6 +70,8 @@ function handleActionSelect(option: DropdownMenuOption, transaction: Transaction
   // Delete transaction
   if (option.label === "Delete") {
     useTransactionStore().deleteTransaction(transaction);
+  } else if (option.label === "Edit") {
+    console.log("Editing..");
   }
 }
 </script>
