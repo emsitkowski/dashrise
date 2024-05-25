@@ -2,7 +2,7 @@
   <div>
     <!-- Page header -->
     <PageHeader
-      :header-text="`Hi, ${username} 👋`"
+      :header-text="`Dashboard`"
       subheader-text="Here's what's happening with your money this month"
       :button="true"
       button-text="Add transaction"
@@ -58,8 +58,6 @@
 
 <script setup lang="ts">
 const isModalOpen = ref(false);
-const username = useSupabaseUser().value?.email?.split("@")[0];
-
 const today = getCurrentDate();
 </script>
 

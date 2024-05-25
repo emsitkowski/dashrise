@@ -1,6 +1,6 @@
 <template>
-  <nav class="flex flex-col-reverse py-6 sm:flex-row sm:justify-between sm:items-center border-b border-primary-8">
-    <ul class="container max-w-5xl mx-auto flex flex-row flex-wrap gap-2 sm:gap-6">
+  <nav class="flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center sm:border-b sm:border-primary-8">
+    <ul class="container max-w-5xl mx-auto flex flex-row flex-wrap gap-2 sm:gap-6 py-4">
       <li v-for="link in links" :key="link.label">
         <NuxtLink :to="link.path">
           <Button
@@ -15,7 +15,10 @@
     </ul>
 
     <!-- Log out button -->
-    <Button label="Log out" class="self-end sm:self-auto" variant="ghost" @click="useSupabaseAuth().logOut"></Button>
+    <div class="flex justify-end items-center shrink-0 gap-2 sm:gap-6 py-1 border-b sm:border-none border-primary-8">
+      <span>Hi, {{ username }} 👋</span>
+      <Button label="Log out" class="self-end sm:self-auto" variant="ghost" @click="useSupabaseAuth().logOut"></Button>
+    </div>
   </nav>
 </template>
 
@@ -25,6 +28,8 @@ const links = [
   { path: "/budget", label: "Budget" },
   { path: "/history", label: "History" },
 ];
+
+const username = useSupabaseUser().value?.email?.split("@")[0];
 </script>
 
 <style scoped></style>
