@@ -67,8 +67,6 @@ async function handleSubmit() {
   // Turn on loading state
   toggleFormLoading();
 
-  console.log(formState.value);
-
   // Add transaction type to form state
   formState.value.type = tabs[activeTab.value].label;
 

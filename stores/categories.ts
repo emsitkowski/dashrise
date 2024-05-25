@@ -42,7 +42,6 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
         await useSupabaseCategories().saveCategory(category);
         categories.value.push(category);
         sortCategoriesByName();
-        console.log("New category added: ", category);
       } else {
         console.warn("Category already exists");
       }
