@@ -1,5 +1,5 @@
 <template>
-  <Card class="relative overflow-x-hidden overflow-y-visible h-[420px]">
+  <Card class="relative min-h-[420px] overflow-x-hidden overflow-y-visible">
     <template #card-body>
       <div v-if="expenses.length > 0" class="flex flex-col justify-between h-full">
         <div class="divide-y divide-primary-8%">
@@ -9,7 +9,7 @@
           >
             <!-- Category name -->
             <div class="sm:basis-2/5">
-              <span class="text-base font-semibold">{{ expense.category }}</span>
+              <span class="text-base font-bold">{{ expense.category }}</span>
             </div>
 
             <div class="w-full flex flex-col sm:basis-3/5 gap-3">
@@ -37,7 +37,7 @@
 
         <!-- Expenses summary -->
         <div
-          class="sticky bottom-0 flex justify-between items-center gap-4 bg-primary-50 px-4 sm:px-6 py-3 sm:py-4 rounded-xl text-primary-600 z-20"
+          class="sticky top-0 flex justify-between items-center gap-4 bg-primary-4% px-4 sm:px-6 py-3 sm:py-4 mt-6 rounded-xl text-primary-600 z-20"
         >
           <span>
             <strong>Planned –</strong>

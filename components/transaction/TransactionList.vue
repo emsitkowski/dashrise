@@ -6,16 +6,16 @@
           <div class="flex items-center gap-4">
             <!-- Transaction details -->
             <Badge :label="transaction.type" :variant="transaction.type === 'Income' ? 'primary' : 'secondary'" />
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-3">
               <div class="flex flex-col gap-1">
-                <span class="text-sm sm:text-base font-semibold">{{ transaction.name }}</span>
-                <span v-if="transaction.category" class="text-xs sm:text-sm">{{ transaction.category }}</span>
+                <span class="text-base sm:text-lg font-bold">{{ transaction.name }}</span>
+                <span v-if="transaction.category" class="text-sm font-normal">{{ transaction.category }}</span>
               </div>
 
               <!-- Transaction date -->
               <div class="flex items-center gap-1 opacity-60">
-                <img class="w-3 h-3" src="~assets/icons/calendar.svg" alt="" />
-                <span class="text-xs">{{ transaction.date }}</span>
+                <img class="w-3 sm:w-4 h-3 sm:h-4" src="~assets/icons/calendar.svg" alt="" />
+                <span class="text-xs sm:sm">{{ transaction.date }}</span>
               </div>
             </div>
 

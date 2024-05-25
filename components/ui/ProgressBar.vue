@@ -10,7 +10,7 @@
     <span
       v-if="label"
       v-html="label"
-      class="mt-2 text-sm font-semibold"
+      class="mt-2 text-sm font-medium"
       :class="color === 'primary' ? '' : 'text-secondary-500'"
     ></span>
   </div>
