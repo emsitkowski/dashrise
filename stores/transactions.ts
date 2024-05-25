@@ -12,8 +12,8 @@ export const useTransactionStore = defineStore("transactions", () => {
   }
 
   // Sort transactions by date
-  function sortByDate() {
-    transactions.value.sort((a, b) => a.date.localeCompare(b.date)).reverse();
+  function sortByDate(transactionsToSort: Transaction[]) {
+    transactionsToSort.sort((a, b) => a.date.localeCompare(b.date)).reverse();
   }
 
   // Fetch all transactions from database and save them in the store
@@ -40,6 +40,9 @@ export const useTransactionStore = defineStore("transactions", () => {
       // Save transaction to database and store
       await useSupabaseTransactions().saveTransaction(transaction);
       transactions.value.unshift(transaction);
+
+      // Sort transaction by date
+      sortByDate(transactions.value);
     } catch (error: any) {
       console.error("Failed to save new transaction: ", error);
       error.value = error;
@@ -64,12 +67,31 @@ export const useTransactionStore = defineStore("transactions", () => {
     toggleLoading(false);
   }
 
+  // Edit transaction
+  async function editTransaction(transaction: Transaction) {
+    toggleLoading(true);
+
+    try {
+      // Delete transaction from database and store
+      await useSupabaseTransactions().editTransaction(transaction);
+      transactions.value = transactions.value.map((el) => (el.id === transaction.id ? { ...transaction } : el));
+    } catch (error: any) {
+      console.error("Failed to edit transaction: ", error);
+      error.value = error;
+    }
+
+    toggleLoading(false);
+  }
+
   // Filter transactions by a given date, with optional limit
   const filterTransactionsByDate = computed(() => {
     return (date: { year: string; month: string }, limit?: number | undefined) => {
       const results = transactions.value.filter((transaction: Transaction) =>
         transaction.date.includes(`${date.year}-${date.month}`)
       );
+
+      // Sort transactions by date
+      sortByDate(results);
 
       return limit ? results.slice(0, limit) : results;
     };
@@ -133,6 +155,7 @@ export const useTransactionStore = defineStore("transactions", () => {
     transactions,
     saveTransaction,
     deleteTransaction,
+    editTransaction,
     fetchAllTransactions,
     filterTransactionsByDate,
     totalValues,

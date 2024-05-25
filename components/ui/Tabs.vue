@@ -6,8 +6,11 @@
       <!-- Tab links -->
       <div
         v-for="(tab, index) in items"
-        class="flex basis-1/3 items-center justify-center flex-grow rounded text-dark-32% cursor-pointer select-none duration-300"
-        :class="{ 'bg-white text-dark-500': props.value === index }"
+        class="flex basis-1/3 items-center justify-center flex-grow rounded text-dark-32% select-none duration-300"
+        :class="[
+          props.value === index ? 'bg-white text-dark-500' : '',
+          disabled ? 'cursor-not-allowed' : 'cursor-pointer',
+        ]"
         :key="index"
         @click="switchTab(index)"
       >
@@ -24,13 +27,15 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["items", "value"]);
+const props = defineProps(["items", "value", "disabled"]);
 const emit = defineEmits(["update:value"]);
 const activeTab = ref(props.value); // set initial active tab to first one
 
 function switchTab(index: number) {
-  activeTab.value = index;
-  emit("update:value", index);
+  if (!props.disabled) {
+    activeTab.value = index;
+    emit("update:value", index);
+  }
 }
 </script>
 

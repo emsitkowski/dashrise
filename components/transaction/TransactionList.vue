@@ -49,6 +49,15 @@
         <span>No transactions found</span>
       </div>
 
+      <!-- Transaction edit modal -->
+      <TransactionActionsModal
+        mode="Edit"
+        :transactionToEdit="transactionToEdit"
+        :open="isEditModalOpen"
+        @close="isEditModalOpen = false"
+        @success="isEditModalOpen = false"
+      />
+
       <!-- Loading spinner -->
       <SpinnerLoader
         label="Loading transactions..."
@@ -64,6 +73,8 @@
 import type { Transaction, DropdownMenuOption } from "~/src/types/global";
 
 const props = defineProps(["transactions"]);
+const isEditModalOpen = ref<boolean>(false);
+const transactionToEdit = ref();
 
 // Handle action selection
 function handleActionSelect(option: DropdownMenuOption, transaction: Transaction) {
@@ -71,7 +82,8 @@ function handleActionSelect(option: DropdownMenuOption, transaction: Transaction
   if (option.label === "Delete") {
     useTransactionStore().deleteTransaction(transaction);
   } else if (option.label === "Edit") {
-    console.log("Editing..");
+    isEditModalOpen.value = true;
+    transactionToEdit.value = transaction;
   }
 }
 </script>
