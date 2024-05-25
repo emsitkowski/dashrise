@@ -1,8 +1,11 @@
 <template>
-  <Card class="relative overflow-x-hidden overflow-y-visible h-[420px] py-2 sm:py-4">
+  <Card class="relative overflow-x-hidden overflow-y-visible h-[420px]">
     <template #card-body>
       <div v-if="expenses.length > 0" class="divide-y divide-primary-8%">
-        <div v-for="expense in expenses" class="flex flex-col sm:flex-row sm:items-center py-4 gap-4">
+        <div
+          v-for="expense in expenses"
+          class="flex flex-col sm:flex-row sm:items-center gap-4 py-4 sm:py-5 first:pt-0"
+        >
           <!-- Category name -->
           <div class="sm:basis-2/5">
             <span class="text-base font-semibold">{{ expense.category }}</span>

@@ -1,8 +1,8 @@
 <template>
-  <Card class="relative py-2 sm:py-4 h-full min-h-[240px]">
+  <Card class="relative h-full min-h-[240px]">
     <template #card-body>
       <div v-if="props.transactions.length > 0" class="divide-y divide-primary-8%">
-        <div v-for="transaction in props.transactions" class="flex flex-col py-4 gap-4">
+        <div v-for="transaction in props.transactions" class="flex flex-col py-4 sm:py-5 first:pt-0">
           <div class="flex items-center gap-4">
             <!-- Transaction details -->
             <Badge :label="transaction.type" :variant="transaction.type === 'Income' ? 'primary' : 'secondary'" />
