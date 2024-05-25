@@ -7,7 +7,6 @@
     :type="props.type"
     :name="props.name"
     :placeholder="props.placeholder"
-    autocapitalize="none"
     :disabled="props.disabled"
   />
 </template>
