@@ -23,6 +23,7 @@
         v-for="category in useCategoryStore().categories"
         :category="category"
         class="[&>*]:h-full"
+        :class="{ 'order-1': category.limitValue == 0 }"
       />
     </div>
 

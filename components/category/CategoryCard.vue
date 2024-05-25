@@ -1,6 +1,6 @@
 <template>
   <div v-if="props.category">
-    <Card>
+    <Card :class="{ 'opacity-50': category.limitValue == 0 }">
       <template #card-body>
         <div class="flex flex-col h-full">
           <div class="flex justify-between items-center mb-3">
@@ -42,7 +42,11 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["category"]);
+import type { Category } from "~/src/types/global";
+
+const props = defineProps<{
+  category: Category;
+}>();
 const isModalOpen = ref(false);
 
 // Calculate total transactions value for the category
