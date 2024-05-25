@@ -37,7 +37,7 @@
 
         <!-- Expenses summary -->
         <div
-          class="flex justify-between items-center gap-4 bg-primary-2% px-4 sm:px-6 py-3 sm:py-4 rounded-xl text-primary-600"
+          class="sticky bottom-0 flex justify-between items-center gap-4 bg-primary-50 px-4 sm:px-6 py-3 sm:py-4 rounded-xl text-primary-600 z-20"
         >
           <span>
             <strong>Planned –</strong>
