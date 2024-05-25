@@ -99,5 +99,28 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
     };
   });
 
-  return { categories, saveCategory, editCategory, deleteCategory, fetchAllCategories, getCategoriesNames };
+  // Get total categories values planned for current month
+  const getTotalValuesForCurrentMonth = computed(() => {
+    return () => {
+      let total: number = 0;
+
+      categories.value.forEach((el: Category) => {
+        if (el.limitValue > 0) {
+          total += Number(el.limitValue);
+        }
+      });
+
+      return total;
+    };
+  });
+
+  return {
+    categories,
+    saveCategory,
+    editCategory,
+    deleteCategory,
+    fetchAllCategories,
+    getCategoriesNames,
+    getTotalValuesForCurrentMonth,
+  };
 });

@@ -15,7 +15,7 @@
 
       <!-- Limit -->
       <FormField label="Limit">
-        <FormInput name="Limit" type="text" placeholder="Enter category limit" v-model="formState.limitValue" />
+        <FormInput name="Limit" type="number" placeholder="Enter category limit" v-model="formState.limitValue" />
       </FormField>
 
       <!-- Submit button -->
@@ -49,7 +49,7 @@ const emit = defineEmits(["close", "success"]);
 
 const isSubmitting = ref(false);
 const formState = ref<any>(
-  props.mode === "edit" ? { name: props.category.name, limitValue: props.category.limitValue } : {}
+  props.mode === "edit" ? { name: props.category.name as string, limitValue: props.category.limitValue as number } : {}
 );
 
 const formSchema = ref(categorySchema); // set initial form schema
