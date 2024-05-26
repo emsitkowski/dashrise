@@ -8,5 +8,8 @@
         <NuxtPage class="py-12 sm:py-20" />
       </NuxtLayout>
     </div>
+
+    <!-- PWA Manifest component -->
+    <NuxtPwaManifest />
   </div>
 </template>

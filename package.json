@@ -12,6 +12,7 @@
   "dependencies": {
     "@nuxtjs/supabase": "^1.1.7",
     "@pinia/nuxt": "^0.5.1",
+    "@vite-pwa/nuxt": "^0.7.0",
     "animejs": "^3.2.2",
     "currency.js": "^2.0.4",
     "joi": "^17.12.2",
