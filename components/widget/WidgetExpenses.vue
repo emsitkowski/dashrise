@@ -39,7 +39,7 @@
         <div
           class="sticky top-0 flex justify-between items-center gap-4 bg-primary-4% px-4 sm:px-6 py-3 sm:py-4 mt-6 rounded-xl text-primary-600 z-20"
         >
-          <span>
+          <span v-if="$props.mode !== 'simple'">
             <strong>Planned –</strong>
             {{ convertToCurrency(useCategoryStore().getTotalValuesForCurrentMonth()) }}
           </span>
@@ -67,12 +67,10 @@
 <script setup lang="ts">
 import type { CategoryExpense } from "~/src/types/global";
 
-const props = defineProps({
-  expenses: {
-    type: Array as () => CategoryExpense[],
-    required: true,
-  },
-});
+const props = defineProps<{
+  expenses: CategoryExpense[];
+  mode?: "simple";
+}>();
 </script>
 
 <style scoped></style>

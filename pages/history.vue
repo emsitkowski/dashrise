@@ -16,17 +16,35 @@
     <!-- Date select -->
     <DatePicker :start-year="2024" class="mb-16" />
 
-    <!-- Transactions table -->
-    <SectionHeader header-text="Transactions" />
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8">
+      <div class="flex flex-col">
+        <!-- Transactions list -->
+        <SectionHeader header-text="Transactions" />
 
-    <TransactionList
-      :transactions="
-        useTransactionStore().filterTransactionsByDate({
-          year: useSelectedDate().selectedDate.year,
-          month: useSelectedDate().selectedDate.month,
-        })
-      "
-    ></TransactionList>
+        <TransactionList
+          :transactions="
+            useTransactionStore().filterTransactionsByDate({
+              year: useSelectedDate().selectedDate.year,
+              month: useSelectedDate().selectedDate.month,
+            })
+          "
+        ></TransactionList>
+      </div>
+      <div class="flex flex-col">
+        <!-- Expenses by categories -->
+        <SectionHeader header-text="Expenses" />
+
+        <WidgetExpenses
+          :expenses="
+            useTransactionStore().expensesByCategories({
+              year: useSelectedDate().selectedDate.year,
+              month: useSelectedDate().selectedDate.month,
+            })
+          "
+          mode="simple"
+        />
+      </div>
+    </div>
 
     <!-- Transactions modal -->
     <TransactionActionsModal :open="isModalOpen" @close="isModalOpen = false" @success="isModalOpen = false" />
