@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: "page", mode: "out-in" },
     head: {
+      title: "dashrise – Personal dashboard",
       meta: [{ name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" }],
       link: [
         { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
@@ -24,8 +25,8 @@ export default defineNuxtConfig({
   },
   pwa: {
     manifest: {
-      name: "Personal dashboard",
-      short_name: "Dashboard",
+      name: "dashrise",
+      short_name: "dashrise",
       icons: [
         {
           src: "/app-icon.png",
