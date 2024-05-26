@@ -8,7 +8,7 @@
             <Badge :label="transaction.type" :variant="transaction.type === 'Income' ? 'primary' : 'secondary'" />
             <div class="flex flex-col gap-3">
               <div class="flex flex-col gap-1">
-                <span class="text-base sm:text-lg font-bold">{{ transaction.name }}</span>
+                <span class="text-base sm:text-base font-bold">{{ transaction.name }}</span>
                 <span v-if="transaction.category" class="text-sm font-normal">{{ transaction.category }}</span>
               </div>
 

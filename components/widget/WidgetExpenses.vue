@@ -48,7 +48,10 @@
       </div>
 
       <!-- Empty state -->
-      <div v-else class="flex flex-col justify-center items-center w-full h-full gap-1 sm:gap-2 text-dark-32%">
+      <div
+        v-else
+        class="absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center gap-1 sm:gap-2 w-full h-full text-dark-32%"
+      >
         <img class="w-5 sm:w-6" src="~assets/icons/info.svg" alt="" />
         <span>No expenses found</span>
       </div>
