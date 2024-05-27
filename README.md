@@ -3,11 +3,12 @@
 
 ![dashrise](https://github.com/emsitkowski/dashrise/assets/40630259/7c2e6ba3-f5eb-4204-a2e3-7d371adf4ba4)
 
-dashrise is a SPA budget planner app built with Nuxt3, Supabase, and Tailwind CSS. It was created for my personal use to keep track of my finances, transactions, and more.
+dashrise is a budget planner app built with Nuxt3, Supabase, and Tailwind CSS. It was created for my personal use to keep track of my finances, transactions, and more.
 
 ## Key features
 
 - Single-page application with client-side rendering
+- PWA integration that allows installing the app as native-like
 - Supabase Authentication for user management (email provider)
 - Supabase Database for storing user data
 - Adding, deleting, and editing transactions
