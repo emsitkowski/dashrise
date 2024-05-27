@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: false,
+  spaLoadingTemplate: "spa-loading.html",
   app: {
     pageTransition: { name: "page", mode: "out-in" },
     head: {
@@ -35,13 +36,16 @@ export default defineNuxtConfig({
         },
       ],
       theme_color: "#f7f7f7",
+      display: "standalone",
     },
     workbox: {
-      navigateFallback: "/",
+      cacheId: "dashrise",
     },
+
     devOptions: {
       enabled: true,
       suppressWarnings: true,
+      type: "module",
     },
   },
 });
