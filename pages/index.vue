@@ -2,8 +2,8 @@
   <div>
     <!-- Page header -->
     <PageHeader
-      :header-text="`Dashboard`"
-      subheader-text="Here's what's happening with your money this month"
+      :header-text="`Dashboard – ${getCurrentMonthName()} ${getCurrentYear()}`"
+      subheader-text="Get a quick overview of your financial performance this month"
       :button="true"
       button-text="Add transaction"
       :button-icon="true"
@@ -40,8 +40,8 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8">
       <div class="flex flex-col">
-        <!-- Recent activity widget -->
-        <SectionHeader headerText="Recent activity" />
+        <!-- Recent transactions widget -->
+        <SectionHeader headerText="Recent transactions" />
         <WidgetRecentActivity />
       </div>
       <div class="flex flex-col">

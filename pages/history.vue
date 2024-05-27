@@ -3,7 +3,7 @@
     <!-- Page header -->
     <PageHeader
       header-text="History"
-      subheader-text="Choose date and check out the history of your transactions"
+      subheader-text="Pick a date to explore your transaction history"
       :button="true"
       button-text="Add transaction"
       :button-icon="true"
@@ -19,7 +19,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8">
       <div class="flex flex-col">
         <!-- Transactions list -->
-        <SectionHeader header-text="Transactions" />
+        <SectionHeader header-text="All transactions" />
 
         <TransactionList
           :transactions="
@@ -32,7 +32,7 @@
       </div>
       <div class="flex flex-col">
         <!-- Expenses by categories -->
-        <SectionHeader header-text="Expenses" />
+        <SectionHeader header-text="Expenses summary" />
 
         <WidgetExpenses
           :expenses="
@@ -41,7 +41,7 @@
               month: useSelectedDate().selectedDate.month,
             })
           "
-          mode="simple"
+          mode="history"
         />
       </div>
     </div>
