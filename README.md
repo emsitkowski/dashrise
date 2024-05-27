@@ -19,14 +19,15 @@ dashrise is a budget planner app built with Nuxt3, Supabase, and Tailwind CSS. I
 
 ## Getting started
 
-### 1. Create your Supabase project at https://supabase.com/ or self-host it yourself.
+### 1. Supabase: Create your Supabase project at https://supabase.com/ or self-host it yourself.
 
-### 2. Create necessary database tables.
+### 2. Supabase: Create necessary database tables with foreign keys.
 The easiest way is to use SQL Editor in Supabase panel. To set up the required database tables, follow these steps:
 
 1. Open the SQL Editor in the Supabase panel.
 2. Paste the following SQL commands.
 3. Click "Run" to generate the tables.
+4. Newly created tables should appear in Table Editor tab.
 
 ```sql
 CREATE TABLE public."Categories" (
@@ -63,27 +64,67 @@ ALTER TABLE public."UserCategories" ADD CONSTRAINT "public_UserCategories_catego
 ALTER TABLE public."UserCategories" ADD CONSTRAINT "public_UserCategories_user_id_fkey" FOREIGN KEY (user_id) REFERENCES auth.users(id);
 ```
 
-### 3. Enable Row Level Security to secure the data.
+### ⚠️ 3. Supabase: Enable Row Level Security to secure the data and prevent users from accessing other users' data.
 You read more about RLS here: https://supabase.com/docs/guides/database/postgres/row-level-security
 
-### 4. Install dependencies
+To create basic RLS policies use SQL Editor and paste the following commands:
+
+```sql
+ALTER TABLE "Categories" enable row level security;
+ALTER TABLE "Transactions" enable row level security;
+ALTER TABLE "UserCategories" enable row level security;
+
+CREATE POLICY "Enable ALL actions for authenticated users based on user_id"
+on "public"."Transactions"
+to authenticated
+using (
+(auth.uid() = user_id )
+);
+
+CREATE POLICY "Enable ALL actions for authenticated users based on user_id"
+on "public"."UserCategories"
+to authenticated
+using (
+(auth.uid() = user_id )
+);
+
+CREATE POLICY "Enable INSERT actions for authenticated users based on user_id"
+on "public"."Categories"
+for INSERT
+to authenticated
+with check (true);
+
+CREATE POLICY "Enable SELECT actions for authenticated users"
+on "public"."Categories"
+for SELECT
+to authenticated
+using (true);
+```
+
+### 4. Create .env file in your project directory containing your Supabase secrets.
+You can find unique URL and KEY in your Supabase panel, **Project Settings –> API**
+```
+SUPABASE_URL="<YOUR_SUPABASE_URL>"
+SUPABASE_KEY="<YOUR_SUPABASE_KEY>"
+```
+### 5. Install dependencies
 
 ```sh
 npm install
 ```
 
-### 5. Run in development mode
+### 6. Run in development mode
 
 ```sh
 npm run dev
 ```
 
-### 6. Build for production
+### 7. Build for production
 
 ```sh
 npm run generate
 ```
 
-### 7. Deploy
+### 8. Deploy
 
 Deploy **.output/public** folder to your favorite hosting like Netlify or Vercel.
