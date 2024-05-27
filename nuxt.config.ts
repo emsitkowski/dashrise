@@ -24,13 +24,14 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+
   pwa: {
     manifest: {
       name: "dashrise",
       short_name: "dashrise",
       icons: [
         {
-          src: "/app-icon.png",
+          src: "/app-icon.png?v=2.0",
           sizes: "144x144",
           type: "image/png",
         },
@@ -40,12 +41,7 @@ export default defineNuxtConfig({
     },
     workbox: {
       cacheId: "dashrise",
-    },
-
-    devOptions: {
-      enabled: true,
-      suppressWarnings: true,
-      type: "module",
+      globPatterns: ["**/*.{js,css,html}"],
     },
   },
 });
