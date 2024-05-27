@@ -9,7 +9,7 @@
     </div>
 
     <!-- Card body -->
-    <div v-if="$slots['card-body']" class="grow">
+    <div v-if="$slots['card-body']" class="grow h-full">
       <slot name="card-body"></slot>
     </div>
 
