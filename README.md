@@ -12,7 +12,8 @@ dashrise is a budget planner app built with Nuxt3, Supabase, and Tailwind CSS. I
 - Supabase Authentication for user management (email provider)
 - Supabase Database for storing user data
 - Adding, deleting, and editing transactions
-- Budget page for creating budget limits custom user categories
+- Home page for current month summary
+- Budget page for creating budget limits for custom user categories
 - History page for analyzing all transactions, filtered by selected date
 - Smooth loading indicators for better UX
 - Custom UI components
