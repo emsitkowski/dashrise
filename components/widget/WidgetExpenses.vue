@@ -16,14 +16,14 @@
               <!-- Category total value -->
               <div class="flex flex-col basis-1/4">
                 <span
-                  class="text-sm leading-none"
+                  class="text-sm sm:text-base leading-none"
                   :class="{ 'text-secondary-500': expense.totalValue > expense.limitValue && expense.limitValue > 0 }"
                   >{{ convertToCurrency(expense.totalValue) }}</span
                 >
               </div>
 
               <!-- Category progress bar -->
-              <div class="w-full flex flex-col basis-3/4 justify-center">
+              <div v-if="mode !== 'history'" class="w-full flex flex-col basis-3/4 justify-center">
                 <ProgressBar
                   v-if="expense.limitValue"
                   :progress="(expense.totalValue / expense.limitValue) * 100"
@@ -39,11 +39,21 @@
         <div
           class="sticky top-0 flex justify-between items-center gap-4 bg-primary-4% px-4 sm:px-6 py-3 sm:py-4 mt-6 rounded-xl text-primary-600 z-20"
         >
-          <span v-if="$props.mode !== 'simple'">
+          <span v-if="$props.mode !== 'history'">
             <strong>Planned –</strong>
             {{ convertToCurrency(useCategoryStore().getTotalValuesForCurrentMonth()) }}
           </span>
-          <span> <strong>Spent –</strong> {{ convertToCurrency(useTransactionStore().totalValues("Expense")) }} </span>
+          <span>
+            <strong>Spent –</strong>
+            {{
+              convertToCurrency(
+                useTransactionStore().totalValues("Expense", {
+                  year: $props.mode === "history" ? useSelectedDate().selectedDate.year : getCurrentDate().year,
+                  month: $props.mode === "history" ? useSelectedDate().selectedDate.month : getCurrentDate().month,
+                })
+              )
+            }}
+          </span>
         </div>
       </div>
 
@@ -72,7 +82,7 @@ import type { CategoryExpense } from "~/src/types/global";
 
 const props = defineProps<{
   expenses: CategoryExpense[];
-  mode?: "simple";
+  mode?: "history";
 }>();
 </script>
 
