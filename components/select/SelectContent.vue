@@ -1,7 +1,7 @@
 <template>
   <div
     v-show="isVisible"
-    class="absolute top-full w-full p-2 bg-white border-gray-300 max-h-52 overflow-auto z-50 border rounded-md shadow-2xl"
+    class="absolute top-full w-full p-2 bg-white border-dark-8% max-h-52 overflow-auto z-50 border rounded-b-md shadow-2xl shadow-dark-8%"
   >
     <slot></slot>
   </div>

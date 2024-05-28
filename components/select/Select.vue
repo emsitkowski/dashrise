@@ -1,6 +1,8 @@
 <template>
   <SelectContainer ref="selectContainer">
-    <SelectTrigger @click="toggleSelect" ref="selectTrigger"> {{ selected }} </SelectTrigger>
+    <SelectTrigger @click="toggleSelect" ref="selectTrigger" :is-select-open="isSelectOpen">
+      {{ selected }}
+    </SelectTrigger>
     <SelectContent :is-visible="isSelectOpen">
       <SelectItem
         v-if="options.length > 0"

@@ -13,7 +13,7 @@
     </form>
 
     <!-- Validation error -->
-    <p class="text-sm text-red-500 text-center mt-3">
+    <p v-if="validationError" class="text-sm text-red-500 text-center mt-3">
       {{ validationError }}
     </p>
   </div>

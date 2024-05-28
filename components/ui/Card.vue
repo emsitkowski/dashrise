@@ -1,5 +1,7 @@
 <template>
-  <div class="relative flex flex-col gap-6 p-4 sm:p-8 rounded-2xl bg-white overflow-x-auto overflow-y-hidden">
+  <div
+    class="relative flex flex-col gap-6 p-4 sm:p-8 rounded-lg sm:rounded-xl bg-white overflow-x-auto overflow-y-hidden"
+  >
     <!-- Card header -->
     <div
       v-if="$slots['card-header']"
