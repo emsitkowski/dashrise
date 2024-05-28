@@ -8,6 +8,7 @@
       @submit.prevent="handleSubmit"
       novalidate
       autocomplete="off"
+      ref="form"
     >
       <slot></slot>
     </form>
@@ -23,6 +24,7 @@
 const props = defineProps(["state", "schema", "loading"]);
 const emit = defineEmits(["submit"]);
 const validationError = ref<string>("");
+const form = ref<HTMLFormElement>();
 
 function handleSubmit() {
   // Clear any previous validation errors
@@ -40,6 +42,10 @@ function handleSubmit() {
     emit("submit");
   }
 }
+
+onMounted(() => {
+  form.value?.children[0].querySelector("input")?.focus();
+});
 </script>
 
 <style scoped></style>

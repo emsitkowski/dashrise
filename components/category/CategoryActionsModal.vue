@@ -1,5 +1,10 @@
 <template>
-  <Modal :open="open" :header-text="mode === 'edit' ? 'Edit category' : 'Add category'" @close="$emit('close')">
+  <Modal
+    v-if="open"
+    :open="open"
+    :header-text="mode === 'edit' ? 'Edit category' : 'Add category'"
+    @close="$emit('close')"
+  >
     <!-- Category form -->
     <Form @submit="handleSubmit" :loading="isSubmitting" :state="formState" :schema="formSchema">
       <!-- Name -->

@@ -1,5 +1,5 @@
 <template>
-  <Modal :open="open" header-text="Add transaction" @close="$emit('close')">
+  <Modal v-if="open" :open="open" header-text="Add transaction" @close="$emit('close')">
     <!-- Transaction type switch -->
     <span class="block mb-2">Choose transaction type</span>
     <Tabs class="gap-6" :items="tabs" :value="activeTab" @update:value="handleTabSwitch" :disabled="areTabsDisabled">

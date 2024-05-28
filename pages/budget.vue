@@ -28,12 +28,7 @@
     </div>
 
     <!-- Category modal -->
-    <CategoryActionsModal
-      v-if="isModalOpen"
-      :open="isModalOpen"
-      @close="isModalOpen = false"
-      @success="isModalOpen = false"
-    />
+    <CategoryActionsModal :open="isModalOpen" @close="isModalOpen = false" @success="isModalOpen = false" />
   </div>
 </template>
 
