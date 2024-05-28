@@ -17,7 +17,9 @@
     </ul>
 
     <!-- Log out button -->
-    <div class="flex justify-end items-center shrink-0 gap-2 sm:gap-6 py-1 border-b sm:border-none border-primary-8">
+    <div
+      class="flex justify-between items-center shrink-0 gap-2 sm:gap-6 py-1 border-b sm:border-none border-primary-8"
+    >
       <span>Hi, {{ username }} 👋</span>
       <Button label="Log out" class="self-end sm:self-auto" variant="ghost" @click="useSupabaseAuth().logOut"></Button>
     </div>
