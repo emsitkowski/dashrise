@@ -6,7 +6,7 @@
           <div class="flex items-center gap-4">
             <!-- Transaction details -->
             <Badge :label="transaction.type" :variant="transaction.type === 'Income' ? 'primary' : 'secondary'" />
-            <div class="flex flex-col gap-3">
+            <div class="flex flex-col gap-2">
               <div class="flex flex-col gap-1">
                 <span class="text-base sm:text-base font-bold">{{ transaction.name }}</span>
                 <span v-if="transaction.category" class="text-sm font-normal">{{ transaction.category }}</span>
@@ -20,8 +20,8 @@
             </div>
 
             <!-- Transaction value -->
-            <div class="ml-auto text-sm sm:text-base font-semibold whitespace-nowrap pl-2 shrink-0">
-              <span v-if="transaction.type === 'Income'" class="text-primary-500 font-semibold">
+            <div class="ml-auto text-sm sm:text-base font-bold whitespace-nowrap pl-2 shrink-0">
+              <span v-if="transaction.type === 'Income'" class="text-primary-500 font-bold">
                 + {{ convertToCurrency(transaction.value) }}</span
               >
               <span v-if="transaction.type === 'Expense'" class="text-dark-60%">

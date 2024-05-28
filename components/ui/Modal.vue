@@ -7,7 +7,7 @@
     <Card class="w-full max-w-md my-16">
       <template #card-header>
         <!-- Modal header -->
-        <span class="text-xl">{{ headerText }}</span>
+        <span class="text-lg sm:text-xl">{{ headerText }}</span>
 
         <!-- Modal close button -->
         <div class="absolute right-4 sm:right-8">
