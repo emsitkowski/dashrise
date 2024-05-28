@@ -21,8 +21,6 @@
 const isAppLoading = ref<boolean>(true);
 
 onMounted(() => {
-  console.log("loaded!!");
-
   setTimeout(() => {
     isAppLoading.value = false;
   }, 100);
