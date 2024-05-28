@@ -7,7 +7,7 @@ export function getCurrentMonth() {
 }
 
 export function getCurrentMonthName() {
-  return new Date().toLocaleString("default", { month: "long" });
+  return new Date().toLocaleString("en-US", { month: "long" });
 }
 
 export function getCurrentDate() {

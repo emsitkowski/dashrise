@@ -22,7 +22,7 @@
 <script setup lang="ts">
 const props = defineProps(["state", "schema", "loading"]);
 const emit = defineEmits(["submit"]);
-const validationError = ref("");
+const validationError = ref<string>("");
 
 function handleSubmit() {
   // Clear any previous validation errors
