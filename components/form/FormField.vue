@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-2" ref="formField">
-    <label class="font-medium" :for="randomFormFieldID">{{ label }}</label>
+    <label class="text-sm font-medium" :for="randomFormFieldID">{{ label }}</label>
     <slot></slot>
   </div>
 </template>

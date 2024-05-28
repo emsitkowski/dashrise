@@ -10,7 +10,9 @@
         <span class="text-xl">{{ headerText }}</span>
 
         <!-- Modal close button -->
-        <Button class="ml-6" variant="ghost" size="sm" @click="$emit('close')" :icon="true" icon-type="x" />
+        <div class="absolute right-4 sm:right-8">
+          <Button class="ml-6" variant="ghost" size="sm" @click="$emit('close')" :icon="true" icon-type="x" />
+        </div>
       </template>
 
       <!-- Modal body -->
