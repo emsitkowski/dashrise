@@ -90,6 +90,7 @@
     <SpinnerLoader :loading="loading" bg-color-class="bg-primary-500" stroke-color-class="stroke-white" />
 
     {{ label }}
+    <slot></slot>
   </button>
 </template>
 
@@ -128,7 +129,8 @@ const buttonVariantClass = {
   secondary: "bg-secondary-500 text-white hover:bg-secondary-600",
   "secondary-ghost":
     "opacity-30 hover:bg-secondary-4% hover:text-secondary-500  hover:bg-secondary-600 hover:opacity-100",
-  ghost: " opacity-30 text-dark-500 hover:text-primary-500 hover:bg-primary-2% hover:opacity-100",
+  ghost: "opacity-30 text-dark-500 hover:text-primary-500 hover:bg-primary-2% hover:opacity-100",
+  unstyled: "",
 };
 </script>
 
