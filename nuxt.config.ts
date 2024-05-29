@@ -26,7 +26,6 @@ export default defineNuxtConfig({
   },
 
   pwa: {
-    strategies: "injectManifest",
     manifest: {
       name: "dashrise",
       short_name: "dashrise",
