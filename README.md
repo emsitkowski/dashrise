@@ -18,6 +18,17 @@ dashrise is a budget planner app built with Nuxt3, Supabase, and Tailwind CSS. I
 - Smooth loading indicators for better UX
 - Custom UI components
 
+## How to use it
+
+### Homepage
+On the main page, you get a quick glance at your financial situation for the current month. It shows your total balance, income, recent transactions, and expenses grouped by categories. From this view, you can also add new transactions, and edit or delete existing ones. The homepage dashboard data resets automatically each month, but you can find all your transactions in the History tab.
+
+### Budget
+This page is where you plan your finances. You can add as many budget items as you wish, setting a plan or limit for each one. The limits you set will also be displayed on the homepage in the expenses widget. You can adjust the limits each month, and each budget card will show your progress for the current month. If you want to keep some items for future months, you can set the limit to 0. This way, you won't have to remember to add them again, and you can simply update the limit to the desired value when needed.
+
+### History
+In the History tab, you can explore your past transactions by selecting a specific year and month. This view allows you to see all your transactions for the chosen period and provides a summary of total expenses, sorted by categories in descending order of value. This feature helps you review your spending habits and make informed financial decisions based on your historical data.
+
 ## Getting started
 
 ### 1. Supabase: Create your Supabase project at https://supabase.com/ or self-host it yourself.
