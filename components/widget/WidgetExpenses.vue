@@ -17,7 +17,10 @@
               <div class="flex flex-col basis-1/4">
                 <span
                   class="text-sm sm:text-base leading-none"
-                  :class="{ 'text-secondary-500': expense.totalValue > expense.limitValue && expense.limitValue > 0 }"
+                  :class="{
+                    'text-secondary-500':
+                      expense.totalValue > expense.limitValue && expense.limitValue > 0 && mode !== 'history',
+                  }"
                   >{{ convertToCurrency(expense.totalValue) }}</span
                 >
               </div>
