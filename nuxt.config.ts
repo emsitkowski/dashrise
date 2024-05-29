@@ -26,6 +26,7 @@ export default defineNuxtConfig({
   },
 
   pwa: {
+    strategies: "injectManifest",
     manifest: {
       name: "dashrise",
       short_name: "dashrise",
@@ -40,7 +41,23 @@ export default defineNuxtConfig({
       display: "standalone",
     },
     workbox: {
-      cacheId: "dashrise",
+      navigateFallback: "/",
+      navigationPreload: true,
+      runtimeCaching: [
+        {
+          // Cache HTML documents with Network First strategy
+          urlPattern: ({ request }) => request.mode === "navigate",
+          handler: "NetworkFirst",
+          options: {
+            cacheName: "html-cache",
+            expiration: {
+              maxEntries: 200,
+              maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
+            },
+          },
+        },
+      ],
+      cacheId: "dashrise-cache",
       globPatterns: ["**/*.{js,css,html}"],
     },
   },
