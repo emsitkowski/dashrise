@@ -20,13 +20,14 @@
             </div>
 
             <!-- Transaction value -->
-            <div class="ml-auto text-sm sm:text-base font-bold whitespace-nowrap pl-2 shrink-0">
-              <span v-if="transaction.type === 'Income'" class="text-primary-500 font-bold">
-                + {{ convertToCurrency(transaction.value) }}</span
-              >
-              <span v-if="transaction.type === 'Expense'" class="text-dark-60%">
-                - {{ convertToCurrency(transaction.value) }}</span
-              >
+            <div
+              class="ml-auto text-sm sm:text-base font-semibold whitespace-nowrap pl-2 shrink-0"
+              :class="{ 'text-primary-500': transaction.type === 'Income' }"
+            >
+              <span>{{ transaction.type === "Income" ? "+" : "-" }}</span>
+              <span>
+                {{ convertToCurrency(transaction.value) }}
+              </span>
             </div>
 
             <!-- Transaction actions dropdown -->

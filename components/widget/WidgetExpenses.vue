@@ -9,14 +9,14 @@
           >
             <!-- Category name -->
             <div class="sm:basis-2/5">
-              <span class="text-base font-bold">{{ expense.category }}</span>
+              <span class="text-base font-medium">{{ expense.category }}</span>
             </div>
 
             <div class="w-full flex flex-col sm:basis-3/5 gap-3">
               <!-- Category total value -->
               <div class="flex flex-col basis-1/4">
                 <span
-                  class="text-sm sm:text-base leading-none"
+                  class="text-sm sm:text-base font-semibold leading-none"
                   :class="{
                     'text-secondary-500':
                       expense.totalValue > expense.limitValue && expense.limitValue > 0 && mode !== 'history',
@@ -38,7 +38,7 @@
           </div>
         </div>
 
-        <!-- Expenses summary -->
+        <!-- Expenses summary pill -->
         <div
           class="sticky top-0 flex justify-between items-center gap-4 bg-primary-4% px-4 sm:px-6 py-3 sm:py-4 mt-6 rounded-xl text-primary-600 z-20"
         >

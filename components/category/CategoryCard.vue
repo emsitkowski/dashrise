@@ -15,7 +15,7 @@
               :class="leftValue < 0 ? 'text-secondary-500' : 'text-dark-500'"
             >
               {{ totalValue > 0 ? convertToCurrency(totalValue) : "–" }}
-              <span class="text-sm sm:text-base text-dark-60% font-normal whitespace-nowrap"
+              <span class="text-sm sm:text-base font-normal whitespace-nowrap"
                 >/ {{ convertToCurrency(category.limitValue) }}</span
               >
             </span>
