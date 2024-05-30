@@ -10,7 +10,7 @@ export default {
   ],
   theme: {
     fontFamily: {
-      sans: ["Lato", "sans-serif"],
+      sans: ["Lato", "Fallback", "sans-serif"],
     },
     extend: {
       colors: {
