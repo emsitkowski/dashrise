@@ -97,11 +97,13 @@ onMounted(() => {
 
   document.addEventListener("click", handleOutsideClick);
   window.addEventListener("resize", closeSelectMenu);
+  window.visualViewport?.addEventListener("resize", updateSelectContentPos); // fixes wrong select menu positioning virtual keyboard show/hide
 });
 
 onUnmounted(() => {
   document.removeEventListener("click", handleOutsideClick);
   window.removeEventListener("click", closeSelectMenu);
+  window.visualViewport?.removeEventListener("resize", updateSelectContentPos);
 });
 
 function updateSelectContentPos() {
@@ -111,7 +113,9 @@ function updateSelectContentPos() {
   // Check if mode is modal and set correct y position + close select menu on modal container scroll
   if (content) {
     if (props.mode === "modal") {
-      content.style.top = `${container.getBoundingClientRect().y + container.getBoundingClientRect().height}px`;
+      content.style.top = `${container.getBoundingClientRect().top + container.clientHeight}px`;
+      /*       content.style.transform = "translateY(100%)"; */
+
       document.querySelector("#modal")?.addEventListener("scroll", closeSelectMenu);
     } else {
       content.style.top = `${
