@@ -81,6 +81,7 @@ const handleResize = () => {
 };
 
 onMounted(() => {
+  console.log("Select mounted!!!");
   // Set and emit initial value
   selected.value = props.defaultValue ? (props.defaultValue as string) : props.options[0];
   emit("update:modelValue", selected.value);

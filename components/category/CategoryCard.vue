@@ -4,7 +4,7 @@
       <template #card-body>
         <div class="flex flex-col h-full">
           <div class="flex justify-between items-center mb-4">
-            <span class="text-base sm:text-lg font-medium pr-14">{{ category.name }}</span>
+            <span class="text-base sm:text-lg font-semibold pr-14">{{ category.name }}</span>
             <div class="absolute top-5 right-5">
               <Button variant="ghost" size="sm" @click="isModalOpen = true" :icon="true" icon-type="edit" />
             </div>
