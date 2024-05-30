@@ -9,6 +9,7 @@
       :name="props.name"
       :placeholder="props.placeholder"
       :disabled="props.disabled"
+      autocomplete="off"
       ref="input"
     />
 
