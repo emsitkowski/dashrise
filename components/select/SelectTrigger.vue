@@ -1,6 +1,6 @@
 <template>
   <button
-    class="flex justify-between items-center px-3 py-2 bg-white cursor-pointer border border-dark-8%"
+    class="flex justify-between items-center px-3 py-2 bg-white cursor-pointer border border-dark-8% text-start"
     :class="isSelectOpen === true ? 'rounded-t-md' : 'rounded-md'"
     type="button"
   >

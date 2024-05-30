@@ -20,7 +20,9 @@
         class="flex items-center gap-2 px-3 py-2 mt-2 text-sm border-t border-primary-8% cursor-default opacity-50 pointer-events-none"
       >
         <img class="w-5 h-5" src="~assets/icons/info.svg" alt="" />
-        {{ footerLabel }}
+        <span>
+          {{ footerLabel }}
+        </span>
       </SelectItem>
     </SelectContent>
   </SelectContainer>
