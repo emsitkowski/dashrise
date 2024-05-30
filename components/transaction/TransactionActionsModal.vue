@@ -19,6 +19,7 @@
         <FormField v-if="tabs[activeTab].label === 'Expense'" label="Category">
           <Select
             :options="useCategoryStore().getCategoriesNames()"
+            mode="modal"
             empty-label="No categories found"
             footer-label="Create new categories on the Budget page"
             v-model="formState.category"
