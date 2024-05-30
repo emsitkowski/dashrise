@@ -8,6 +8,7 @@
         :is-visible="isSelectOpen"
         :class="$props.mode === 'modal' ? 'fixed' : 'absolute'"
         ref="selectContent"
+        data-prevent-modal-close="true"
       >
         <SelectItem
           v-if="options.length > 0"
@@ -82,9 +83,7 @@ function toggleSelect() {
 }
 
 const handleOutsideClick = (e: MouseEvent) => {
-  if (selectContainer.value) {
-    detectOutsideClick(e, selectContainer.value.$el, () => (isSelectOpen.value = false));
-  }
+  detectOutsideClick(e, selectContainer.value?.$el, () => (isSelectOpen.value = false));
 };
 
 const closeSelectMenu = () => {
@@ -110,19 +109,21 @@ function updateSelectContentPos() {
   const content = selectContent.value?.$el as HTMLElement;
 
   // Check if mode is modal and set correct y position + close select menu on modal container scroll
-  if (props.mode === "modal") {
-    content.style.top = `${container.getBoundingClientRect().y + container.getBoundingClientRect().height}px`;
-    document.querySelector("#modal")?.addEventListener("scroll", closeSelectMenu);
-  } else {
-    content.style.top = `${
-      container.getBoundingClientRect().y + window.scrollY + container.getBoundingClientRect().height
+  if (content) {
+    if (props.mode === "modal") {
+      content.style.top = `${container.getBoundingClientRect().y + container.getBoundingClientRect().height}px`;
+      document.querySelector("#modal")?.addEventListener("scroll", closeSelectMenu);
+    } else {
+      content.style.top = `${
+        container.getBoundingClientRect().y + window.scrollY + container.getBoundingClientRect().height
+      }px`;
+    }
+
+    // Set correct content x position and width using CSS
+    content.style.cssText += `left: ${container.getBoundingClientRect().left}px; width: ${
+      container.getBoundingClientRect().width
     }px`;
   }
-
-  // Set correct content x position and width using CSS
-  content.style.cssText += `left: ${container.getBoundingClientRect().left}px; width: ${
-    container.getBoundingClientRect().width
-  }px`;
 }
 </script>
 

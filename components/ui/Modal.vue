@@ -5,7 +5,7 @@
     class="fixed flex justify-center items-start top-0 left-0 right-0 w-full h-full px-4 bg-dark-80% overflow-y-auto z-50"
   >
     <!-- Modal card -->
-    <Card class="w-full max-w-md my-16">
+    <Card class="w-full max-w-md my-16" ref="modalContainer">
       <template #card-header>
         <!-- Modal header -->
         <span class="text-xl sm:text-2xl font-semibold">{{ headerText }}</span>
@@ -25,8 +25,22 @@
 </template>
 
 <script setup lang="ts">
+import type { ComponentInstance } from "vue";
+import type Card from "./Card.vue";
+import { detectOutsideClick } from "~/utils/detectOutsideClick";
+
 const props = defineProps(["headerText", "open"]);
-defineEmits(["close"]);
+const emit = defineEmits(["close"]);
+
+const modalContainer = ref<ComponentInstance<typeof Card>>();
+
+onMounted(() => {
+  document.addEventListener("click", handleOutsideClick, { capture: true });
+});
+
+onUnmounted(() => {
+  document.removeEventListener("click", handleOutsideClick);
+});
 
 onUpdated(() => {
   if (props.open === true) {
@@ -35,6 +49,18 @@ onUpdated(() => {
     enableScrollbar();
   }
 });
+
+// Close modal on outside of container click, only if there isn't data-prevent-modal-close attribute on parent element
+const handleOutsideClick = (e: MouseEvent) => {
+  const target = e.target as HTMLElement;
+
+  if (
+    !target.getAttribute("data-prevent-modal-close") &&
+    !(target.parentNode as HTMLElement).getAttribute("data-prevent-modal-close")
+  ) {
+    detectOutsideClick(e, modalContainer.value?.$el, () => emit("close"));
+  }
+};
 </script>
 
 <style scoped></style>
