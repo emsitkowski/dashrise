@@ -1,6 +1,6 @@
 <template>
   <div
-    v-show="open"
+    v-if="open"
     class="fixed flex justify-center items-start top-0 left-0 right-0 w-full h-full px-4 bg-dark-80% overflow-y-auto z-50"
   >
     <!-- Modal card -->

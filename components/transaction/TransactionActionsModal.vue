@@ -48,7 +48,7 @@ import type { Tab, Transaction } from "~/src/types/global";
 
 const props = defineProps<{
   open: boolean;
-  mode?: "Edit" | undefined;
+  mode?: "edit" | undefined;
   transactionToEdit?: Transaction;
 }>();
 
@@ -71,7 +71,7 @@ async function handleSubmit() {
   formState.value.type = tabs[activeTab.value].label;
 
   // Save or edit transaction
-  if (props.mode === "Edit") {
+  if (props.mode === "edit") {
     // If editing, send old transaction values with id etc. + updated values
     await useTransactionStore().editTransaction({ ...props.transactionToEdit, ...formState.value } as Transaction);
   } else {
@@ -97,7 +97,7 @@ function handleTabSwitch(tabIndex: number) {
   activeTab.value = tabIndex;
 
   // Restore form to initial state if not in editing mode
-  if (props.mode !== "Edit") {
+  if (props.mode !== "edit") {
     resetForm();
   }
 
@@ -109,7 +109,7 @@ onUpdated(() => {
   // Update form schema
   setCorrectFormSchema();
 
-  if (props.mode === "Edit") {
+  if (props.mode === "edit") {
     // Prefill form fields with transaction to edit
     const transaction = props.transactionToEdit as Transaction;
 

@@ -31,9 +31,8 @@
 
     <!-- Category modal -->
     <CategoryActionsModal
-      v-if="isModalOpen"
       mode="edit"
-      :category="props.category"
+      :category-to-edit="props.category"
       :open="isModalOpen"
       @close="isModalOpen = false"
       @success="isModalOpen = false"

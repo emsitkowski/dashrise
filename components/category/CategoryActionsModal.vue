@@ -1,10 +1,5 @@
 <template>
-  <Modal
-    v-if="open"
-    :open="open"
-    :header-text="mode === 'edit' ? 'Edit category' : 'Add category'"
-    @close="$emit('close')"
-  >
+  <Modal :open="open" :header-text="mode === 'edit' ? 'Edit category' : 'Add category'" @close="$emit('close')">
     <!-- Category form -->
     <Form @submit="handleSubmit" :loading="isSubmitting" :state="formState" :schema="formSchema">
       <!-- Name -->
@@ -49,15 +44,31 @@
 import { categorySchema } from "~/src/schemas/form";
 import type { Category } from "~/src/types/global";
 
-const props = defineProps(["open", "mode", "category"]);
+const props = defineProps(["open", "mode", "categoryToEdit"]);
 const emit = defineEmits(["close", "success"]);
 
 const isSubmitting = ref(false);
 const formState = ref<any>(
-  props.mode === "edit" ? { name: props.category.name as string, limitValue: props.category.limitValue as number } : {}
+  props.mode === "edit"
+    ? { name: props.categoryToEdit.name as string, limitValue: props.categoryToEdit.limitValue as number }
+    : {}
 );
 
 const formSchema = ref(categorySchema); // set initial form schema
+
+onUpdated(() => {
+  if (props.mode === "edit") {
+    // Prefill form fields with transaction to edit
+    const category = props.categoryToEdit as Category;
+
+    formState.value = {
+      name: category.name,
+      limitValue: category.limitValue,
+    };
+  } else {
+    resetForm();
+  }
+});
 
 async function handleSubmit() {
   // Turn on loading state
@@ -94,6 +105,11 @@ async function handleDelete() {
 
 function toggleFormLoading() {
   isSubmitting.value = !isSubmitting.value;
+}
+
+function resetForm() {
+  clearInputs();
+  formState.value = {};
 }
 </script>
 

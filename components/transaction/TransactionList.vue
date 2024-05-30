@@ -52,7 +52,7 @@
 
       <!-- Transaction edit modal -->
       <TransactionActionsModal
-        mode="Edit"
+        mode="edit"
         :transactionToEdit="transactionToEdit"
         :open="isEditModalOpen"
         @close="isEditModalOpen = false"
