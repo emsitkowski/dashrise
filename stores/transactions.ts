@@ -147,7 +147,7 @@ export const useTransactionStore = defineStore("transactions", () => {
         });
 
       // Return expenses sorted descendingly by value
-      return expenses.toSorted((a, b) => b.totalValue - a.totalValue);
+      return expenses.sort((a, b) => b.totalValue - a.totalValue);
     };
   });
 
