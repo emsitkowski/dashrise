@@ -58,6 +58,10 @@ html {
   font-size: 16px;
 }
 
+[data-disable-scroll="true"] {
+  @apply overflow-hidden touch-none select-none;
+}
+
 // Page and default fade-in transitions
 .page-enter-active,
 .page-leave-active,
