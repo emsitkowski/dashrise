@@ -36,13 +36,15 @@
             :color="leftValue >= 0 ? 'primary' : 'secondary'"
           />
 
-          <!-- Category note indicator -->
-          <img
+          <!-- Category note indicator + modal trigger -->
+          <button
             v-if="category.note"
-            class="absolute bottom-6 sm:bottom-8 w-4 h-4"
-            src="~/assets/icons/file.svg"
-            alt="file text"
-          />
+            class="absolute bottom-2 left-2 w-8 h-8 p-2 rounded-lg bg-primary-4%"
+            type="button"
+            @click="isModalOpen = true"
+          >
+            <img src="~/assets/icons/file-primary.svg" alt="file text" />
+          </button>
         </div>
       </template>
     </Card>
