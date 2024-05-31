@@ -5,8 +5,12 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: "page", mode: "out-in" },
     head: {
+      htmlAttrs: { lang: "en" },
       title: "dashrise – Personal dashboard",
-      meta: [{ name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" }],
+      meta: [
+        { name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" },
+        { name: "description", content: "dashrise is a budget planner app built to keep track of personal finances." },
+      ],
       link: [
         { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
         { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },

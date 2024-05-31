@@ -2,8 +2,8 @@
   <div>
     <!-- Page header -->
     <PageHeader
-      :header-text="`Budget – ${getCurrentMonthName()} ${getCurrentYear()}`"
-      subheader-text="Plan and manage your budget for each category"
+      header-text="Budget"
+      subheader-text="Adjust your monthly limits for each category and track current month's progress"
       :button="true"
       button-text="Add category"
       :button-icon="true"
