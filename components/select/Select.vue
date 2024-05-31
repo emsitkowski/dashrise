@@ -109,7 +109,7 @@ onMounted(() => {
 
   document.addEventListener("click", handleOutsideClick);
   window.addEventListener("resize", closeSelectMenu);
-  window.visualViewport?.addEventListener("resize", updateSelectContentPos); // fixes wrong select menu positioning virtual keyboard show/hide
+  window.visualViewport?.addEventListener("resize", closeSelectMenu); // fixes wrong select menu positioning virtual keyboard show/hide
 });
 
 onUnmounted(() => {
