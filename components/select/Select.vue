@@ -9,7 +9,7 @@
       <!-- Select content underlay (prevents from clicking other page elements when select menu is open) -->
       <div
         v-if="isSelectOpen"
-        class="absolute top-0 left-0 right-0 w-full h-full z-[9998]"
+        class="fixed top-0 bg-red-500 left-0 right-0 w-screen h-screen touch-none z-[9998]"
         data-prevent-modal-close="true"
       ></div>
 
@@ -126,7 +126,6 @@ function updateSelectContentPos() {
   if (content) {
     if (props.mode === "modal") {
       content.style.top = `${container.getBoundingClientRect().top + container.clientHeight}px`;
-      /*       content.style.transform = "translateY(100%)"; */
 
       document.querySelector("#modal")?.addEventListener("scroll", closeSelectMenu);
     } else {
