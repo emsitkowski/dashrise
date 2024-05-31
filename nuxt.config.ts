@@ -54,8 +54,7 @@ export default defineNuxtConfig({
           options: {
             cacheName: "html-cache",
             expiration: {
-              maxEntries: 200,
-              maxAgeSeconds: 7 * 24 * 60 * 60, // 1 week
+              maxAgeSeconds: 3600, // 1 hour
             },
           },
         },
