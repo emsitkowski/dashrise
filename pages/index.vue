@@ -2,8 +2,8 @@
   <div>
     <!-- Page header -->
     <PageHeader
-      :header-text="`Dashboard – ${getCurrentMonthName()} ${getCurrentYear()}`"
-      subheader-text="Get a quick overview of your financial performance this month"
+      header-text="Dashboard"
+      :subheader-text="`Get a quick overview of your financial performance this month – ${getCurrentMonthName()} ${getCurrentYear()}`"
       :button="true"
       button-text="Add transaction"
       :button-icon="true"
