@@ -60,7 +60,7 @@ html {
 }
 
 [data-disable-scroll="true"] {
-  @apply overflow-hidden touch-none select-none;
+  @apply overflow-hidden touch-none select-none overscroll-none;
 }
 
 // Page and default fade-in transitions
