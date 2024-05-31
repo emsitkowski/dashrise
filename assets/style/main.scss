@@ -40,6 +40,10 @@
   @apply text-white;
 }
 
+input::placeholder {
+  @apply text-dark-32%;
+}
+
 body {
   @apply font-sans;
   @apply bg-light-50;

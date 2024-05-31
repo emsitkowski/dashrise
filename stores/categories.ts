@@ -61,7 +61,7 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
       await useSupabaseCategories().editCategory(category);
 
       // Update category in the store
-      categories.value[categories.value.findIndex((el) => el.name === category.name)].limitValue = category.limitValue;
+      categories.value[categories.value.findIndex((el) => el.name === category.name)] = category;
     } catch (error: any) {
       console.error("Failed to edit category: ", error);
     } finally {

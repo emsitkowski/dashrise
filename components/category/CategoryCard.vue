@@ -4,26 +4,44 @@
       <template #card-body>
         <div class="flex flex-col h-full">
           <div class="flex justify-between items-center mb-4">
-            <span class="text-base sm:text-lg font-semibold pr-14">{{ category.name }}</span>
+            <div class="flex items-center gap-2 pr-14">
+              <!-- Category name -->
+              <span class="text-base sm:text-lg font-semibold">
+                {{ category.name }}
+              </span>
+            </div>
+
+            <!-- Action button -->
             <div class="absolute top-5 right-5">
               <Button variant="ghost" size="sm" @click="isModalOpen = true" :icon="true" icon-type="edit" />
             </div>
           </div>
-          <div class="mb-6 mt-auto">
+
+          <!-- Category progress -->
+          <div class="flex items-center gap-2 mb-6 mt-auto">
             <span
-              class="text-2xl sm:text-2xl font-semibold leading-none"
+              class="contents text-2xl sm:text-2xl font-semibold leading-none"
               :class="leftValue < 0 ? 'text-secondary-500' : 'text-dark-500'"
             >
               {{ totalValue > 0 ? convertToCurrency(totalValue) : "–" }}
-              <span class="text-sm sm:text-base font-normal whitespace-nowrap"
-                >/ {{ convertToCurrency(category.limitValue) }}</span
-              >
+              <span class="text-sm sm:text-base font-normal whitespace-nowrap">
+                / {{ convertToCurrency(category.limitValue) }}
+              </span>
             </span>
           </div>
+
           <ProgressBar
             :label="progressLabel"
             :progress="(totalValue / category.limitValue) * 100"
             :color="leftValue >= 0 ? 'primary' : 'secondary'"
+          />
+
+          <!-- Category note indicator -->
+          <img
+            v-if="category.note"
+            class="absolute bottom-6 sm:bottom-8 w-4 h-4"
+            src="~/assets/icons/file.svg"
+            alt="file text"
           />
         </div>
       </template>

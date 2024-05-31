@@ -19,6 +19,7 @@ const expenseSchema = Joi.object({
 const categorySchema = Joi.object({
   name: Joi.string().required(),
   limitValue: Joi.number().precision(2).required(),
+  note: Joi.string().optional().allow(""),
 });
 
 const authSchema = Joi.object({

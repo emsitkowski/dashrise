@@ -1,4 +1,5 @@
 ![app-icon](https://github.com/emsitkowski/dashrise/assets/40630259/de663c72-c01a-4d3f-a9a4-26a4cf76c5e7)
+
 # dashrise – Nuxt3 + Supabase + Tailwind CSS
 
 ![dashrise](https://github.com/emsitkowski/dashrise/assets/40630259/7c2e6ba3-f5eb-4204-a2e3-7d371adf4ba4)
@@ -21,12 +22,15 @@ dashrise is a budget planner app built with Nuxt3, Supabase, and Tailwind CSS. I
 ## How to use it
 
 ### Homepage
+
 On the main page, you get a quick glance at your financial situation for the current month. It shows your total balance, income, recent transactions, and expenses grouped by categories. From this view, you can also add new transactions, and edit or delete existing ones. The homepage dashboard data resets automatically each month, but you can find all your transactions in the History tab.
 
 ### Budget
-This page is where you plan your finances. You can add as many budget items as you wish, setting a plan or limit for each one. The limits you set will also be displayed on the homepage in the expenses widget. You can adjust the limits each month, and each budget card will show your progress for the current month. If you want to keep some items for future months, you can set the limit to 0. This way, you won't have to remember to add them again, and you can simply update the limit to the desired value when needed.
+
+This page is where you plan your finances. You can add as many budget items as you wish, setting a plan or limit for each one. The limits you set will also be displayed on the homepage in the expenses widget. You can adjust the limits each month, and each budget card will show your progress for the current month. You can also take a short note for each category. If you want to preserve some items for future months, you can set the limit to 0. This way, you won't have to remember to add them again, and you can simply update the limit to the desired value when needed.
 
 ### History
+
 In the History tab, you can explore your past transactions by selecting a specific year and month. This view allows you to see all your transactions for the chosen period and provides a summary of total expenses, sorted by categories in descending order of value. This feature helps you review your spending habits and make informed financial decisions based on your historical data.
 
 ## Getting started
@@ -34,6 +38,7 @@ In the History tab, you can explore your past transactions by selecting a specif
 ### 1. Supabase: Create your Supabase project at https://supabase.com/ or self-host it yourself.
 
 ### 2. Supabase: Create necessary database tables with foreign keys.
+
 The easiest way is to use SQL Editor in Supabase panel. To set up the required database tables, follow these steps:
 
 1. Open the SQL Editor in the Supabase panel.
@@ -66,6 +71,7 @@ CREATE TABLE public."UserCategories" (
 	user_id uuid DEFAULT auth.uid() NULL,
 	"name" text NULL,
 	"limitValue" float8 NULL,
+	"note" text NULL,
 	CONSTRAINT "UserCategories_pkey" PRIMARY KEY (id)
 );
 
@@ -77,6 +83,7 @@ ALTER TABLE public."UserCategories" ADD CONSTRAINT "public_UserCategories_user_i
 ```
 
 ### ⚠️ 3. Supabase: Enable Row Level Security to secure the data and prevent users from accessing other users' data.
+
 You read more about RLS here: https://supabase.com/docs/guides/database/postgres/row-level-security
 
 To create basic RLS policies use SQL Editor and paste the following commands:
@@ -114,11 +121,14 @@ using (true);
 ```
 
 ### 4. Create .env file in your project directory containing your Supabase secrets.
+
 You can find unique URL and KEY in your Supabase panel, **Project Settings –> API**
+
 ```
 SUPABASE_URL="<YOUR_SUPABASE_URL>"
 SUPABASE_KEY="<YOUR_SUPABASE_KEY>"
 ```
+
 ### 5. Install dependencies
 
 ```sh

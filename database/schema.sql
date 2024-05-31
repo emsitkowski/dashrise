@@ -22,6 +22,7 @@ CREATE TABLE public."UserCategories" (
 	user_id uuid DEFAULT auth.uid() NULL,
 	"name" text NULL,
 	"limitValue" float8 NULL,
+	"note" text NULL,
 	CONSTRAINT "UserCategories_pkey" PRIMARY KEY (id)
 );
 

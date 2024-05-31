@@ -11,6 +11,7 @@ export interface Category {
   id?: string;
   name: string;
   limitValue: number;
+  note: string;
 }
 
 export interface CategoryExpense {

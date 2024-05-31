@@ -43,6 +43,8 @@ export default {
         },
         "white-40%": "rgba(255, 255, 255, 0.4)",
         "white-60%": "rgba(255, 255, 255, 0.6)",
+        success: "#3ec300",
+        error: "#ed1d01",
       },
     },
   },

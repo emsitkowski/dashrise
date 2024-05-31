@@ -1,17 +1,23 @@
 <template>
   <div class="relative w-full flex">
-    <input
+    <!-- Input or textarea -->
+    <component
+      :is="type === 'textarea' ? 'textarea' : 'input'"
       :value="modelValue"
-      @input="handleInput"
-      class="w-full px-3 py-2 bg-none border border-gray-300 rounded-md"
-      :class="$props.disabled ? 'bg-dark-2% text-dark-60% cursor-not-allowed' : ''"
-      :type="props.type"
-      :name="props.name"
-      :placeholder="props.placeholder"
-      :disabled="props.disabled"
+      class="w-full h-auto px-3 py-2 bg-none border border-gray-300 rounded-md resize-none"
+      :class="{ 'bg-dark-2% text-dark-60% cursor-not-allowed': disabled }"
+      :rows="type === 'textarea' ? 3 : null"
+      :type="type"
+      :name="name"
+      :maxlength="maxlength"
+      :placeholder="placeholder"
+      :disabled="disabled"
       autocomplete="off"
+      @input="handleInput"
       ref="input"
-    />
+    >
+      {{ type === "textarea" ? modelValue : null }}
+    </component>
 
     <!-- Password reveal -->
     <div v-if="type === 'password'" class="absolute top-1/2 -translate-y-1/2 right-0 scale-75">
@@ -20,6 +26,15 @@
         <img v-show="!isPasswordRevealed" src="~assets/icons/eye-off.svg" alt="closed eye" />
       </Button>
     </div>
+
+    <!-- Characters counter -->
+    <span
+      v-if="maxlength"
+      class="absolute right-0 bottom-0 text-xs px-2 py-1 select-none pointer-events-none"
+      :class="currentTextLength === Number(maxlength) ? 'text-error' : 'text-dark-32%'"
+    >
+      {{ currentTextLength }} / {{ maxlength }}
+    </span>
   </div>
 </template>
 
@@ -37,6 +52,9 @@ const props = defineProps({
   name: {
     type: String,
   },
+  maxlength: {
+    type: String,
+  },
   disabled: {
     type: Boolean,
   },
@@ -44,18 +62,29 @@ const props = defineProps({
 });
 
 const isPasswordRevealed = ref<boolean>(false);
-const input = ref<HTMLInputElement>();
+const input = ref<HTMLInputElement | HTMLTextAreaElement>();
+const currentTextLength = ref<number | undefined>(props.type === "textarea" ? input.value?.value.length : undefined);
+
+onMounted(() => {
+  currentTextLength.value = input.value?.value.length;
+});
 
 function handleInput(e: Event) {
   const target = e.target as HTMLInputElement;
+
+  // Compute current input characters length
+  currentTextLength.value = target.value.length;
+
+  // Emit event with input's value
   emit("update:modelValue", target.value);
 }
 
 function handlePasswordReveal() {
   isPasswordRevealed.value = !isPasswordRevealed.value;
+  const inputElement = input.value as HTMLInputElement;
 
-  if (input.value) {
-    isPasswordRevealed.value ? (input.value.type = "text") : (input.value.type = "password");
+  if (inputElement) {
+    isPasswordRevealed.value ? (inputElement.type = "text") : (inputElement.type = "password");
   }
 }
 </script>

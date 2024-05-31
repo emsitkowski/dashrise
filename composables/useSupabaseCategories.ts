@@ -34,6 +34,7 @@ export const useSupabaseCategories = () => {
           {
             name: category.name,
             limitValue: category.limitValue,
+            note: category.note,
           },
         ] as never);
 
@@ -47,7 +48,7 @@ export const useSupabaseCategories = () => {
   const editCategory = async (category: Category) => {
     const { data, error } = await useSupabaseClient()
       .from("UserCategories")
-      .update({ limitValue: category.limitValue } as never)
+      .update({ limitValue: category.limitValue, note: category.note } as never)
       .eq("name", category.name)
       .select("*");
 

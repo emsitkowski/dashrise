@@ -18,6 +18,17 @@
         <FormInput name="Limit" type="number" placeholder="Enter category limit" v-model="formState.limitValue" />
       </FormField>
 
+      <!-- Optional note -->
+      <FormField label="Note">
+        <FormInput
+          name="Note"
+          type="textarea"
+          maxlength="100"
+          placeholder="Enter optional note"
+          v-model="formState.note"
+        />
+      </FormField>
+
       <!-- Submit button -->
       <div class="flex flex-row-reverse w-full gap-4">
         <Button
@@ -50,7 +61,11 @@ const emit = defineEmits(["close", "success"]);
 const isSubmitting = ref(false);
 const formState = ref<any>(
   props.mode === "edit"
-    ? { name: props.categoryToEdit.name as string, limitValue: props.categoryToEdit.limitValue as number }
+    ? {
+        name: props.categoryToEdit.name as string,
+        limitValue: props.categoryToEdit.limitValue as number,
+        note: props.categoryToEdit.note as number,
+      }
     : {}
 );
 
@@ -64,6 +79,7 @@ onUpdated(() => {
     formState.value = {
       name: category.name,
       limitValue: category.limitValue,
+      note: category.note,
     };
   } else {
     resetForm();
