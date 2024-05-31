@@ -9,7 +9,7 @@
       <!-- Select content underlay (prevents from clicking other page elements when select menu is open) -->
       <div
         v-if="isSelectOpen"
-        class="absolute top-0 left-0 right-0 w-full h-full z-[9998]"
+        class="absolute bg-red-500 top-0 left-0 right-0 w-full h-full touch-none z-[9998]"
         data-prevent-modal-close="true"
       ></div>
 
