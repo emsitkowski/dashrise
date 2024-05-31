@@ -1,9 +1,19 @@
 <template>
   <SelectContainer ref="selectContainer">
+    <!-- Select trigger -->
     <SelectTrigger @click="toggleSelect" ref="selectTrigger" :is-select-open="isSelectOpen">
       {{ selected }}
     </SelectTrigger>
+
     <Teleport to="body">
+      <!-- Select content underlay (prevents from clicking other page elements when select menu is open) -->
+      <div
+        v-if="isSelectOpen"
+        class="absolute top-0 left-0 right-0 w-full h-full z-[9998]"
+        data-prevent-modal-close="true"
+      ></div>
+
+      <!-- Select content -->
       <SelectContent
         :is-visible="isSelectOpen"
         :class="$props.mode === 'modal' ? 'fixed' : 'absolute'"
@@ -21,6 +31,8 @@
         <SelectItem v-else class="pointer-events-none">
           {{ emptyLabel }}
         </SelectItem>
+
+        <!-- Select footer -->
         <SelectItem
           v-if="footerLabel"
           class="flex items-center gap-2 px-3 py-2 mt-2 text-sm border-t border-primary-8% cursor-default opacity-50 pointer-events-none"
