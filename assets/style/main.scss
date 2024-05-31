@@ -45,6 +45,7 @@ input::placeholder {
 }
 
 body {
+  @apply relative; // fixes iOS bug with overflow hidden still allowing to scroll
   @apply font-sans;
   @apply bg-light-50;
   @apply text-dark-500;
