@@ -21,6 +21,9 @@ dashrise is a budget planner app built with Nuxt3, Supabase, and Tailwind CSS. I
 
 ## How to use it
 
+### Change currency
+You can globally change the currency symbol throughout the app in the **utils/currency.ts** file – just replace the symbol inside **convertToCurrency** function.
+
 ### Homepage
 
 On the main page, you get a quick glance at your financial situation for the current month. It shows your total balance, income, recent transactions, and expenses grouped by categories. From this view, you can also add new transactions, and edit or delete existing ones. The homepage dashboard data resets automatically each month, but you can find all your transactions in the History tab.
