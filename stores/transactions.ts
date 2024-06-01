@@ -4,7 +4,7 @@ import type { CategoryExpense, Transaction } from "~/src/types/global";
 
 export const useTransactionStore = defineStore("transactions", () => {
   const transactions = ref<Transaction[]>([]);
-  const loading = ref(false);
+  const loading = ref(true);
 
   // Toggle loading
   function toggleLoading(state: boolean) {
