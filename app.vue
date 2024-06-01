@@ -1,33 +1,28 @@
 <template>
-  <Transition>
-    <div
-      id="app"
-      class="relative after:content-[''] after:absolute after:w-full after:h-1/2 after:bg-gradient-to-t after:from-transparent after:to-primary-4% after:top-0 after:pointer-events-none after:select-none"
-      v-show="isAppLoading === false"
-    >
-      <div class="container max-w-6xl min-h-screen mx-auto px-4">
-        <NuxtLayout>
-          <div>
-            <NuxtPage class="py-12 sm:py-20" />
-          </div>
-        </NuxtLayout>
-      </div>
-
-      <!-- PWA Manifest component -->
-      <NuxtPwaManifest />
+  <div
+    id="app"
+    class="relative after:content-[''] after:absolute after:w-full after:h-1/2 after:bg-gradient-to-t after:from-transparent after:to-primary-4% after:top-0 after:pointer-events-none after:select-none duration-500 opacity-0"
+    :class="{ 'opacity-100': hasAppLoaded }"
+  >
+    <div class="container max-w-6xl min-h-screen mx-auto px-4">
+      <NuxtLayout>
+        <div>
+          <NuxtPage class="py-12 sm:py-20" />
+        </div>
+      </NuxtLayout>
     </div>
-  </Transition>
+
+    <!-- PWA Manifest component -->
+    <NuxtPwaManifest />
+  </div>
 </template>
 
 <script setup lang="ts">
-const isAppLoading = ref<boolean>(true);
+const hasAppLoaded = ref<boolean>(false);
 
 onMounted(() => {
-  isAppLoading.value = false;
-
-  document.fonts.ready.then(() => {
-    console.log("Fonts loaded!");
-    document.documentElement.setAttribute("data-font-loaded", "true");
-  });
+  setTimeout(() => {
+    hasAppLoaded.value = true;
+  }, 100);
 });
 </script>

@@ -35,13 +35,8 @@
   src: local("Tahoma");
 }
 
-::selection {
-  @apply bg-primary-500;
-  @apply text-white;
-}
-
-input::placeholder {
-  @apply text-dark-32%;
+html {
+  font-size: 16px;
 }
 
 body {
@@ -51,16 +46,21 @@ body {
   @apply text-dark-500;
 }
 
-span {
-  line-height: 1.25 !important;
-}
-
-html {
-  font-size: 16px;
+::selection {
+  @apply bg-primary-500;
+  @apply text-white;
 }
 
 [data-disable-scroll="true"] {
   @apply overflow-hidden touch-none select-none overscroll-none;
+}
+
+input::placeholder {
+  @apply text-dark-32%;
+}
+
+span {
+  line-height: 1.25 !important;
 }
 
 // Page and default fade-in transitions

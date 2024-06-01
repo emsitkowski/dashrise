@@ -48,6 +48,6 @@ defineProps(["loading", "bgColorClass", "strokeColorClass", "label", "mode", "po
 <style scoped>
 .v-leave-to {
   opacity: 0;
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 </style>
