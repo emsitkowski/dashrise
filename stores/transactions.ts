@@ -12,8 +12,10 @@ export const useTransactionStore = defineStore("transactions", () => {
   }
 
   // Sort transactions by date
-  function sortByDate(transactionsToSort: Transaction[]) {
-    transactionsToSort.sort((a, b) => a.date.localeCompare(b.date)).reverse();
+  function sortByDate() {
+    transactions.value.sort((a, b) => {
+      return a.date === b.date ? a.name.localeCompare(b.name) : b.date.localeCompare(a.date);
+    });
   }
 
   // Fetch all transactions from database and save them in the store
@@ -41,8 +43,8 @@ export const useTransactionStore = defineStore("transactions", () => {
       await useSupabaseTransactions().saveTransaction(transaction);
       transactions.value.unshift(transaction);
 
-      // Sort transaction by date
-      sortByDate(transactions.value);
+      // Sort transactions by date
+      sortByDate();
     } catch (error: any) {
       console.error("Failed to save new transaction: ", error);
       error.value = error;
@@ -89,9 +91,6 @@ export const useTransactionStore = defineStore("transactions", () => {
       const results = transactions.value.filter((transaction: Transaction) =>
         transaction.date.includes(`${date.year}-${date.month}`)
       );
-
-      // Sort transactions by date
-      sortByDate(results);
 
       return limit ? results.slice(0, limit) : results;
     };
