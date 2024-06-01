@@ -42,14 +42,8 @@
           </div>
         </div>
 
-        <!-- Empty state -->
-        <div
-          v-else
-          class="absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center gap-1 sm:gap-2 w-full h-full text-dark-32%"
-        >
-          <img class="w-5 sm:w-6" src="~assets/icons/info.svg" alt="" />
-          <span>No expenses found</span>
-        </div>
+        <!-- No items found label -->
+        <InfoLabel v-else position="vertical" mode="fullscreen" label="No categories found" />
 
         <!-- Expenses summary pill -->
         <div
@@ -74,7 +68,10 @@
 
         <!-- Loading spinner -->
         <SpinnerLoader
+          v-show="useTransactionStore().loading"
           label="Loading expenses..."
+          position="vertical"
+          mode="fullscreen"
           bg-color-class="bg-white"
           stroke-color-class="stroke-dark-500"
           :loading="useTransactionStore().loading"

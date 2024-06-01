@@ -11,19 +11,27 @@
       :button-icon-leading="true"
       @button-click="isModalOpen = true"
     />
-    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-8">
-      <div v-if="useCategoryStore().categories.length < 1">
-        <div class="flex items-center gap-1 sm:gap-2 w-full h-full text-dark-32%">
-          <img class="w-5 sm:w-6" src="~assets/icons/info.svg" alt="" />
-          <span>No budget categories found</span>
-        </div>
+    <div class="">
+      <div v-if="!useCategoryStore().loading" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-8">
+        <CategoryCard
+          v-if="useCategoryStore().categories.length > 0"
+          v-for="category in useCategoryStore().categories"
+          :category="category"
+          class="[&>*]:h-full"
+          :class="{ 'order-1': category.limitValue == 0 }"
+        />
+
+        <!-- No items found label -->
+        <InfoLabel v-else position="horizontal" label="No categories found" />
       </div>
-      <CategoryCard
+
+      <!-- Loading spinner -->
+      <SpinnerLoader
         v-else
-        v-for="category in useCategoryStore().categories"
-        :category="category"
-        class="[&>*]:h-full"
-        :class="{ 'order-1': category.limitValue == 0 }"
+        label="Loading categories..."
+        position="horizontal"
+        stroke-color-class="stroke-dark-500"
+        :loading="useCategoryStore().loading"
       />
     </div>
 

@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 
 export const useCategoryStore = defineStore("transaction-categories", () => {
   const categories = ref<Category[]>([]);
-  const loading = ref(false);
+  const loading = ref(true);
 
   // Toggle loading
   function toggleLoading(state: boolean) {
@@ -17,8 +17,6 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
 
   // Fetch categories from database and save them in store
   async function fetchAllCategories() {
-    toggleLoading(true);
-
     try {
       categories.value = (await useSupabaseCategories().fetchUserCategories()) as [];
       sortCategoriesByName();
@@ -31,8 +29,6 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
 
   // Save new category
   async function saveCategory(category: Category) {
-    toggleLoading(true);
-
     try {
       // Add unique id for the category
       category.id = nanoid();
@@ -54,8 +50,6 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
 
   // Edit category and update the store
   async function editCategory(category: Category) {
-    toggleLoading(true);
-
     try {
       // Edit selected category
       await useSupabaseCategories().editCategory(category);
@@ -71,8 +65,6 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
 
   // Delete category and update the store
   async function deleteCategory(category: Category) {
-    toggleLoading(true);
-
     try {
       // Delete selected category
       await useSupabaseCategories().deleteCategory(category);
@@ -115,6 +107,7 @@ export const useCategoryStore = defineStore("transaction-categories", () => {
   });
 
   return {
+    loading,
     categories,
     saveCategory,
     editCategory,

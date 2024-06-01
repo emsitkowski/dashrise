@@ -1,9 +1,15 @@
 <template>
   <Transition>
     <div
-      class="absolute flex flex-col gap-1 sm:gap-2 justify-center items-center top-0 left-0 right-0 w-full h-full duration-300"
-      :class="bgColorClass"
       v-if="loading"
+      class="absolute flex gap-1 sm:gap-2 items-center duration-300"
+      :class="[
+        bgColorClass ? bgColorClass : '',
+        {
+          'top-0 left-0 right-0 w-full h-full justify-center': mode === 'fullscreen',
+          'flex-col justify-center': position === 'vertical',
+        },
+      ]"
     >
       <svg
         class="w-5 sm:w-6 animate-spin duration-100"
@@ -28,7 +34,7 @@
       </svg>
 
       <!-- Loading label -->
-      <span v-if="label" class="text-sm sm:text-base text-dark-32%">
+      <span v-if="label" class="text-sm sm:text-base text-dark-60%">
         {{ label }}
       </span>
     </div>
@@ -36,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps(["loading", "bgColorClass", "strokeColorClass", "label"]);
+defineProps(["loading", "bgColorClass", "strokeColorClass", "label", "mode", "position"]);
 </script>
 
 <style scoped>

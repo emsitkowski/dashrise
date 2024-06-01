@@ -21,14 +21,14 @@
         <!-- Transactions list -->
         <SectionHeader header-text="All transactions" />
 
-        <TransactionList
+        <WidgetTransactions
           :transactions="
             useTransactionStore().filterTransactionsByDate({
               year: useSelectedDate().selectedDate.year,
               month: useSelectedDate().selectedDate.month,
             })
           "
-        ></TransactionList>
+        />
       </div>
       <div class="flex flex-col">
         <!-- Expenses by categories -->

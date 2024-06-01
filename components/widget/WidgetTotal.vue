@@ -22,6 +22,9 @@
 
       <!-- Loading spinner -->
       <SpinnerLoader
+        v-show="useTransactionStore().loading"
+        mode="fullscreen"
+        position="vertical"
         :label="`Calculating ${header}...`"
         bg-color-class="bg-white"
         stroke-color-class="stroke-dark-500"

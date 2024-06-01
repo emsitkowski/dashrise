@@ -20,8 +20,6 @@ export const useTransactionStore = defineStore("transactions", () => {
 
   // Fetch all transactions from database and save them in the store
   async function fetchAllTransactions() {
-    toggleLoading(true);
-
     try {
       transactions.value = (await useSupabaseTransactions().getTransactions()) as Transaction[];
     } catch (error) {
@@ -33,8 +31,6 @@ export const useTransactionStore = defineStore("transactions", () => {
 
   // Save new transaction
   async function saveTransaction(transaction: Transaction) {
-    toggleLoading(true);
-
     try {
       // Add unique id for the transaction
       transaction.id = nanoid();
@@ -55,8 +51,6 @@ export const useTransactionStore = defineStore("transactions", () => {
 
   // Delete transaction
   async function deleteTransaction(transaction: Transaction) {
-    toggleLoading(true);
-
     try {
       // Delete transaction from database and store
       await useSupabaseTransactions().deleteTransaction(transaction);
@@ -71,8 +65,6 @@ export const useTransactionStore = defineStore("transactions", () => {
 
   // Edit transaction
   async function editTransaction(transaction: Transaction) {
-    toggleLoading(true);
-
     try {
       // Delete transaction from database and store
       await useSupabaseTransactions().editTransaction(transaction);

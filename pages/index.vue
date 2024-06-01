@@ -42,7 +42,17 @@
       <div class="flex flex-col">
         <!-- Recent transactions widget -->
         <SectionHeader headerText="Recent transactions" />
-        <WidgetRecentActivity />
+        <WidgetTransactions
+          :transactions="
+            useTransactionStore().filterTransactionsByDate(
+              {
+                year: getCurrentYear(),
+                month: getCurrentMonth(),
+              },
+              6
+            )
+          "
+        />
       </div>
       <div class="flex flex-col">
         <!-- Expenses summary widget -->
