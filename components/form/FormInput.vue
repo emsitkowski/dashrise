@@ -4,7 +4,7 @@
     <component
       :is="type === 'textarea' ? 'textarea' : 'input'"
       :value="modelValue"
-      class="flex w-full h-auto px-3 py-2 bg-transparent border border-gray-300 rounded-md resize-none appearance-none disabled:bg-dark-4% disabled:text-dark-60% disabled:cursor-not-allowed"
+      class="flex w-full h-auto min-h-[42px] px-3 py-2 bg-transparent border border-gray-300 rounded-md resize-none appearance-none disabled:bg-dark-4% disabled:text-dark-60% disabled:cursor-not-allowed"
       :rows="type === 'textarea' ? 3 : null"
       :type="type"
       :name="name"
@@ -21,8 +21,8 @@
     <!-- Password reveal -->
     <div v-if="type === 'password'" class="absolute top-1/2 -translate-y-1/2 right-0 scale-75">
       <Button class="opacity-50" variant="unstyled" type="button" @click="handlePasswordReveal">
-        <img v-show="isPasswordRevealed" src="~assets/icons/eye.svg" alt="eye" />
-        <img v-show="!isPasswordRevealed" src="~assets/icons/eye-off.svg" alt="closed eye" />
+        <img v-show="isPasswordRevealed" src="~assets/icons/eye-off.svg" alt="closed eye" />
+        <img v-show="!isPasswordRevealed" src="~assets/icons/eye.svg" alt="eye" />
       </Button>
     </div>
 
