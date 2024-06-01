@@ -24,5 +24,10 @@ const isAppLoading = ref<boolean>(true);
 
 onMounted(() => {
   isAppLoading.value = false;
+
+  document.fonts.ready.then(() => {
+    console.log("Fonts loaded!");
+    document.documentElement.setAttribute("data-font-loaded", "true");
+  });
 });
 </script>
