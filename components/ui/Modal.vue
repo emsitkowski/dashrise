@@ -53,11 +53,9 @@ onUpdated(() => {
 // Close modal on outside of container click, only if there isn't data-prevent-modal-close attribute on parent element
 const handleOutsideClick = (e: MouseEvent) => {
   const target = e.target as HTMLElement;
+  const targetParent = target.parentNode as HTMLElement;
 
-  if (
-    !target.getAttribute("data-prevent-modal-close") &&
-    !(target.parentNode as HTMLElement).getAttribute("data-prevent-modal-close")
-  ) {
+  if (!target?.getAttribute("data-prevent-modal-close") && !targetParent?.getAttribute("data-prevent-modal-close")) {
     detectOutsideClick(e, modalContainer.value?.$el, () => emit("close"));
   }
 };

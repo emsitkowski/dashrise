@@ -7,7 +7,7 @@
       <Form @submit="handleSubmit" :loading="isSubmitting" :state="formState" :schema="formSchema">
         <!-- Date -->
         <FormField label="Date">
-          <FormInput name="Date" type="date" placeholder="Pick transaction date" v-model="formState.date" />
+          <FormInput name="Date" type="date" placeholder="Pick transaction date" v-model="formState.date" ref="date" />
         </FormField>
 
         <!-- Name -->
@@ -61,6 +61,7 @@ const formState = ref<any>({});
 const tabs = [{ label: "Income" }, { label: "Expense" }];
 const activeTab = ref(0); // Set initial active tab
 const areTabsDisabled = ref<boolean>(false);
+const date = ref<HTMLInputElement>();
 
 const formSchema = ref(incomeSchema); // set initial form schema
 
@@ -144,7 +145,9 @@ function setCorrectFormSchema() {
 
 function resetForm() {
   clearInputs();
-  formState.value = {};
+
+  // Reset form, yet set date input to today's date
+  formState.value = { date: new Date().toJSON().slice(0, 10) };
 }
 
 function disableTabsFunctionality(state: boolean) {

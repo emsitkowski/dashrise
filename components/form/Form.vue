@@ -44,7 +44,8 @@ function handleSubmit() {
 }
 
 onMounted(() => {
-  form.value?.children[0].querySelector("input")?.focus();
+  // Focus first input text element
+  (document.querySelector('input[type="text"]') as HTMLInputElement).focus();
 });
 </script>
 
