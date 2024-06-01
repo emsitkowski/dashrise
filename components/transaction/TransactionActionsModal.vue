@@ -132,6 +132,9 @@ onUpdated(() => {
     }
   } else {
     resetForm();
+
+    // Set date input to today's date
+    formState.value = { date: new Date().toJSON().slice(0, 10) };
   }
 });
 
@@ -145,9 +148,6 @@ function setCorrectFormSchema() {
 
 function resetForm() {
   clearInputs();
-
-  // Reset form, yet set date input to today's date
-  formState.value = { date: new Date().toJSON().slice(0, 10) };
 }
 
 function disableTabsFunctionality(state: boolean) {

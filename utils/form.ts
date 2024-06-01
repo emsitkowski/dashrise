@@ -4,7 +4,7 @@ export function unfocusInputs() {
   });
 }
 export function clearInputs() {
-  document.querySelectorAll("input").forEach((input) => {
-    input.value = "";
+  document.querySelectorAll("input[type='text']").forEach((input) => {
+    (input as HTMLInputElement).value = "";
   });
 }
