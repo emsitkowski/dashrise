@@ -4,7 +4,7 @@
     <component
       :is="type === 'textarea' ? 'textarea' : 'input'"
       :value="modelValue"
-      class="w-full h-auto px-3 py-2 bg-none border border-gray-300 rounded-md resize-none"
+      class="flex w-full h-auto px-3 py-2 bg-transparent border border-gray-300 rounded-md resize-none appearance-none"
       :class="{ 'bg-dark-2% text-dark-60% cursor-not-allowed': disabled }"
       :rows="type === 'textarea' ? 3 : null"
       :type="type"

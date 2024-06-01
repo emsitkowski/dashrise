@@ -4,9 +4,9 @@
       <template #card-body>
         <div class="flex flex-col h-full">
           <div class="flex justify-between items-center mb-4">
-            <div class="flex items-center gap-2 pr-14">
+            <div class="flex items-center pr-14">
               <!-- Category name -->
-              <span class="text-base sm:text-lg font-semibold">
+              <span class="text-base sm:text-lg font-bold">
                 {{ category.name }}
               </span>
             </div>
@@ -28,6 +28,16 @@
                 / {{ convertToCurrency(category.limitValue) }}
               </span>
             </span>
+
+            <!-- Category note indicator + modal trigger -->
+            <button
+              v-if="category.note"
+              class="w-8 sm:w-9 h-8 sm:h-9 sm:ml-1 p-2 rounded-md sm:rounded-lg bg-primary-4%"
+              type="button"
+              @click="isModalOpen = true"
+            >
+              <img src="~/assets/icons/file-primary.svg" alt="file text" />
+            </button>
           </div>
 
           <ProgressBar
@@ -35,16 +45,6 @@
             :progress="(totalValue / category.limitValue) * 100"
             :color="leftValue >= 0 ? 'primary' : 'secondary'"
           />
-
-          <!-- Category note indicator + modal trigger -->
-          <button
-            v-if="category.note"
-            class="absolute bottom-2 left-2 w-8 h-8 p-2 rounded-lg bg-primary-4%"
-            type="button"
-            @click="isModalOpen = true"
-          >
-            <img src="~/assets/icons/file-primary.svg" alt="file text" />
-          </button>
         </div>
       </template>
     </Card>

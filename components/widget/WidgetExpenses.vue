@@ -47,7 +47,7 @@
 
         <!-- Expenses summary pill -->
         <div
-          class="absolute w-full bottom-0 flex justify-between items-center gap-4 bg-primary-4% px-4 sm:px-6 py-3 sm:py-4 mt-6 rounded-xl text-primary-600 z-50"
+          class="absolute w-full bottom-0 flex justify-between items-center gap-4 bg-primary-4% px-4 sm:px-6 py-3 sm:py-4 mt-6 rounded-md sm:rounded-lg text-primary-600 z-50"
         >
           <span v-if="$props.mode !== 'history'">
             <strong>Planned –</strong>
