@@ -6,75 +6,34 @@ export const useTransactionStore = defineStore("transactions", () => {
   const transactions = ref<Transaction[]>([]);
   const loading = ref(true);
 
-  // Toggle loading
-  function toggleLoading(state: boolean) {
-    loading.value = state;
+  // Fetch all transactions from database and save them in the store
+  async function fetchAllTransactions() {
+    transactions.value = (await useSupabaseDatabase().fetchItems("transactions")) as Transaction[];
+
+    loading.value = false;
   }
 
-  // Sort transactions by date
-  function sortByDate() {
+  // Save new transaction
+  async function saveTransaction(transaction: Transaction) {
+    await useSupabaseDatabase().saveItem("transaction", transaction);
+    transactions.value.unshift(transaction);
+
+    // Sort transactions by date, or name if date is the same
     transactions.value.sort((a, b) => {
       return a.date === b.date ? a.name.localeCompare(b.name) : b.date.localeCompare(a.date);
     });
   }
 
-  // Fetch all transactions from database and save them in the store
-  async function fetchAllTransactions() {
-    try {
-      transactions.value = (await useSupabaseTransactions().getTransactions()) as Transaction[];
-    } catch (error) {
-      console.error("Failed to fetch transactions from database: ", error);
-    }
-
-    toggleLoading(false);
-  }
-
-  // Save new transaction
-  async function saveTransaction(transaction: Transaction) {
-    try {
-      // Add unique id for the transaction
-      transaction.id = nanoid();
-
-      // Save transaction to database and store
-      await useSupabaseTransactions().saveTransaction(transaction);
-      transactions.value.unshift(transaction);
-
-      // Sort transactions by date
-      sortByDate();
-    } catch (error: any) {
-      console.error("Failed to save new transaction: ", error);
-      error.value = error;
-    }
-
-    toggleLoading(false);
-  }
-
   // Delete transaction
   async function deleteTransaction(transaction: Transaction) {
-    try {
-      // Delete transaction from database and store
-      await useSupabaseTransactions().deleteTransaction(transaction);
-      transactions.value = transactions.value.filter((el) => el.id !== transaction.id);
-    } catch (error: any) {
-      console.error("Failed to delete transaction: ", error);
-      error.value = error;
-    }
-
-    toggleLoading(false);
+    await useSupabaseDatabase().deleteItem("transaction", transaction);
+    transactions.value = transactions.value.filter((el) => el.id !== transaction.id);
   }
 
   // Edit transaction
   async function editTransaction(transaction: Transaction) {
-    try {
-      // Delete transaction from database and store
-      await useSupabaseTransactions().editTransaction(transaction);
-      transactions.value = transactions.value.map((el) => (el.id === transaction.id ? { ...transaction } : el));
-    } catch (error: any) {
-      console.error("Failed to edit transaction: ", error);
-      error.value = error;
-    }
-
-    toggleLoading(false);
+    await useSupabaseDatabase().editItem("transaction", transaction);
+    transactions.value = transactions.value.map((el) => (el.id === transaction.id ? { ...transaction } : el));
   }
 
   // Filter transactions by a given date, with optional limit
@@ -88,19 +47,17 @@ export const useTransactionStore = defineStore("transactions", () => {
     };
   });
 
-  // Calculate total values
+  // Calculate total values for specified date
   const totalValues = computed(() => {
     return (type: "Income" | "Expense", date?: { year: string; month: string }) => {
       const transactionsToCalculate: Transaction[] = date
         ? useTransactionStore().filterTransactionsByDate(date)
         : transactions.value;
 
-      return transactionsToCalculate.reduce((total, transaction) => {
-        if (transaction.type === type) {
-          total += transaction.value as number;
-        }
-        return total;
-      }, 0);
+      return transactionsToCalculate.reduce(
+        (total: number, transaction: Transaction) => (transaction.type === type ? total + transaction.value : total),
+        0
+      );
     };
   });
 
