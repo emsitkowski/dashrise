@@ -31,7 +31,7 @@
 
           <!-- Transaction actions dropdown -->
           <DropdownMenu
-            :options="[{ label: 'Delete' }, { label: 'Edit' }]"
+            :options="[{ label: 'Edit' }, { label: 'Delete' }]"
             @select="handleActionSelect($event, transaction)"
           >
             <Button variant="ghost" :icon="true" icon-type="actions" size="sm"></Button>

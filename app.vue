@@ -21,7 +21,7 @@
 const hasAppLoaded = ref<boolean>(false);
 
 onMounted(() => {
-  document.fonts.load("1rem Lato").then(function () {
+  document.fonts.ready.then(() => {
     setTimeout(() => {
       hasAppLoaded.value = true;
     }, 100);
