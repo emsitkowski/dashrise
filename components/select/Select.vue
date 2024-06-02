@@ -60,7 +60,7 @@ const emit = defineEmits(["update:modelValue", "select"]);
 const props = withDefaults(
   defineProps<{
     options: Array<string>;
-    defaultValue?: string;
+    defaultValue?: string | undefined;
     emptyLabel?: string;
     footerLabel?: string;
     mode?: "modal" | "normal";

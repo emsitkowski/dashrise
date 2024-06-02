@@ -22,6 +22,7 @@
             mode="modal"
             empty-label="No categories found"
             footer-label="Create new categories on the Budget page"
+            :default-value="mode === 'edit' ? $props.transactionToEdit?.category : undefined"
             v-model="formState.category"
           ></Select>
         </FormField>
@@ -118,6 +119,7 @@ onUpdated(() => {
     formState.value = {
       date: transaction.date,
       name: transaction.name,
+      category: transaction.category,
       value: transaction.value,
     };
 
@@ -125,7 +127,6 @@ onUpdated(() => {
     disableTabsFunctionality(true);
 
     if (transaction?.type === "Expense") {
-      formState.value.category = transaction.category;
       handleTabSwitch(1);
     } else {
       handleTabSwitch(0);
