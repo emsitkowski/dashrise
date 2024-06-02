@@ -87,7 +87,12 @@
       </svg>
     </div>
 
-    <SpinnerLoader :loading="loading" bg-color-class="bg-primary-500" stroke-color-class="stroke-white" />
+    <SpinnerLoader
+      :loading="loading"
+      mode="fullscreen"
+      bg-color-class="bg-primary-500"
+      stroke-color-class="stroke-white"
+    />
 
     {{ label }}
     <slot></slot>
@@ -125,11 +130,12 @@ const props = defineProps({
 defineEmits(["button-click"]);
 
 const buttonVariantClass = {
-  primary: "bg-primary-500 text-white hover:bg-primary-600",
-  secondary: "bg-secondary-500 text-white hover:bg-secondary-600",
+  primary: "bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-600",
+  secondary: "bg-secondary-500 text-white hover:bg-secondary-600 active:bg-secondary-600",
   "secondary-ghost":
-    "opacity-30 hover:bg-secondary-4% hover:text-secondary-500  hover:bg-secondary-600 hover:opacity-100",
-  ghost: "opacity-30 text-dark-500 hover:text-primary-500 hover:bg-primary-2% hover:opacity-100",
+    "opacity-30 hover:bg-secondary-4% hover:text-secondary-500 active:text-secondary-500  hover:bg-secondary-600 active:bg-secondary-600 hover:opacity-100 active:opacity-100",
+  ghost:
+    "opacity-30 text-dark-500 hover:text-primary-500 active:text-primary-500 hover:bg-primary-2% active:bg-primary-2% hover:opacity-100 active:opacity-100",
   unstyled: "",
 };
 </script>
