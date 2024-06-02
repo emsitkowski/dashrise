@@ -32,7 +32,7 @@
             <!-- Category note indicator + modal trigger -->
             <button
               v-if="category.note"
-              class="w-8 sm:w-9 h-8 sm:h-9 sm:ml-1 p-2 rounded-md sm:rounded-lg bg-primary-4%"
+              class="w-7 h-7 sm:ml-1 p-[6px] rounded-md sm:rounded-lg bg-primary-4%"
               type="button"
               @click="isModalOpen = true"
             >
