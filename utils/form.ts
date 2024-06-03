@@ -3,8 +3,9 @@ export function unfocusInputs() {
     input.blur();
   });
 }
-export function clearInputs() {
-  document.querySelectorAll("input[type='text']").forEach((input) => {
-    (input as HTMLInputElement).value = "";
+export function clearAllTextAndNumberInputs() {
+  document.querySelectorAll("input").forEach((input) => {
+    if (input.type === "text" || input.type === "number") {
+      (input as HTMLInputElement).value = "";
   });
 }

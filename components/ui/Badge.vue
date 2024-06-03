@@ -46,10 +46,6 @@
 
 <script setup lang="ts">
 defineProps({
-  label: {
-    type: String,
-    required: true,
-  },
   variant: {
     type: String,
     default: "primary",
