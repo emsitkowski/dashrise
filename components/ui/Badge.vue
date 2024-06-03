@@ -1,6 +1,6 @@
 <template>
   <span
-    class="flex justify-center items-center p-3 text-xs sm:text-sm rounded-md sm:rounded-lg aspect-square"
+    class="flex justify-center items-center p-2 sm:p-3 rounded-md sm:rounded-lg aspect-square"
     :class="{
       'text-primary-500 bg-primary-4%': variant === 'primary',
       'text-secondary-500 bg-secondary-4%': variant === 'secondary',

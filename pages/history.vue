@@ -28,6 +28,7 @@
               month: useSelectedDate().selectedDate.month,
             })
           "
+          mode="history"
         />
       </div>
       <div class="flex flex-col">

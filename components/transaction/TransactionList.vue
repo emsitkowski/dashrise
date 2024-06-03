@@ -2,7 +2,7 @@
   <div>
     <div class="divide-y divide-primary-8%">
       <div v-for="transaction in props.transactions" class="flex flex-col py-4 sm:py-5 first:pt-0">
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-3 sm:gap-4">
           <!-- Transaction details -->
           <Badge :label="transaction.type" :variant="transaction.type === 'Income' ? 'primary' : 'secondary'" />
           <div class="flex flex-col gap-2">

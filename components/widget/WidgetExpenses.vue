@@ -6,11 +6,11 @@
           <div class="divide-y divide-primary-8%">
             <div
               v-for="expense in expenses"
-              class="flex flex-col sm:flex-row sm:items-center gap-4 py-4 sm:py-5 first:pt-0"
+              class="flex flex-col sm:flex-row sm:items-center gap-4 py-4 sm:py-5 first:pt-0 last:mb-20"
             >
               <!-- Category name -->
               <div class="sm:basis-2/5">
-                <span class="text-base font-medium">{{ expense.category }}</span>
+                <span class="text-base font-bold">{{ expense.category }}</span>
               </div>
 
               <div class="w-full flex flex-col sm:basis-3/5 gap-3">
