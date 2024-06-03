@@ -148,7 +148,7 @@ function setCorrectFormSchema() {
 }
 
 function resetForm() {
-  clearInputs();
+  clearAllTextAndNumberInputs();
 }
 
 function disableTabsFunctionality(state: boolean) {

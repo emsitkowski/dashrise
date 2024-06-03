@@ -124,7 +124,7 @@ function toggleFormLoading() {
 }
 
 function resetForm() {
-  clearInputs();
+  clearAllTextAndNumberInputs();
   formState.value = {};
 }
 </script>
