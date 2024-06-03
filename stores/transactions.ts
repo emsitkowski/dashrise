@@ -15,6 +15,8 @@ export const useTransactionStore = defineStore("transactions", () => {
 
   // Save new transaction
   async function saveTransaction(transaction: Transaction) {
+    transaction.id = nanoid();
+
     await useSupabaseDatabase().saveItem("transaction", transaction);
     transactions.value.unshift(transaction);
 

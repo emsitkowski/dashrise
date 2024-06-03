@@ -35,7 +35,7 @@ export const useSupabaseDatabase = () => {
     if (type === "transaction") {
       const response = await useSupabaseClient()
         .from("Transactions")
-        .insert([{ id: nanoid(), ...item }] as never);
+        .insert([{ ...item }] as never);
 
       return handleSupabaseResponse(response);
     } else if (type === "category") {

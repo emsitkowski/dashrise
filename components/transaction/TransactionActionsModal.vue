@@ -96,6 +96,7 @@ function toggleFormLoading() {
 }
 
 function handleTabSwitch(tabIndex: number) {
+  console.log(formState.value.category);
   // Find correct tab index based on label value
   activeTab.value = tabIndex;
 
@@ -112,6 +113,9 @@ onUpdated(() => {
   // Update form schema
   setCorrectFormSchema();
 
+  // Reset form
+  resetForm();
+
   if (props.mode === "edit") {
     // Prefill form fields with transaction to edit
     const transaction = props.transactionToEdit as Transaction;
@@ -119,7 +123,6 @@ onUpdated(() => {
     formState.value = {
       date: transaction.date,
       name: transaction.name,
-      category: transaction.category,
       value: transaction.value,
     };
 
@@ -131,11 +134,6 @@ onUpdated(() => {
     } else {
       handleTabSwitch(0);
     }
-  } else {
-    resetForm();
-
-    // Set date input to today's date
-    formState.value = { date: new Date().toJSON().slice(0, 10) };
   }
 });
 
@@ -149,6 +147,10 @@ function setCorrectFormSchema() {
 
 function resetForm() {
   clearAllTextAndNumberInputs();
+
+  formState.value = {
+    date: new Date().toJSON().slice(0, 10),
+  };
 }
 
 function disableTabsFunctionality(state: boolean) {
