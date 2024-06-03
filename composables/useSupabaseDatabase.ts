@@ -20,7 +20,7 @@ export const useSupabaseDatabase = () => {
         .from("Transactions")
         .select("*")
         .order("date", { ascending: false })
-        .order("name", { ascending: true });
+        .order("created_at", { ascending: false });
 
       return handleSupabaseResponse(response);
     } else if (type === "categories") {

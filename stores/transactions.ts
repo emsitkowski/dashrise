@@ -20,7 +20,7 @@ export const useTransactionStore = defineStore("transactions", () => {
 
     // Sort transactions by date, or name if date is the same
     transactions.value.sort((a, b) => {
-      return a.date === b.date ? a.name.localeCompare(b.name) : b.date.localeCompare(a.date);
+      return b.date.localeCompare(a.date);
     });
   }
 
