@@ -3,7 +3,7 @@
     <!-- Page header -->
     <PageHeader
       header-text="Budget"
-      subheader-text="Adjust your monthly limits for each category and track current month's progress"
+      subheader-text="Adjust the limits for each category and track current month's progress"
       :button="true"
       button-text="Add category"
       :button-icon="true"
