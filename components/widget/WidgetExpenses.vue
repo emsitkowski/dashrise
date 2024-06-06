@@ -6,7 +6,7 @@
           <div class="divide-y divide-primary-8%">
             <div
               v-for="expense in expenses"
-              class="flex flex-col sm:flex-row sm:items-center gap-4 py-4 sm:py-5 first:pt-0 last:mb-20"
+              class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 py-4 sm:py-5 first:pt-0 last:mb-20"
             >
               <!-- Category name -->
               <div class="sm:basis-2/5">
