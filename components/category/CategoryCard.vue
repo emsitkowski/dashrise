@@ -43,7 +43,7 @@
           <ProgressBar
             :label="progressLabel"
             :progress="(totalValue / category.limitValue) * 100"
-            :color="leftValue >= 0 ? 'primary' : 'secondary'"
+            :color="progressColor"
           />
         </div>
       </template>
@@ -88,8 +88,23 @@ const progressLabel = computed(() => {
     return `${convertToCurrency(-leftValue.value)} overspent`;
   } else if (leftValue.value > 0) {
     return `${convertToCurrency(leftValue.value)} left`;
+  } else if (props.category.limitValue && leftValue.value === 0) {
+    return `Budget limit achieved`;
   } else {
     return `&nbsp;`;
+  }
+});
+
+// Generate correct progress bar and its label color
+const progressColor = computed(() => {
+  if (leftValue.value > 0 && totalValue.value > 0) {
+    return "primary";
+  } else if (leftValue.value < 0) {
+    return "secondary";
+  } else if (leftValue.value === 0) {
+    return "success";
+  } else {
+    return "unstyled";
   }
 });
 </script>

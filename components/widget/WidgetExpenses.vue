@@ -6,7 +6,8 @@
           <div class="divide-y divide-primary-8%">
             <div
               v-for="expense in expenses"
-              class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 py-4 sm:py-5 first:pt-0 last:mb-20"
+              class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 py-4 sm:py-5 first:pt-0 last:mb-20"
+              :key="expense.category"
             >
               <!-- Category name -->
               <div class="sm:basis-2/5">
@@ -17,10 +18,10 @@
                 <!-- Category total value -->
                 <div class="flex flex-col basis-1/4">
                   <span
-                    class="text-sm sm:text-base font-semibold leading-none"
+                    class="text-base font-semibold leading-none"
                     :class="{
-                      'text-secondary-500':
-                        expense.totalValue > expense.limitValue && expense.limitValue > 0 && mode !== 'history',
+                      'text-error':
+                        $props.mode !== 'history' && expense.limitValue && expense.limitValue - expense.totalValue < 0,
                     }"
                     >{{ convertToCurrency(expense.totalValue) }}</span
                   >
@@ -31,11 +32,49 @@
                   <ProgressBar
                     v-if="expense.limitValue"
                     :progress="(expense.totalValue / expense.limitValue) * 100"
-                    :color="expense.limitValue - expense.totalValue >= 0 ? 'primary' : 'secondary'"
+                    :color="progressColor(expense)"
                   />
                   <span v-else class="inline-block text-sm leading-1 text-dark-32%"
                     >This category has no limit set</span
                   >
+                </div>
+
+                <!-- Budget achieved or overspent label -->
+                <div
+                  v-if="
+                    $props.mode !== 'history' &&
+                    expense.limitValue &&
+                    (expense.limitValue - expense.totalValue === 0 || expense.limitValue - expense.totalValue < 0)
+                  "
+                  class="flex items-center gap-1 sm:gap-2"
+                >
+                  <span
+                    class="inline-block text-sm leading-1"
+                    :class="expense.limitValue - expense.totalValue === 0 ? 'text-success' : 'text-error'"
+                  >
+                    {{ expense.limitValue - expense.totalValue === 0 ? "Budget limit achieved" : "Budget overspent" }}
+                  </span>
+                  <svg
+                    class="w-4 h-4 sm:w-5 sm:h-5"
+                    :class="expense.limitValue - expense.totalValue === 0 ? 'stroke-success' : 'stroke-error'"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <g v-if="expense.limitValue - expense.totalValue === 0">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </g>
+                    <g v-else>
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="15" y1="9" x2="9" y2="15"></line>
+                      <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </g>
+                  </svg>
                 </div>
               </div>
             </div>
@@ -88,6 +127,19 @@ const props = defineProps<{
   expenses: CategoryExpense[];
   mode?: "history";
 }>();
+
+const progressColor = computed(() => {
+  return (expense: CategoryExpense) => {
+    const leftValue = expense.limitValue - expense.totalValue;
+    if (leftValue > 0) {
+      return "primary";
+    } else if (leftValue < 0) {
+      return "secondary";
+    } else {
+      return "success";
+    }
+  };
+});
 </script>
 
 <style scoped></style>
