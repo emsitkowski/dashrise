@@ -3,12 +3,7 @@
     <div class="relative w-full h-1 bg-primary-4% rounded-full overflow-hidden">
       <div class="absolute top-0 left-0 h-full" :class="$props.color" :style="`width: ${progress}%`"></div>
     </div>
-    <span
-      v-if="label"
-      v-html="label"
-      class="mt-2 bg- text-sm font-medium text-dark-60%"
-      :class="$props.labelColor"
-    ></span>
+    <span v-if="label" v-html="label" class="mt-2 text-sm text-dark-60%" :class="$props.labelColor"></span>
   </div>
 </template>
 

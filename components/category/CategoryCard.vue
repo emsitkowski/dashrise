@@ -6,7 +6,7 @@
           <div class="flex justify-between items-center mb-4">
             <div class="flex items-center pr-14">
               <!-- Category name -->
-              <span class="text-base sm:text-lg font-semibold">
+              <span class="text-base font-semibold">
                 {{ category.name }}
               </span>
             </div>
@@ -18,16 +18,18 @@
           </div>
 
           <!-- Category progress -->
-          <div class="flex items-center gap-2 mb-6 mt-auto">
-            <span
-              class="contents text-2xl sm:text-2xl font-semibold leading-none"
+          <div class="flex items-center gap-2 mb-4 mt-auto">
+            <div
+              class="contents text-2xl font-medium leading-none"
               :class="leftValue < 0 ? 'text-secondary-500' : 'text-dark-500'"
             >
-              {{ totalValue > 0 ? convertToCurrency(totalValue) : "–" }}
-              <span class="text-sm sm:text-base font-normal whitespace-nowrap">
+              <span>
+                {{ totalValue > 0 ? convertToCurrency(totalValue) : "–" }}
+              </span>
+              <span class="text-sm sm:text-base font-normal whitespace-nowrap text-dark-60%">
                 / {{ convertToCurrency(category.limitValue) }}
               </span>
-            </span>
+            </div>
 
             <!-- Category note indicator + modal trigger -->
             <button

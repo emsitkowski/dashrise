@@ -6,19 +6,19 @@
           <div class="divide-y divide-primary-8%">
             <div
               v-for="expense in expenses"
-              class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 py-4 sm:py-5 first:pt-0 last:mb-20"
+              class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 py-4 sm:py-5 first:pt-0 last:mb-20"
               :key="expense.category"
             >
               <!-- Category name -->
               <div class="sm:basis-2/5">
-                <span class="text-base font-bold">{{ expense.category }}</span>
+                <span class="text-base font-semibold">{{ expense.category }}</span>
               </div>
 
-              <div class="w-full flex flex-col sm:basis-3/5 gap-3">
+              <div class="w-full flex flex-col sm:basis-3/5 gap-2">
                 <!-- Category total value -->
                 <div class="flex flex-col basis-1/4">
                   <span
-                    class="text-base font-semibold leading-none"
+                    class="text-sm sm:text-base font-normal leading-none"
                     :class="{
                       'text-error':
                         $props.mode !== 'history' && expense.limitValue && expense.limitValue - expense.totalValue < 0,
@@ -46,7 +46,7 @@
                     expense.limitValue &&
                     (expense.limitValue - expense.totalValue === 0 || expense.limitValue - expense.totalValue < 0)
                   "
-                  class="flex items-center gap-1 sm:gap-2"
+                  class="flex items-center gap-1"
                 >
                   <span
                     class="inline-block text-sm leading-1"
@@ -55,7 +55,7 @@
                     {{ expense.limitValue - expense.totalValue === 0 ? "Budget limit achieved" : "Budget overspent" }}
                   </span>
                   <svg
-                    class="w-4 h-4 sm:w-5 sm:h-5"
+                    class="w-4 h-4"
                     :class="expense.limitValue - expense.totalValue === 0 ? 'stroke-success' : 'stroke-error'"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -86,14 +86,14 @@
 
         <!-- Expenses summary pill -->
         <div
-          class="absolute w-full bottom-0 flex justify-between items-center gap-4 bg-primary-4% px-4 sm:px-6 py-3 sm:py-4 mt-6 rounded-md sm:rounded-lg text-primary-600 z-50"
+          class="absolute w-full bottom-0 flex justify-between items-center gap-4 text-base bg-primary-4% px-4 sm:px-6 py-3 sm:py-4 mt-6 rounded-md sm:rounded-lg text-primary-600 z-50"
         >
           <span v-if="$props.mode !== 'history'">
-            <strong>Planned –</strong>
+            <span class="font-bold">Planned –</span>
             {{ convertToCurrency(useCategoryStore().getTotalValuesForCurrentMonth()) }}
           </span>
           <span>
-            <strong>Spent –</strong>
+            <span class="font-bold">Spent –</span>
             {{
               convertToCurrency(
                 useTransactionStore().totalValues("Expense", {

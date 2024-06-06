@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="divide-y divide-primary-8%">
-      <div v-for="transaction in props.transactions" class="flex flex-col py-4 sm:py-5 first:pt-0">
+      <div v-for="transaction in props.transactions" class="flex flex-col py-4 sm:py-5 first:pt-0 last:pb-0">
         <div class="flex items-center gap-3 sm:gap-4">
           <!-- Transaction details -->
           <Badge :label="transaction.type" :variant="transaction.type === 'Income' ? 'primary' : 'secondary'" />
           <div class="flex flex-col gap-2">
             <div class="flex flex-col gap-1">
-              <span class="text-base sm:text-base font-bold">{{ transaction.name }}</span>
-              <span v-if="transaction.category" class="text-sm font-normal">{{ transaction.category }}</span>
+              <span class="text-sm sm:text-base font-bold sm:font-semibold">{{ transaction.name }}</span>
+              <span v-if="transaction.category" class="text-xs sm:text-sm font-normal">{{ transaction.category }}</span>
             </div>
 
             <!-- Transaction date -->
@@ -20,7 +20,7 @@
 
           <!-- Transaction value -->
           <div
-            class="ml-auto text-sm sm:text-base font-semibold whitespace-nowrap pl-2 shrink-0"
+            class="ml-auto text-sm sm:text-base font-normal whitespace-nowrap pl-2 shrink-0"
             :class="{ 'text-primary-500': transaction.type === 'Income' }"
           >
             <span>{{ transaction.type === "Income" ? "+" : "-" }}</span>
