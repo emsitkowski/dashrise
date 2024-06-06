@@ -23,6 +23,7 @@ const hasAppLoaded = ref<boolean>(false);
 onMounted(() => {
   document.fonts.ready.then(() => {
     setTimeout(() => {
+      useNuxtApp().$pwa?.updateServiceWorker();
       hasAppLoaded.value = true;
     }, 100);
   });
