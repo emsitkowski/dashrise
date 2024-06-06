@@ -1,5 +1,9 @@
 <template>
-  <Modal :open="open" header-text="Add transaction" @close="$emit('close')">
+  <Modal
+    :open="open"
+    :header-text="$props.mode === 'edit' ? 'Edit transaction' : 'Add transaction'"
+    @close="$emit('close')"
+  >
     <!-- Transaction type switch -->
     <span class="block mb-2">Choose transaction type</span>
     <Tabs class="gap-6" :items="tabs" :value="activeTab" @update:value="handleTabSwitch" :disabled="areTabsDisabled">
@@ -38,7 +42,13 @@
         </FormField>
 
         <!-- Submit button -->
-        <Button label="Add transaction" class="mt-4" :loading="isSubmitting" type="submit" ref="submitBtn"></Button>
+        <Button
+          :label="$props.mode === 'edit' ? 'Save transaction' : 'Add transaction'"
+          class="mt-4"
+          :loading="isSubmitting"
+          type="submit"
+          ref="submitBtn"
+        ></Button>
       </Form>
     </Tabs>
   </Modal>
@@ -96,7 +106,6 @@ function toggleFormLoading() {
 }
 
 function handleTabSwitch(tabIndex: number) {
-  console.log(formState.value.category);
   // Find correct tab index based on label value
   activeTab.value = tabIndex;
 
@@ -113,9 +122,6 @@ onUpdated(() => {
   // Update form schema
   setCorrectFormSchema();
 
-  // Reset form
-  resetForm();
-
   if (props.mode === "edit") {
     // Prefill form fields with transaction to edit
     const transaction = props.transactionToEdit as Transaction;
@@ -125,6 +131,7 @@ onUpdated(() => {
       name: transaction.name,
       value: transaction.value,
     };
+    transaction.type === "Expense" ? (formState.value.category = transaction.category) : null;
 
     // Disable tabs
     disableTabsFunctionality(true);
@@ -134,6 +141,9 @@ onUpdated(() => {
     } else {
       handleTabSwitch(0);
     }
+  } else {
+    // Reset form
+    resetForm();
   }
 });
 
