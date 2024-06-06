@@ -79,8 +79,8 @@ onUpdated(() => {
     formState.value = {
       name: category.name,
       limitValue: category.limitValue,
-      note: category.note,
     };
+    category.note ? (formState.value.note = category.note) : null;
   } else {
     resetForm();
   }
