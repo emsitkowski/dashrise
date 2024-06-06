@@ -44,6 +44,7 @@
             :label="progressLabel"
             :progress="(totalValue / category.limitValue) * 100"
             :color="progressColor"
+            :label-color="labelColor"
           />
         </div>
       </template>
@@ -95,16 +96,25 @@ const progressLabel = computed(() => {
   }
 });
 
+// Generate correct label color
+const labelColor = computed(() => {
+  if (leftValue.value > 0 && totalValue.value > 0) {
+    return "text-primary-500";
+  } else if (leftValue.value < 0) {
+    return "text-secondary-500";
+  } else if (leftValue.value === 0) {
+    return "text-success";
+  }
+});
+
 // Generate correct progress bar and its label color
 const progressColor = computed(() => {
   if (leftValue.value > 0 && totalValue.value > 0) {
-    return "primary";
+    return "bg-primary-500";
   } else if (leftValue.value < 0) {
-    return "secondary";
+    return "bg-secondary-500";
   } else if (leftValue.value === 0) {
-    return "success";
-  } else {
-    return "unstyled";
+    return "bg-success";
   }
 });
 </script>

@@ -132,11 +132,11 @@ const progressColor = computed(() => {
   return (expense: CategoryExpense) => {
     const leftValue = expense.limitValue - expense.totalValue;
     if (leftValue > 0) {
-      return "primary";
+      return "bg-primary-500";
     } else if (leftValue < 0) {
-      return "secondary";
+      return "bg-secondary-500";
     } else {
-      return "success";
+      return "bg-success";
     }
   };
 });
