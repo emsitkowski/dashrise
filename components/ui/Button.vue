@@ -131,6 +131,7 @@ defineEmits(["button-click"]);
 
 const buttonVariantClass = {
   primary: "bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-600",
+  "primary-light": "bg-primary-4% text-primary-600 hover:text-white hover:bg-primary-500 active:bg-primary-500",
   secondary: "bg-secondary-500 text-white hover:bg-secondary-600 active:bg-secondary-600",
   "secondary-ghost":
     "opacity-30 hover:bg-secondary-4% hover:text-secondary-500 active:text-secondary-500  hover:bg-secondary-600 active:bg-secondary-600 hover:opacity-100 active:opacity-100",

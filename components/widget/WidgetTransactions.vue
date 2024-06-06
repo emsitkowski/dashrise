@@ -5,7 +5,17 @@
         class="relative h-full min-h-[320px] overflow-hidden after:content-[''] after:w-full after:h-full after:absolute after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-white after:to-50% after:z-10 after:select-none after:pointer-events-none"
         :class="{ 'after:content-none': $props.mode === 'history' }"
       >
-        <TransactionList v-if="transactions.length > 0" :transactions="transactions" />
+        <div class="flex flex-col" v-if="transactions.length > 0">
+          <TransactionList :transactions="transactions" />
+          <NuxtLink class="self-center" to="/history">
+            <Button
+              v-if="$props.mode !== 'history'"
+              class="absolute z-20"
+              label="See all transactions"
+              variant="primary-light"
+            />
+          </NuxtLink>
+        </div>
 
         <!-- No items found label -->
         <InfoLabel v-else position="vertical" mode="fullscreen" label="No transactions found" />
