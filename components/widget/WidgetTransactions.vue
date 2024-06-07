@@ -9,10 +9,10 @@
           <!-- Show more overlay + button -->
           <div
             v-if="transactions.length > 3 && $props.mode !== 'history'"
-            class="absolute flex flex-col items-center bottom-0 w-full"
+            class="flex flex-col items-center mt-4 w-full"
           >
             <div
-              class="after:content-[''] after:w-full after:h-[420px] after:absolute after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-white after:from-5% after:to-100% after:z-10 after:select-none after:pointer-events-none"
+              class="after:content-[''] after:w-full after:h-[600px] after:absolute after:bottom-0 after:left-0 after:bg-gradient-to-t after:from-white after:from-10% after:to-60% after:z-10 after:select-none after:pointer-events-none"
             ></div>
             <NuxtLink to="/history">
               <Button
