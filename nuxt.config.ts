@@ -34,6 +34,7 @@ export default defineNuxtConfig({
   },
 
   pwa: {
+    registerType: "autoUpdate",
     manifest: {
       name: "dashrise",
       short_name: "dashrise",
@@ -48,6 +49,7 @@ export default defineNuxtConfig({
       display: "standalone",
     },
     workbox: {
+      cleanupOutdatedCaches: true,
       navigateFallback: "/",
       navigationPreload: true,
       runtimeCaching: [
