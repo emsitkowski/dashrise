@@ -5,7 +5,7 @@
     @close="$emit('close')"
   >
     <!-- Transaction type switch -->
-    <span class="block mb-2">Choose transaction type</span>
+    <span class="block text-sm font-medium mb-2">Transaction type</span>
     <Tabs class="gap-6" :items="tabs" :value="activeTab" @update:value="handleTabSwitch" :disabled="areTabsDisabled">
       <!-- Transaction form -->
       <Form @submit="handleSubmit" :loading="isSubmitting" :state="formState" :schema="formSchema">
