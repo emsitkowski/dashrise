@@ -69,7 +69,7 @@ const emit = defineEmits(["close", "success"]);
 const isSubmitting = ref(false);
 const formState = ref<any>({});
 
-const tabs = [{ label: "Income" }, { label: "Expense" }];
+const tabs = [{ label: "Expense" }, { label: "Income" }];
 const activeTab = ref(0); // Set initial active tab
 const areTabsDisabled = ref<boolean>(false);
 const date = ref<HTMLInputElement>();
@@ -136,11 +136,8 @@ onUpdated(() => {
     // Disable tabs
     disableTabsFunctionality(true);
 
-    if (transaction?.type === "Expense") {
-      handleTabSwitch(1);
-    } else {
-      handleTabSwitch(0);
-    }
+    // Switch to correct tab index based on label value
+    handleTabSwitch(tabs.findIndex((el) => el.label === transaction.type));
   } else {
     // Reset form
     resetForm();
