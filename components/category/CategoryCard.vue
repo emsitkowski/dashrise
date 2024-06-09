@@ -6,7 +6,7 @@
           <div class="flex justify-between items-center mb-4">
             <div class="flex items-center pr-14">
               <!-- Category name -->
-              <span class="text-base font-semibold">
+              <span class="text-base sm:text-lg font-semibold">
                 {{ category.name }}
               </span>
             </div>

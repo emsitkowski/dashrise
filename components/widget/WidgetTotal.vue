@@ -16,7 +16,7 @@
           <span v-if="value">
             <span class="opacity-0" ref="integer">0</span>
           </span>
-          <div v-else>–</div>
+          <span v-else>–</span>
         </div>
       </div>
 

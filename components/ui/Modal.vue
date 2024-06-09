@@ -8,7 +8,7 @@
     <Card class="w-full max-w-md my-16" ref="modalContainer">
       <template #card-header>
         <!-- Modal header -->
-        <span class="text-xl sm:text-2xl font-semibold">{{ headerText }}</span>
+        <span class="text-lg sm:text-xl font-semibold">{{ headerText }}</span>
 
         <!-- Modal close button -->
         <div class="absolute right-4 sm:right-8">

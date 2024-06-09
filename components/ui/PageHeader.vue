@@ -1,7 +1,7 @@
 <template>
   <header class="flex flex-col sm:flex-row gap-4 justify-between items-start mb-11">
     <div>
-      <h1 class="text-3xl sm:text-4xl font-semibold mb-3">{{ headerText }}</h1>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-3">{{ headerText }}</h1>
       <p v-if="subheaderText">{{ subheaderText }}</p>
     </div>
     <Button
