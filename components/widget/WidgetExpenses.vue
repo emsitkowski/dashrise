@@ -11,7 +11,7 @@
             >
               <!-- Category name -->
               <div class="sm:basis-2/5">
-                <span class="text-base font-semibold">{{ expense.category }}</span>
+                <span class="text-base font-bold">{{ expense.category }}</span>
               </div>
 
               <div class="w-full flex flex-col sm:basis-3/5 gap-2">
