@@ -17,14 +17,9 @@
               <div class="w-full flex flex-col sm:basis-3/5 gap-2">
                 <!-- Category total value -->
                 <div class="flex flex-col basis-1/4">
-                  <span
-                    class="text-sm sm:text-base font-normal leading-none"
-                    :class="{
-                      'text-error':
-                        $props.mode !== 'history' && expense.limitValue && expense.limitValue - expense.totalValue < 0,
-                    }"
-                    >{{ convertToCurrency(expense.totalValue) }}</span
-                  >
+                  <span class="text-sm sm:text-base font-normal leading-none">{{
+                    convertToCurrency(expense.totalValue)
+                  }}</span>
                 </div>
 
                 <!-- Category progress bar -->
@@ -54,27 +49,6 @@
                   >
                     {{ expense.limitValue - expense.totalValue === 0 ? "Budget limit achieved" : "Budget overspent" }}
                   </span>
-                  <svg
-                    class="w-4 h-4"
-                    :class="expense.limitValue - expense.totalValue === 0 ? 'stroke-success' : 'stroke-error'"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <g v-if="expense.limitValue - expense.totalValue === 0">
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </g>
-                    <g v-else>
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <line x1="15" y1="9" x2="9" y2="15"></line>
-                      <line x1="9" y1="9" x2="15" y2="15"></line>
-                    </g>
-                  </svg>
                 </div>
               </div>
             </div>
