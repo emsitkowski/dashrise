@@ -155,9 +155,16 @@ function setCorrectFormSchema() {
 function resetForm() {
   clearAllTextAndNumberInputs();
 
+  // Set initial date and category values
   formState.value = {
     date: new Date().toJSON().slice(0, 10),
   };
+
+  if (tabs[activeTab.value].label === "Expense") {
+    formState.value.category = useCategoryStore().getCategoriesNames()
+      ? useCategoryStore().getCategoriesNames()[0]
+      : undefined;
+  }
 }
 
 function disableTabsFunctionality(state: boolean) {
