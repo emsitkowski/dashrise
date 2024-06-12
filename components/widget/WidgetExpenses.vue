@@ -25,7 +25,7 @@
                 <!-- Category progress bar -->
                 <div v-if="mode !== 'history'" class="w-full flex flex-col basis-3/4 justify-center">
                   <ProgressBar
-                    v-if="expense.limitValue"
+                    v-if="expense.limitValue != 0"
                     :progress="(expense.totalValue / expense.limitValue) * 100"
                     :color="progressColor(expense)"
                   />
@@ -38,7 +38,7 @@
                 <div
                   v-if="
                     $props.mode !== 'history' &&
-                    expense.limitValue &&
+                    expense.limitValue != 0 &&
                     (expense.limitValue - expense.totalValue === 0 || expense.limitValue - expense.totalValue < 0)
                   "
                   class="flex items-center gap-1"
@@ -105,6 +105,7 @@ const props = defineProps<{
 const progressColor = computed(() => {
   return (expense: CategoryExpense) => {
     const leftValue = expense.limitValue - expense.totalValue;
+    console.log(leftValue);
     if (leftValue > 0) {
       return "bg-primary-500";
     } else if (leftValue < 0) {

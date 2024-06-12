@@ -2,7 +2,7 @@
   <div v-if="props.category">
     <Card :class="{ 'opacity-50': category.limitValue == 0 }">
       <template #card-body>
-        <div class="flex flex-col h-full">
+        <div class="flex flex-col">
           <div class="flex justify-between items-center mb-4">
             <div class="flex items-center pr-14">
               <!-- Category name -->
@@ -18,7 +18,7 @@
           </div>
 
           <!-- Category progress -->
-          <div class="flex items-center gap-2 mb-4 mt-auto">
+          <div class="flex items-center gap-2 mt-auto">
             <div
               class="contents text-2xl font-medium leading-none"
               :class="leftValue < 0 ? 'text-secondary-500' : 'text-dark-500'"
@@ -43,6 +43,8 @@
           </div>
 
           <ProgressBar
+            v-if="$props.category.limitValue > 0"
+            class="mt-4"
             :label="progressLabel"
             :progress="(totalValue / category.limitValue) * 100"
             :color="progressColor"
@@ -91,7 +93,7 @@ const progressLabel = computed(() => {
     return `${convertToCurrency(-leftValue.value)} overspent`;
   } else if (leftValue.value > 0) {
     return `${convertToCurrency(leftValue.value)} left`;
-  } else if (props.category.limitValue && leftValue.value === 0) {
+  } else if (leftValue.value === 0 && props.category.limitValue != 0) {
     return `Budget limit achieved`;
   } else {
     return `&nbsp;`;
