@@ -44,8 +44,12 @@ function handleSubmit() {
 }
 
 onMounted(() => {
-  // Focus first input text element
-  (document.querySelector('input[type="text"]') as HTMLInputElement).focus();
+  // Focus value input element
+  const input = document.querySelector("input[type='number']") as HTMLInputElement;
+  if (input) {
+    input.focus();
+    input.scrollIntoView();
+  }
 });
 </script>
 

@@ -105,7 +105,6 @@ const props = defineProps<{
 const progressColor = computed(() => {
   return (expense: CategoryExpense) => {
     const leftValue = expense.limitValue - expense.totalValue;
-    console.log(leftValue);
     if (leftValue > 0) {
       return "bg-primary-500";
     } else if (leftValue < 0) {
