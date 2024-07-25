@@ -126,7 +126,6 @@ function updateSelectContentPos() {
   if (content) {
     if (props.mode === "modal") {
       content.style.top = `${container.getBoundingClientRect().top + container.clientHeight}px`;
-      /*       content.style.transform = "translateY(100%)"; */
 
       document.querySelector("#modal")?.addEventListener("scroll", closeSelectMenu);
     } else {

@@ -48,7 +48,6 @@ onMounted(() => {
   const input = document.querySelector("input[type='number']") as HTMLInputElement;
   if (input) {
     input.focus();
-    input.scrollIntoView();
   }
 });
 </script>
