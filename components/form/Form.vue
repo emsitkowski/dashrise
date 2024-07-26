@@ -42,14 +42,4 @@ function handleSubmit() {
     emit("submit");
   }
 }
-
-onMounted(() => {
-  // Focus value input element
-  const input = document.querySelector("input[type='number']") as HTMLInputElement;
-  if (input) {
-    input.focus();
-  }
-});
 </script>
-
-<style scoped></style>

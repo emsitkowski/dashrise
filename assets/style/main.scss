@@ -52,7 +52,11 @@ body {
 }
 
 [data-disable-scroll="true"] {
-  @apply overflow-hidden touch-none select-none overscroll-none;
+  @apply overflow-hidden touch-none select-none overscroll-contain;
+}
+
+[data-disable-scroll="true"] * {
+  @apply overscroll-contain;
 }
 
 input::placeholder {
