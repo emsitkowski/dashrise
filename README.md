@@ -2,7 +2,8 @@
 
 # dashrise – Nuxt3 + Supabase + Tailwind CSS
 
-![localhost_3000_](https://github.com/emsitkowski/dashrise/assets/40630259/96ba079d-d980-4e60-be3b-64ea219fdf55)
+![dashr](https://github.com/user-attachments/assets/811cfb9e-ec30-42e7-93fe-95e875361b40)
+
 
 
 dashrise is a budget planner app built with Nuxt3, Supabase, and Tailwind CSS. It was created for my personal use to keep track of my finances, transactions, and more.
