@@ -12,6 +12,7 @@
       :placeholder="placeholder"
       :disabled="disabled"
       autocomplete="off"
+      :inputmode="inputmode"
       @input="handleInput"
       ref="input"
     >
@@ -56,6 +57,9 @@ const props = defineProps({
   },
   disabled: {
     type: Boolean,
+  },
+  inputmode: {
+    type: String,
   },
   modelValue: {},
 });

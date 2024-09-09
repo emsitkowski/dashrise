@@ -18,9 +18,10 @@
         <FormField label="Value">
           <FormInput
             name="Value"
-            type="number"
+            type="text"
             placeholder="Enter transaction value"
-            v-model.number="formState.value"
+            v-model="formState.value"
+            inputmode="decimal"
           />
         </FormField>
 
@@ -82,6 +83,9 @@ async function handleSubmit() {
 
   // Add transaction type to form state
   formState.value.type = tabs[activeTab.value].label;
+
+  // Transform value to number
+  formState.value.value = Number((formState.value.value as string).replaceAll(",", ".")).toFixed(2);
 
   // Save or edit transaction
   if (props.mode === "edit") {

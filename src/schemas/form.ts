@@ -4,7 +4,7 @@ import Joi from "joi";
 const defaultSchema = {
   date: Joi.string().required(),
   name: Joi.string().required(),
-  value: Joi.number().min(0.01).precision(2).required(),
+  value: Joi.string().required(),
 };
 
 const incomeSchema = Joi.object({
