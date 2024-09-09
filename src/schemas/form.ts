@@ -4,7 +4,10 @@ import Joi from "joi";
 const defaultSchema = {
   date: Joi.string().required(),
   name: Joi.string().required(),
-  value: Joi.string().required(),
+  value: Joi.string()
+    .regex(/^\d+(?:[.,]\d{2})?$/)
+    .message("Value must be a valid amount.")
+    .required(),
 };
 
 const incomeSchema = Joi.object({

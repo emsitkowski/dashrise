@@ -85,7 +85,7 @@ async function handleSubmit() {
   formState.value.type = tabs[activeTab.value].label;
 
   // Transform value to number
-  formState.value.value = Number((formState.value.value as string).replaceAll(",", ".")).toFixed(2);
+  formState.value.value = Number(parseFloat((formState.value.value as string).replaceAll(",", ".")).toFixed(2));
 
   // Save or edit transaction
   if (props.mode === "edit") {
