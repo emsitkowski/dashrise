@@ -5,7 +5,7 @@ const defaultSchema = {
   date: Joi.string().required(),
   name: Joi.string().required(),
   value: Joi.string()
-    .regex(/^\d+(?:[.,]\d{2})?$/)
+    .regex(/^\d+(?:[.,]\d{1,2})?$/)
     .message("Value must be a valid amount.")
     .required(),
 };
