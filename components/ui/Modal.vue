@@ -2,13 +2,13 @@
   <div
     v-if="open"
     id="modal"
-    class="fixed flex justify-center items-start top-0 left-0 right-0 w-full h-full px-4 py-20 bg-dark-80% overflow-y-scroll z-[999]"
+    class="fixed flex justify-center items-start top-0 left-0 right-0 w-full h-full px-4 pt-10 pb-20 bg-dark-80% overflow-y-scroll z-[999]"
   >
     <!-- Modal card -->
     <Card class="w-full max-w-md mb-16" ref="modalContainer">
       <template #card-header>
         <!-- Modal header -->
-        <span class="text-lg sm:text-xl font-semibold">{{ headerText }}</span>
+        <span class="text-xl font-semibold py-2 sm:py-0">{{ headerText }}</span>
 
         <!-- Modal close button -->
         <div class="absolute right-4 sm:right-8">

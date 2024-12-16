@@ -5,13 +5,24 @@
     @close="$emit('close')"
   >
     <!-- Transaction type switch -->
-    <span class="block text-sm font-medium mb-2">Transaction type</span>
     <Tabs class="gap-6" :items="tabs" :value="activeTab" @update:value="handleTabSwitch" :disabled="areTabsDisabled">
       <!-- Transaction form -->
       <Form @submit="handleSubmit" :loading="isSubmitting" :state="formState" :schema="formSchema">
         <!-- Date -->
         <FormField label="Date">
           <FormInput name="Date" type="date" placeholder="Pick transaction date" v-model="formState.date" ref="date" />
+        </FormField>
+
+        <!-- Category -->
+        <FormField v-if="tabs[activeTab].label === 'Expense'" label="Category">
+          <Select
+            :options="useCategoryStore().getCategoriesNames()"
+            mode="modal"
+            empty-label="No categories found"
+            footer-label="Create new categories on the Budget page"
+            :default-value="mode === 'edit' ? $props.transactionToEdit?.category : undefined"
+            v-model="formState.category"
+          ></Select>
         </FormField>
 
         <!-- Value -->
@@ -28,18 +39,6 @@
         <!-- Name -->
         <FormField label="Name">
           <FormInput name="Name" type="text" placeholder="Enter transaction name" v-model="formState.name" />
-        </FormField>
-
-        <!-- Category -->
-        <FormField v-if="tabs[activeTab].label === 'Expense'" label="Category">
-          <Select
-            :options="useCategoryStore().getCategoriesNames()"
-            mode="modal"
-            empty-label="No categories found"
-            footer-label="Create new categories on the Budget page"
-            :default-value="mode === 'edit' ? $props.transactionToEdit?.category : undefined"
-            v-model="formState.category"
-          ></Select>
         </FormField>
 
         <!-- Submit button -->
