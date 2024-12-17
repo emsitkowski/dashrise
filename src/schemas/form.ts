@@ -2,12 +2,16 @@ import Joi from "joi";
 
 // Form validation schemas
 const defaultSchema = {
-  date: Joi.string().required(),
-  name: Joi.string().required(),
+  date: Joi.string()
+    .required()
+    .error(() => new Error("Please select a valid date")),
   value: Joi.string()
     .regex(/^\d+(?:[.,]\d{1,2})?$/)
-    .message("Value must be a valid amount.")
-    .required(),
+    .required()
+    .error(() => new Error("Please enter a valid value")),
+  name: Joi.string()
+    .required()
+    .error(() => new Error("Please enter a valid name")),
 };
 
 const incomeSchema = Joi.object({
@@ -16,18 +20,33 @@ const incomeSchema = Joi.object({
 
 const expenseSchema = Joi.object({
   ...defaultSchema,
-  category: Joi.string().required(),
+  category: Joi.string()
+    .required()
+    .error(() => new Error("Please select a category")),
 });
 
 const categorySchema = Joi.object({
-  name: Joi.string().required(),
-  limitValue: Joi.number().precision(2).required(),
-  note: Joi.string().optional().allow(""),
+  name: Joi.string()
+    .required()
+    .error(() => new Error("Please enter a valid name")),
+  limitValue: Joi.number()
+    .precision(2)
+    .required()
+    .error(() => new Error("Please enter a valid value")),
+  note: Joi.string()
+    .optional()
+    .allow("")
+    .error(() => new Error("Please enter a note")),
 });
 
 const authSchema = Joi.object({
-  email: Joi.string().email({ tlds: false }).required(),
-  password: Joi.string().required(),
+  email: Joi.string()
+    .email({ tlds: false })
+    .required()
+    .error(() => new Error("Please enter a valid email address")),
+  password: Joi.string()
+    .required()
+    .error(() => new Error("Please enter a valid password")),
 });
 
 export { incomeSchema, expenseSchema, categorySchema, authSchema };
