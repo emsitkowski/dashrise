@@ -30,6 +30,7 @@
 const links = [
   { path: "/", label: "Dashboard" },
   { path: "/budget", label: "Budget" },
+  { path: "/statistics", label: "Statistics" },
   { path: "/history", label: "History" },
 ];
 
