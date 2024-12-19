@@ -57,7 +57,7 @@
       <div class="flex flex-col">
         <!-- Expenses summary widget -->
         <SectionHeader headerText="Budget summary" />
-        <WidgetExpenses :expenses="useTransactionStore().expensesByCategories(today)" />
+        <WidgetExpenses :expenses="useTransactionStore().expensesByCategories(today)" mode="slim" />
       </div>
     </div>
 

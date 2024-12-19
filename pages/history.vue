@@ -28,7 +28,7 @@
               month: useSelectedDate().selectedDate.month,
             })
           "
-          mode="history"
+          mode="slim"
         />
       </div>
       <div class="flex flex-col">
@@ -42,7 +42,7 @@
               month: useSelectedDate().selectedDate.month,
             })
           "
-          mode="history"
+          mode="slim"
         />
       </div>
     </div>

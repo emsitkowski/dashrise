@@ -23,7 +23,7 @@
                 </div>
 
                 <!-- Category progress bar -->
-                <div v-if="mode !== 'history'" class="w-full flex flex-col basis-3/4 justify-center">
+                <div v-if="mode !== 'slim'" class="w-full flex flex-col basis-3/4 justify-center">
                   <ProgressBar
                     v-if="expense.limitValue != 0"
                     :progress="(expense.totalValue / expense.limitValue) * 100"
@@ -37,7 +37,7 @@
                 <!-- Budget achieved or overspent label -->
                 <div
                   v-if="
-                    $props.mode !== 'history' &&
+                    $props.mode !== 'slim' &&
                     expense.limitValue != 0 &&
                     (expense.limitValue - expense.totalValue === 0 || expense.limitValue - expense.totalValue < 0)
                   "
@@ -62,7 +62,7 @@
         <div
           class="absolute w-full bottom-0 flex justify-between items-center gap-4 text-base bg-primary-4% px-4 sm:px-6 py-3 sm:py-4 mt-6 rounded-md sm:rounded-lg text-primary-600 z-50"
         >
-          <span v-if="$props.mode !== 'history'">
+          <span v-if="$props.mode !== 'slim'">
             <span class="font-bold">Planned –</span>
             {{ convertToCurrency(useCategoryStore().getTotalValuesForCurrentMonth()) }}
           </span>
@@ -71,8 +71,8 @@
             {{
               convertToCurrency(
                 useTransactionStore().totalValues("Expense", {
-                  year: $props.mode === "history" ? useSelectedDate().selectedDate.year : getCurrentDate().year,
-                  month: $props.mode === "history" ? useSelectedDate().selectedDate.month : getCurrentDate().month,
+                  year: $props.mode === "slim" ? useSelectedDate().selectedDate.year : getCurrentDate().year,
+                  month: $props.mode === "slim" ? useSelectedDate().selectedDate.month : getCurrentDate().month,
                 })
               )
             }}
@@ -99,7 +99,7 @@ import type { CategoryExpense } from "~/src/types/global";
 
 const props = defineProps<{
   expenses: CategoryExpense[];
-  mode?: "history";
+  mode?: "slim";
 }>();
 
 const progressColor = computed(() => {
