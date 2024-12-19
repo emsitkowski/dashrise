@@ -2,7 +2,7 @@
   <nav
     class="flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center sm:border-b sm:border-primary-8 sm:py-6"
   >
-    <ul class="container max-w-5xl mx-auto flex flex-row flex-wrap gap-2 sm:gap-6 py-4 sm:py-0">
+    <ul class="container max-w-5xl mx-auto flex flex-row gap-2 sm:gap-6 py-4 sm:py-0 overflow-x-scroll hide-scrollbar">
       <li v-for="link in links" :key="link.label">
         <NuxtLink :to="link.path">
           <Button
