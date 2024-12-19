@@ -4,13 +4,15 @@
       <div v-for="transaction in props.transactions" class="flex flex-col py-4 sm:py-5 first:pt-0 last:pb-0">
         <div class="flex items-center gap-3 sm:gap-4">
           <!-- Transaction details -->
-          <Badge :label="transaction.type" :variant="transaction.type === 'Income' ? 'primary' : 'secondary'" />
+          <Badge
+            :label="transaction.type"
+            :variant="transaction.type === 'Income' ? 'primary' : 'secondary'"
+            class="self-start"
+          />
           <div class="flex flex-col gap-2">
             <div class="flex flex-col gap-[2px]">
               <span class="text-sm sm:text-base font-bold">{{ transaction.name }}</span>
-              <span v-if="transaction.category" class="text-sm sm:text-base font-normal opacity-60">{{
-                transaction.category
-              }}</span>
+              <span v-if="transaction.category" class="text-sm font-normal opacity-60">{{ transaction.category }}</span>
             </div>
 
             <!-- Transaction date -->

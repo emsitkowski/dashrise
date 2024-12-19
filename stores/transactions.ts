@@ -101,6 +101,11 @@ export const useTransactionStore = defineStore("transactions", () => {
     };
   });
 
+  // Calculate monthly summary of all transactions
+  const transactionsMonthlySummary = computed(() => {
+    return transactions.value;
+  });
+
   return {
     transactions,
     saveTransaction,
@@ -110,6 +115,7 @@ export const useTransactionStore = defineStore("transactions", () => {
     filterTransactionsByDate,
     totalValues,
     expensesByCategories,
+    transactionsMonthlySummary,
     loading,
   };
 });

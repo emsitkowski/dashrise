@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+// Scrollbar hide
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+}
+
 @font-face {
   font-family: "Lato";
   src: url("/public/fonts/lato-regular.woff2") format("woff2");

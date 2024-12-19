@@ -5,8 +5,7 @@ const defaultSchema = {
   date: Joi.string()
     .required()
     .error(() => new Error("Please select a valid date")),
-  value: Joi.string()
-    .regex(/^\d+(?:[.,]\d{1,2})?$/)
+  value: Joi.alternatives(Joi.string().regex(/^\d+(?:[.,]\d{1,2})?$/), Joi.number())
     .required()
     .error(() => new Error("Please enter a valid value")),
   name: Joi.string()
