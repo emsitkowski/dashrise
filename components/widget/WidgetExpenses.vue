@@ -62,7 +62,7 @@
         <div
           class="absolute w-full bottom-0 flex justify-between items-center gap-4 text-base bg-primary-4% px-4 sm:px-6 py-3 sm:py-4 mt-6 rounded-md sm:rounded-lg text-primary-600 z-50"
         >
-          <span v-if="$props.mode !== 'slim'">
+          <span v-if="showPlanned">
             <span class="font-bold">Planned –</span>
             {{ convertToCurrency(useCategoryStore().getTotalValuesForCurrentMonth()) }}
           </span>
@@ -100,6 +100,7 @@ import type { CategoryExpense } from "~/src/types/global";
 const props = defineProps<{
   expenses: CategoryExpense[];
   mode?: "slim";
+  showPlanned?: boolean;
 }>();
 
 const progressColor = computed(() => {
