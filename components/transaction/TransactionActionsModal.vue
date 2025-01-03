@@ -13,6 +13,17 @@
           <FormInput name="Date" type="date" placeholder="Pick transaction date" v-model="formState.date" ref="date" />
         </FormField>
 
+        <!-- Value -->
+        <FormField label="Value">
+          <FormInput
+            name="Value"
+            type="text"
+            placeholder="Enter transaction value"
+            v-model="formState.value"
+            inputmode="decimal"
+          />
+        </FormField>
+
         <!-- Category -->
         <FormField v-if="tabs[activeTab].label === 'Expense'" label="Category">
           <Select
@@ -23,17 +34,6 @@
             :default-value="mode === 'edit' ? $props.transactionToEdit?.category : undefined"
             v-model="formState.category"
           ></Select>
-        </FormField>
-
-        <!-- Value -->
-        <FormField label="Value">
-          <FormInput
-            name="Value"
-            type="text"
-            placeholder="Enter transaction value"
-            v-model="formState.value"
-            inputmode="decimal"
-          />
         </FormField>
 
         <!-- Name -->
