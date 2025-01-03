@@ -23,33 +23,34 @@
                 </div>
 
                 <!-- Category progress bar -->
-                <div v-if="mode !== 'slim'" class="w-full flex flex-col basis-3/4 justify-center">
-                  <ProgressBar
-                    v-if="expense.limitValue != 0"
-                    :progress="(expense.totalValue / expense.limitValue) * 100"
-                    :color="progressColor(expense)"
-                  />
-                  <span v-else class="inline-block text-sm leading-1 text-dark-32%"
-                    >This category has no limit set</span
-                  >
-                </div>
+                <template v-if="showProgress">
+                  <div class="w-full flex flex-col basis-3/4 justify-center">
+                    <ProgressBar
+                      v-if="expense.limitValue != 0"
+                      :progress="(expense.totalValue / expense.limitValue) * 100"
+                      :color="progressColor(expense)"
+                    />
+                    <span v-else class="inline-block text-sm leading-1 text-dark-32%"
+                      >This category has no limit set</span
+                    >
+                  </div>
 
-                <!-- Budget achieved or overspent label -->
-                <div
-                  v-if="
-                    $props.mode !== 'slim' &&
-                    expense.limitValue != 0 &&
-                    (expense.limitValue - expense.totalValue === 0 || expense.limitValue - expense.totalValue < 0)
-                  "
-                  class="flex items-center gap-1"
-                >
-                  <span
-                    class="inline-block text-sm leading-1"
-                    :class="expense.limitValue - expense.totalValue === 0 ? 'text-success' : 'text-error'"
+                  <!-- Budget achieved or overspent label -->
+                  <div
+                    v-if="
+                      expense.limitValue != 0 &&
+                      (expense.limitValue - expense.totalValue === 0 || expense.limitValue - expense.totalValue < 0)
+                    "
+                    class="flex items-center gap-1"
                   >
-                    {{ expense.limitValue - expense.totalValue === 0 ? "Budget limit achieved" : "Budget overspent" }}
-                  </span>
-                </div>
+                    <span
+                      class="inline-block text-sm leading-1"
+                      :class="expense.limitValue - expense.totalValue === 0 ? 'text-success' : 'text-error'"
+                    >
+                      {{ expense.limitValue - expense.totalValue === 0 ? "Budget limit achieved" : "Budget overspent" }}
+                    </span>
+                  </div>
+                </template>
               </div>
             </div>
           </div>
@@ -71,8 +72,8 @@
             {{
               convertToCurrency(
                 useTransactionStore().totalValues("Expense", {
-                  year: $props.mode === "slim" ? useSelectedDate().selectedDate.year : getCurrentDate().year,
-                  month: $props.mode === "slim" ? useSelectedDate().selectedDate.month : getCurrentDate().month,
+                  year: $props.mode === "history" ? useSelectedDate().selectedDate.year : getCurrentDate().year,
+                  month: $props.mode === "history" ? useSelectedDate().selectedDate.month : getCurrentDate().month,
                 })
               )
             }}
@@ -99,7 +100,8 @@ import type { CategoryExpense } from "~/src/types/global";
 
 const props = defineProps<{
   expenses: CategoryExpense[];
-  mode?: "slim";
+  mode?: "current" | "history";
+  showProgress?: boolean;
   showPlanned?: boolean;
 }>();
 

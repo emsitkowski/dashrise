@@ -42,7 +42,7 @@
               month: useSelectedDate().selectedDate.month,
             })
           "
-          mode="slim"
+          mode="history"
         />
       </div>
     </div>
